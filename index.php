@@ -6,10 +6,8 @@
  <?php 
 echo "<p>Hello World</p>$_POST['width']"; 
 $myFile = "php/payroll.txt";
-$fh = fopen($myFile, 'w') or die("can't open file");
-$stringData = "Bobby Bopper\n";
-fwrite($fh, $stringData);
-$stringData = "Tracy Tanner\n";
+$fh = fopen($myFile, 'a') or die("can't open file");
+$stringData = "$_POST['width']\n";
 fwrite($fh, $stringData);
 fclose($fh);
 
