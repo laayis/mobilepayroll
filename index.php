@@ -10,7 +10,7 @@ $fh = fopen($myFile, 'a') or die("can't open file");
 if( isset($_POST['width']) == true ){
 	$stringData = "$_POST['width']\n";
 }else {
-	$stringData = "ABC";
+	$stringData = "ABC\n";
 }
 //$stringData = "HI\n";
 fwrite($fh, $stringData);
