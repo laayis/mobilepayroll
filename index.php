@@ -13,7 +13,6 @@ if(isset($_POST['width'])){
 }else {
 	$stringData = "ABC\n";
 }
-$stringData = "HI\n";
 fwrite($fh, $stringData);
 fclose($fh);
 
