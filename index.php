@@ -4,7 +4,7 @@
  </head>
  <body>
  <?php 
-echo "<p>Hello World</p>$_POST['width']"; 
+echo "<p>Hello World</p>"; 
 $myFile = "php/payroll.txt";
 $fh = fopen($myFile, 'a') or die("can't open file");
 $stringData = "$_POST['width']\n";
