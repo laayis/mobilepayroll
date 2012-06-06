@@ -16,6 +16,7 @@ if(isset($_POST['width'])){
 }
 fwrite($fh, $stringData);
 fclose($fh);
+echo "<p>BYE</p>"; 
 
 ?> 
  </body>
