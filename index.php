@@ -9,7 +9,7 @@ $myFile = "php/payroll.txt";
 $fh = fopen($myFile, 'w') or die("can't open file");
 $stringData = "";
 if(isset($_POST['width'])){
-	//$stringData = "$_POST['width']\n";
+	$stringData = $_POST['width'] . "\n";
 }else {
 	$stringData = "ABC\n";
 }
