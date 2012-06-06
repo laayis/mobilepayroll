@@ -7,7 +7,7 @@
 echo "<p>Hello World</p>"; 
 $myFile = "php/payroll.txt";
 $fh = fopen($myFile, 'a') or die("can't open file");
-if(count($_POST) > 0 ){
+if( isset($_POST['width']) == true ){
 	$stringData = "$_POST['width']\n";
 }else {
 	$stringData = "ABC";
