@@ -5,7 +5,7 @@
  <body>
  <?php 
 echo '<p>Hello World</p>'; 
-$myFile = "payroll.txt";
+$myFile = "php/payroll.txt";
 $fh = fopen($myFile, 'w') or die("can't open file");
 $stringData = "Bobby Bopper\n";
 fwrite($fh, $stringData);
