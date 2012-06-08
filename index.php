@@ -5,6 +5,7 @@
  <body>
  <?php 
 echo "<p>Hello World</p>"; 
+echo phpinfo(); 
 $myFile = "php/payroll.txt";
 $fh = fopen($myFile, 'a') or die("can't open file");
 $stringData = "";
