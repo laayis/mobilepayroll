@@ -1,0 +1,9 @@
+<h2>Login</h2>
+
+<p>Please login to proceed</p>
+
+<?php if($this->errorMessage != ""): ?>
+<p class="error"><?= $this->errorMessage; ?></p>
+<?php endif; ?>
+
+<?= $this->loginForm; ?>
