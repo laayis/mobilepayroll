@@ -1,0 +1,105 @@
+<?php
+session_start();
+
+//check if user sent correct username and password
+function initDb(){
+	$link = mysql_connect('localhost', 'pussyeater', 'win2210760');
+	if (!$link) { die('Could not connect: ' . mysql_error());}
+	return $link;
+}
+
+function isValidLogin($link){
+	// make 'live' the current db
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+
+	$query = "SELECT employee.username, employee.password FROM employee WHERE employee.username='" . $_POST['username'] . "'";
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	if($row['username'] == $_POST['username'] &&
+	$row['password'] == $_POST['password']){
+		return TRUE;
+	}else{return FALSE;}
+}
+
+//only works at login because of $_POST
+function whatIsEmployeeId($link){
+	// make 'live' the current db
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+
+	$query = "SELECT employee.id, employee.password, employee.username FROM employee WHERE employee.username='" . $_POST['username'] . "'";
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	$row = 0;
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	if($row['username'] == $_POST['username'] &&
+	$row['password'] == $_POST['password']){
+		return $row['id'];
+	}else{return 0;}
+
+}
+
+function showName($link){
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+	
+	$query = "SELECT contact_info.first, contact_info.last FROM contact_info WHERE contact_info.id=" . $_COOKIE['id'];
+	$result=mysql_query($query);
+        if(!$result) {
+            die('Invalid query: ' . mysql_error());
+        }
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	$fullname=$row['first'] . " " . $row['last'];
+	return $fullname ;
+}
+
+function initSession(){
+	if(session_start() == TRUE){
+		
+	} else{
+	}
+}
+
+function isAlphaNumeric($str) 
+{
+    return preg_match('/^[A-Za-z0-9_]+$/',$str);
+}
+
+/*
+$result = queryDb();
+//user successfully logged in
+$row = 0;
+while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	if($row['user'] == $_POST['user'] &&
+	$row['password'] == $_POST['password']){
+		session_start();
+		echo "User logged in";
+	} else{
+		//session_unset();
+		//echo "User not logged \n";
+	}
+}
+
+echo "HELLO\n";
+*/
+/*
+
+if(isset($_SESSION['login']){
+    echo "FUCK YEA!!";
+} else{
+   echo "TRY AGAIN";
+}
+*/
+?>
