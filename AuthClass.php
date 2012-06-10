@@ -3,11 +3,17 @@ session_start();
 
 //check if user sent correct username and password
 function initDb(){
-	$link = mysql_connect('localhost', 'pussyeater', 'win2210760');
+	$link = mysql_connect('localhost', 'mobilepay', 'win2210760');
 	if (!$link) { die('Could not connect: ' . mysql_error());}
 	return $link;
 }
 
+function selectDb($link){
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+}
 function isValidLogin($link){
 	// make 'live' the current db
 	$db_selected = mysql_select_db('live', $link);
@@ -28,7 +34,7 @@ function isValidLogin($link){
 }
 
 //only works at login because of $_POST
-function whatIsEmployeeId($link){
+function getEmployeeId($link){
 	// make 'live' the current db
 	$db_selected = mysql_select_db('live', $link);
 	if (!$db_selected) {

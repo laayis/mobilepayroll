@@ -1,0 +1,44 @@
+* { padding:0; margin:0; font-family:Arial, Helvetica, sans-serif;}
+
+body { color: #606060; font-size: 12px;}
+
+a { color: #606060; text-decoration: none;}
+a:hover { text-decoration: underline;}
+
+/* Header */
+h1 { margin-bottom: 20px;}
+hr { margin-bottom: 15px;}
+
+.main_wrapper { }
+.main { width: 1000px; border: 0px solid #000000; text-align: left;}
+
+.header_top {}
+.header_logo { float: left;}
+.header_login { float: right; margin: 10px 10px 0px 0px;}
+.header_menu { height: 25px; background-color: #71705B;}
+
+.content_main {}
+.content_left { float: left; width: 190px;}
+.content_right { float: left; width: 810px;}
+.content_right_inner { padding: 30px 0px 15px 15px;}
+.content {}
+
+.menu_left { background-color: #E89803; list-style-type: none; padding: 50px 0px 90px 5px; color: #FFFFFF;}
+.menu_left a { color: #FFFFFF;}
+
+.bottom {}
+.bottom_content { padding: 15px; background-color: #71705B;}
+.bottom_content, .bottom_content a { color: #FFFFFF;}
+.bottom_links { list-style-type: none;}
+.bottom_links li { float: left; margin-right: 40px;}
+.bottom_menu { list-style-type: none;}
+.bottom_menu li { float: none;}
+.bottom_copyright { font-size: 10px; text-align: center;}
+.bottom_copyright a { color: #DF761C;}
+
+/* Aux. Classes */
+.clear { clear: both;}
+.left { float: left;}
+.dotted { border-right: 1px dotted #000000;}
+.uppercase { text-transform: uppercase;}
+.capitalize { text-transform: capitalize;}

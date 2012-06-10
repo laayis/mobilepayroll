@@ -1,3 +1,4 @@
+<?php include('top.php')?>
 <html>
  <head>
   <title>PHP Test</title>
@@ -24,3 +25,4 @@ echo "<p>Hello World</p>";
 ?> 
  </body>
 </html>	
+<?php include('bottom.php')?>

@@ -24,9 +24,10 @@ echo "Result: " . $result;
 
 if($result){
 	setcookie('SESSID', session_id(), time()+3600);	
-	setcookie('id', whatIsEmployeeId($link), time()+3600);	
-	header('Location: home.php');
+	setcookie('id', getEmployeeId($link), time()+3600);	
+	header('Location: pages/overview.php');
 } else{
 	header('Location: index.php');
 }
+
 ?>

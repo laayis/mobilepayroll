@@ -1,0 +1,81 @@
+.small {
+	FONT-SIZE: 12px; COLOR: #333333; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.normal {
+	FONT-SIZE: 14px; COLOR: #333333; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.wsmall {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.surroundbox {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid
+}
+.wnormal {
+	FONT-SIZE: 14px; COLOR: #ffffff; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.heading1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #333333; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.oheading1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #ff6600; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.wheading1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #ffffff; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.wheading2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 18px; COLOR: #ffffff; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.oheading2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 18px; COLOR: #ff6600; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.heading2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 18px; COLOR: #333333; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.small {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.small {
+	FONT-SIZE: 12px; COLOR: #696969; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.small2 {
+	FONT-SIZE: 12px; COLOR: #333333; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.pageframe {
+	BACKGROUND-ATTACHMENT: fixed; BACKGROUND-IMAGE: url(images/png_border_patrol_body_slice.png); BACKGROUND-REPEAT: repeat-y
+}
+.pagebottom {
+	BACKGROUND-POSITION: 50% bottom; BACKGROUND-ATTACHMENT: fixed; BACKGROUND-IMAGE: url(images/png_border_patrol_bottom_slice2.png); BACKGROUND-REPEAT: no-repeat; HEIGHT: 715px
+}
+.textbox {
+	PADDING-RIGHT: 10px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px
+}
+.entertext {
+	BORDER-RIGHT: #949cb1 1px solid; BORDER-TOP: #949cb1 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #949cb1 1px solid; COLOR: #000000; BORDER-BOTTOM: #949cb1 1px solid; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.textboxunderline {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; BORDER-BOTTOM: #cccccc 1px solid
+}
+.entertextrequired {
+	BORDER-RIGHT: #949cb1 1px solid; BORDER-TOP: #949cb1 1px solid; FONT-SIZE: 10px; BACKGROUND-ATTACHMENT: fixed; BACKGROUND-IMAGE: url(images/required.gif); BORDER-LEFT: #949cb1 1px solid; COLOR: #000000; BORDER-BOTTOM: #949cb1 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.areabox {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BACKGROUND-IMAGE: url(images/ess_subhead.jpg); BORDER-LEFT: #cccccc 1px solid; WIDTH: 100%; PADDING-TOP: 2px; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-REPEAT: repeat-x
+}
+.rsmall {
+	FONT-SIZE: 12px; COLOR: #990000; FONT-FAMILY: Geneva, Arial, Helvetica, san-serif
+}
+.visible {
+	DISPLAY: block
+}
+.hidden {
+	DISPLAY: none
+}
+.button_small {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #4f4f4f; FONT-FAMILY: Verdana, Geneva, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.errorbox {
+	BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 10px; BACKGROUND: #ff5728; PADDING-BOTTOM: 10px; BORDER-LEFT: #cccccc 1px solid; WIDTH: 100%; PADDING-TOP: 10px; BORDER-BOTTOM: #cccccc 1px solid
+}
+.confbox {
+	BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 10px; BACKGROUND: #fff98c; PADDING-BOTTOM: 10px; BORDER-LEFT: #cccccc 1px solid; WIDTH: 100%; PADDING-TOP: 10px; BORDER-BOTTOM: #cccccc 1px solid
+}

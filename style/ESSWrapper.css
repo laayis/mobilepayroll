@@ -1,0 +1,251 @@
+	/**********************************************************/
+	/****  GLOBAL  ****/
+	td {vertical-align:top;}
+
+	/**********************************************************/
+	/****  MASTHEAD  ****/
+
+	.hdlogo {width:45px; height:45px; background-color:#F68121; margin:2px;}
+
+	#nav0_row	{vertical-align:bottom; text-align:right; padding:10px;}
+	.nav1_droparrow	{vertical-align:middle; background:none;}
+	#nav_clip	{overflow:hidden; width:1000px;}
+	
+	/****  New Nav  ****/
+	#nav	{float:left; width:1000px; margin:0; padding: 0; list-style:none; background:#71705B url(../img/nav1_bg.gif) repeat-x bottom left; border: 1px solid #323218; border-top-color: #5A5944;}
+	#nav li	{float:left; margin:0; padding:0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:80%;}
+	#nav li.selected	{background: #B6B48D url(../img/nav1_bg_act.gif) repeat-x bottom left;}
+	#nav a	{float:left; display: block; margin: 0 0px 0 0; padding: 4px 12px; color:#FFF; text-decoration: none; border-right: 1px solid #323218;}
+	#nav a:hover	{color:#323218; background: #B6B48D url(../img/nav1_bg_ovr.gif) repeat-x bottom left; text-decoration: none; }
+	
+	.nav2	{margin:0; padding:0; background:#C3C09F url(../img/nav2_bg.gif) repeat-x top left; border: 1px solid #5A5944; clear:left; position:absolute; visibility:hidden; z-index:100;}
+	.nav2 td	{margin:0; padding:0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:70%;}
+	.nav2 a	{display:block; margin:0; padding:4px 20px; color:#323218; text-decoration:none; _width:100%;}
+	.nav2 a:visited	{color:#323218;}
+	.nav2 a:hover	{color:#FFF; background-color:#61604C; text-decoration: none; }
+	.nav2 .first_td	{padding-top:8px;}
+	
+	.toolbar td {font-size:75%;}
+
+	/**********************************************************/
+	/****  ORANGE BOX  ****/
+
+	#orange_box	{width:190px; height:250px; background-color:#E89803; padding:30 5 5 5; margin: 0 0 0 0;}
+	#orange_box td	{vertical-align:top; font-size:70%;   }
+	
+	#orange_box a	{color:#B06010; text-decoration:none;}
+	#orange_box a:visited 	{color:#B06010;}
+	#orange_box a:hover 	{color:#B06010; text-decoration:underline;}
+	
+	#orange_box #nav_wrap	{height:240px; overflow:hidden;}
+	#orange_box #backlink	{text-align:right;}
+	#orange_box #backlink a	{background:#E89803 url(../img/nav2_arrow_back_.gif) no-repeat center left; padding-left:12; font-weight:bold;}
+	#orange_box #backlink a	{color:#FFF;}
+	#orange_box #backlink a:visited	{color:#FFF;}
+	#orange_box #backlink a:hover	{color:#FFF;text-decoration: underline; }
+	
+	#orange_box_home	{width:340px; height:225px; background-color:#E89803; padding:20 15 20 20;}
+	#orange_box_home td	{vertical-align:top; color:#FFF; font-size:80%;}
+	#orange_box_home a	{color:#FFF;}
+	#orange_box_home a:visited	{color:#FFF;}
+	#orange_box_home a:hover	{color:#FFF;text-decoration: underline; }
+	/* Additional styles added 060501 - Durden IV */
+	#orange_box_home a	{display:block; margin-top:5px; padding-left:15px; background:url(../img/nav2_arrow.gif) no-repeat center left; text-decoration:underline;}
+	
+	#nav3	{color:#FFF; list-style-image: url(../img/nav2_arrow.gif); margin-top:0 0 0 0; padding: 0 0 0 0;  }
+	#nav3 li a	{color:#FFF; text-decoration:none;}
+	#nav3 li a:visited	{color:#FFF; text-decoration:none;}
+	#nav3 li a:hover	{color:#FFF; text-decoration: underline; }
+	#nav3 li.selected	{color:#000; list-style-image: url(../img/nav2_arrow_sel.gif); font-weight:bold;}
+	#nav3 li.selected a	{color:#000; text-decoration:none;}
+	#nav3 li.selected a:visited	{color:#000; text-decoration:none;}
+	#nav3 li.selected a:hover	{color:#000; text-decoration:none;}  
+
+/*
+	#orange_box	{width:272px; height:225px; font-size:80%; background-color:#E89803; padding:20 15 20 20;}
+	#orange_box td	{vertical-align:top;}
+
+	#orange_box a	{color:#B06010; text-decoration:none;}
+	#orange_box a:visited 	{color:#B06010;}
+	#orange_box a:hover 	{color:#B06010; text-decoration:underline;}
+
+	#orange_box_home	{width:340px; height:225px; background-color:#E89803; padding:20 15 20 20;}
+	#orange_box_home td	{vertical-align:top; color:#FFF; font-size:80%;}
+
+	#nav3	{color:#FFF; list-style-image: url(../img/nav2_arrow.gif); margin-top:5;}
+	#nav3 li a	{color:#FFF; text-decoration:none;}
+	#nav3 li a:visited	{color:#FFF; text-decoration:none;}
+	#nav3 li a:hover	{color:#FFF; text-decoration:none;}
+*/
+	/**********************************************************/
+	/****  SECONDARY CONTENT  ****/
+
+	.secondary	{width:190px; margin:20 5 5 5; _margin:20 5 5 5;}
+	.secondary td	{color:#908A65; font-size:70%; vertical-align:top; padding:0 0; margin: 20 5 5 5;}
+	.secondary td strong	{color:#908A65;}
+	.secondary td img	{margin:20 5 5 5;}
+	.secondary td ul	{margin:0 0 5 5; padding:0 0 0 0; list-style-image: url(../img/secondary_li_arrow.gif);}
+	.secondary td li	{color:#908A65;}
+	.secondary td a	{color:#993; font-weight:bold; text-decoration:none; font-size:95%;}
+	.secondary td a:hover	{color:#993; text-decoration:none;}
+	.secondary td a img	{margin:20 5 5 5;}
+	.secondary td a.orng	{color:#E89803;}			/* Retired */
+	.secondary td a.orng:hover	{color:#E89803;}		/* Retired */
+	.secondary td a.learnmore	{color:#E89803; background:#EFEFE4 url(../img/btn_rtarrow_bgefefe4.jpg) no-repeat top left; padding:3px 0 3px 24px; height:24px; text-decoration:none; display:block;}
+	.secondary td a.learnmore:hover	{color:#E89803; text-decoration:none;}
+	.secondary_div_main	{background: #EFEFE4 url(../img/div_secondary.gif) repeat-x bottom left; margin:20 0 0 0; padding:0 0 10 0; width: 190px; }
+	.secondary_div_sub	{background: #EFEFE4 url(../img/div_secondary_sub.gif) repeat-x bottom left; padding:0 0 10 0;}
+	.secondary div {margin:0;}
+	.secondary p {margin:0 0 10 0;}
+
+	/**********************************************************/
+	/****  MAIN CONTENT  ****/
+
+	#main_bg	{background: #FFFFFF url(../img/hdcom_bg.gif) repeat-y top left;}
+	.main_content	{width:577px; margin:20 15 20 20;}
+	.main_content td	{font-size:80%; color:#333; vertical-align:top; padding:0;}
+	.main_content td img	{margin:0 10 0 0;}
+	.main_content td a	{color:#B06010; text-decoration:none;}
+	.main_content td a:visited	{color:#B06010;}
+	.main_content td a:hover	{color:#B06010; text-decoration:underline;}
+	.main_content td a.more	{color:#B06010; font-weight:bold; display:block; margin:10 0 10 0; padding:0;}
+	.main_content td a.more:visited	{color:#B06010;}
+	.main_content td a.more:hover	{color:#B06010; text-decoration:underline;}
+	.main_content td ul	{margin:5 0 0 -10; _margin:5 0 5 25; list-style-type:square;} 
+	.main_content td ul.arrow	{margin:5 0 5 15; padding:0 0 5 0; list-style-image: url(../img/content_arrow_or.gif);}
+	.main_content td ul.arrow a {color:#B06010; font-weight:bold; text-decoration:none;}
+	.main_content td ul.arrow a:visited {color:#B06010;}
+	.main_content td ul.arrow a:hover {color:#B06010; text-decoration:underline;}
+	.main_content p {margin:0 0 10 0;}
+	.main_div_main	{background: #FFF url(../img/div_main.gif) repeat-x bottom left; padding:0 0 0 0;}
+	.main_div_sub	{background: #FFF url(../img/div_main_sub.gif) repeat-x bottom left; margin:0 0 5 0; height:1px;}
+	.main_content .article_title	{font-weight:bold; margin:0 0 10 0;}
+	
+	div.syndication-title	{margin:0; font-size:180%; color:#B06010; font-weight:bold;}
+	ul.syndication-list {list-style-type:none; margin:0;}
+	ul.syndication-list a {display:block;}
+	li.syndication-list-item	{list-style-type:none; margin:0 0 10 -23;}
+	span.syndication-list-item-date {display:none;}
+
+	/**********************************************************/
+	/****  SPLIT CONTENT  ****/
+
+	.main_content_partial	{width:388px; margin:20 0 20 20;}
+	.main_content_partial td	{font-size:80%; color:#333; vertical-align:top; padding:0 15 0 0;}
+	.main_content_partial td img	{margin:0 10 0 0;}
+	.main_content_partial td a	{color:#B06010; text-decoration:none;}
+	.main_content_partial td a:visited	{color:#B06010;}
+	.main_content_partial td a:hover	{color:#B06010; text-decoration:underline;}
+	.main_content_partial td a.more	{color:#B06010; font-weight:bold; display:block; margin:10 0 10 0; padding:0;}
+	.main_content_partial td a.more:visited	{color:#B06010;}
+	.main_content_partial td a.more:hover	{color:#B06010; text-decoration:underline;}
+	.main_content_partial td ul	{margin:5 0 0 -10; _margin:5 0 5 25; list-style-type:square;} 
+	.main_content_partial td ul.arrow	{margin:5 0 5 15; padding:0 0 5 0; list-style-image: url(../images/content_arrow_or.gif);}
+	.main_content_partial td ul.arrow a {color:#B06010; font-weight:bold; text-decoration:none;}
+	.main_content_partial td ul.arrow a:visited	{color:#B06010;}
+	.main_content_partial td ul.arrow a:hover 	{color:#B06010; text-decoration:underline;}
+	.main_content_partial p {margin:0 0 10 0;}
+	.vertical_div_right		{background: #FFF url(../img/div_tertiary_vert.gif) repeat-y top right;}
+	.vertical_div_left		{background: #FFF url(../img/div_tertiary_vert.gif) repeat-y top left;}
+
+	.tertiary_content	{width:169px; margin:20 15 20 20;}
+	.tertiary_content td	{font-size:70%; color:#333; vertical-align:top; padding:0;}
+	.tertiary_content td a	{color:#993; font-weight:bold; text-decoration:none; font-size:100%;}
+	.tertiary_content td a:hover	{color:#993; text-decoration:underline;}
+	.tertiary_content td a.more	{color:#993; font-weight:bold; display:block; margin:10 0 10 0; padding:0;}
+	.tertiary_content td a.more:hover	{color:#993; text-decoration:underline;}
+	.tertiary_content td ul	{margin:0 0 0 -10; _margin:5 0 5 25; list-style-type:square;} 
+	.tertiary_content td ul.arrow	{margin:0 0 5 15; padding:0 0 5 0; list-style-image: url(../img/secondary_li_arrow.gif);}
+	.tertiary_content td li	{color:#333;}
+	.tertiary_content p {margin:0 0 10 0;}
+	.padded_top	{margin:40 15 20 20;}
+
+	/**********************************************************/
+	/****  FOOTER  ****/
+
+	.logocell	{vertical-align:middle; border-right:1px dotted #030000;}
+	#main_footer	{width:1000px;}
+	
+	#getupdates	{color:#666; font-size:70%; background-color:#EBEBE5; vertical-align:middle; border-top:1px solid #E5E5E5; padding:6px; _padding:0; padding-left:15px;} /**/
+	#getupdates a	{color:#DF761C; text-decoration:none; font-weight:bold; background:#EBEBE5 url(../img/btn_rtarrow_bgebebe4.gif) no-repeat top left; padding:5px 0 3px 28px; height:26px; margin-left:10px;}
+	#getupdates a:hover	{text-decoration:underline;}
+	#getupdates td {vertical-align:middle; color:#666; font-size:70%;}
+
+	#footer_table	{border-style:solid; border-width:1px; border-color:#3F3F33; background-color:#71705B; width:884px;}
+	#footer_table ul {margin:0px; padding:0 0 2 0;}
+	ul .footer_nav	{font-size:70%; color:#ffffff; list-style-type:none; line-height:1.2em; margin:0px; padding:0 0 2 0;}
+	ul .left_nav	{font-size:100%; color:#ffffff; list-style-type:disc; line-height:1.2em; margin:0px; padding:0 0 2 0;}
+	#footer_table li {font-size:70%; color:#ffffff; list-style-type:none; line-height:1.2em; margin:0px; padding:0px;}
+	#footer_table ul .footer_colheader {text-transform:uppercase; font-weight:bold;}
+	#footer_table td {vertical-align:top;}
+	#footer_table a {color:#ffffff; text-decoration:none;}
+	#footer_table a:hover {text-decoration:underline;}
+	
+	#trailer	{width:1000px; background-color:#ffffff; font-size:60%; text-align:center; color:#666666;}
+	#trailer a	{color:#E8791D; text-decoration:none;}
+	#trailer a:hover	{text-decoration:underline;}
+
+	/**********************************************************/
+	/****  sIFR  ****/
+	
+		/* * {font-size:small;}
+		These are standard sIFR styles... do not modify */
+		
+		.sIFR-flash {
+			visibility: visible !important;
+			margin: 0;
+		}
+		
+		.sIFR-replaced {
+			visibility: visible !important;
+		}
+		
+	@media screen, handheld, projection, tty, tv{
+		span.sIFR-alternate {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 0;
+			height: 0;
+			display: block;
+			overflow: hidden;
+		}
+	} /* END @media screen, etc. */
+		
+		
+		/* These "decoy" styles are used to hide the browser text before it is replaced... the negative-letter spacing in this case is used to make the browser text metrics match up with the sIFR text metrics since the sIFR text in this example is so much narrower... your own settings may vary... any weird sizing issues you may run into are usually fixed by tweaking these decoy styles */
+		
+		.sIFR-hasFlash h1 {
+			visibility: hidden;
+			letter-spacing: -2px;
+			/*font-size:400%; */
+		}
+		
+		.sIFR-hasFlash h2 {
+			visibility: hidden;
+			letter-spacing: -2px;
+			/*font-size: 55px;*/
+		}
+		
+		.sIFR-hasFlash h3 {
+			visibility: hidden;
+			/*letter-spacing: -6px;
+			font-size: 25px;*/
+		}
+		
+		.sIFR-hasFlash div.syndication-title {
+			visibility: hidden;
+			letter-spacing: -2px;
+			/*font-size: 25px;*/
+		}
+		
+		
+	
+	@media print {
+		/* This is the print stylesheet to hide the Flash headlines from the browser... regular browser text headlines will now print as normal */
+		
+		.sIFR-replaced embed{ display: none; }
+		
+	}
+	
+	/**********************************************************/
