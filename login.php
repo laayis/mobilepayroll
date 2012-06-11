@@ -25,9 +25,9 @@ echo "Result: " . $result;
 if($result){
 	setcookie('SESSID', session_id(), time()+3600);	
 	setcookie('id', getEmployeeId($link), time()+3600);	
-	header('Location: pages/overview.php');
+	header('Location: http://helloworld123.elasticbeanstalk.com/pages/overview.php');
 } else{
-	header('Location: index.php');
+	header('Location: http://helloworld123.elasticbeanstalk.com/index.php');
 }
 
 ?>
