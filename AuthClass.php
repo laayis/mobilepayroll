@@ -3,8 +3,7 @@ session_start();
 
 //check if user sent correct username and password
 function initDb(){
-	$link = mysql_connect('mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com', 'pussyeater', 'win2210760');
-	//$link = mysql_connect('localhost', 'pussyeater', 'win2210760');
+	$link = mysql_connect('localhost', 'pussyeater', 'win2210760');
 	if (!$link) { die('Could not connect: ' . mysql_error());}
 	return $link;
 }

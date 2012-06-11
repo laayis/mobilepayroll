@@ -10,7 +10,7 @@
 <p>Please login to proceed</p>
 
 
-<form enctype="application/x-www-form-urlencoded" action="/login.php" method="post"><dl class="">
+<form enctype="application/x-www-form-urlencoded" action="login.php" method="post"><dl class="">
 <dt><label for="username" class="required">Username:</label></dt>
 <dd>
 <input type="text" name="username" id="username" value=""></dd>
