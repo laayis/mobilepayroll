@@ -26,6 +26,6 @@
 	<div class="clear"></div>
 </div>
 <div class="bottom_copyright">
-	<div>&copy;2012 ParkTec, LLC. All Rights Reserved.</div>
+	<div>&copy;2012 MobilePay, LLC. All Rights Reserved.</div>
 	<div><a href="#">Terms of Use</a> which constitute a legal agreement between you and ParkTek, LLC.</div>
 </div>

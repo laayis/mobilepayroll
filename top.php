@@ -1,5 +1,5 @@
 <?php
-//	include('AuthClass.php');
+//	include('AuthClassExt.php');
 	//include('Session.php');
 ?>
 
@@ -17,14 +17,20 @@
 	<div class="header_top">
 		<div class="header_logo"><img src="/images/logo.png" width="30" /></div>
 		<div class="header_login">
-			<?php echo "Welcome";?>  | <a href="../logout.php">Exit</a>
+			<?php echo "Welcome, "; //. extgetName(extinitDb());
+			?>  | <a href="../logout.php">Exit</a>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div class="header_menu"></div>
 	<div class="content_main">
 		<div class="content_left">
-			<?php include('left.php'); ?>
+			
+			<?php 
+				//if(isLoggedIn()){
+					include('left.php');
+				//} 
+			?>
 			</div>
 			<div class="content_right">
 				<div class="content_right_inner">

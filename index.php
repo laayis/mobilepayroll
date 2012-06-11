@@ -20,7 +20,6 @@
 <dt>&nbsp;</dt><dd>
 <input type="submit" name="login" id="login" value="Login"></dd></dl></form>
 <?php
-echo "<p>Hello World</p>"; 
 
 ?> 
  </body>

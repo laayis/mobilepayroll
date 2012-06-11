@@ -3,12 +3,10 @@ session_start();
 
 //check if user sent correct username and password
 function initDb(){
-	$link = mysql_connect('mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com', 'pussyeater', 'win2210760');
-	//$link = mysql_connect('localhost', 'pussyeater', 'win2210760');
+	$link = mysql_connect('localhost', 'pussyeater', 'win2210760');
 	if (!$link) { die('Could not connect: ' . mysql_error());}
 	return $link;
 }
-
 function selectDb($link){
 	$db_selected = mysql_select_db('live', $link);
 	if (!$db_selected) {
@@ -84,29 +82,4 @@ function isAlphaNumeric($str)
     return preg_match('/^[A-Za-z0-9_]+$/',$str);
 }
 
-/*
-$result = queryDb();
-//user successfully logged in
-$row = 0;
-while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-	if($row['user'] == $_POST['user'] &&
-	$row['password'] == $_POST['password']){
-		session_start();
-		echo "User logged in";
-	} else{
-		//session_unset();
-		//echo "User not logged \n";
-	}
-}
-
-echo "HELLO\n";
-*/
-/*
-
-if(isset($_SESSION['login']){
-    echo "FUCK YEA!!";
-} else{
-   echo "TRY AGAIN";
-}
-*/
 ?>
