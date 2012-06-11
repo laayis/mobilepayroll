@@ -14,9 +14,11 @@ if(isset($_COOKIE['SESSID'])){
 		include($temp[0] . "_c.php");
 		include('../bottom.php');
 	}else {
-		header('Location: http://helloworld123.elasticbeanstalk.com');
+		header('Location: http://helloworld123.elasticbeanstalk.com/');
+		//header('Location: http://helloworld123.elasticbeanstalk.com');
 	}
 } else{
-		header('Location: http://helloworld123.elasticbeanstalk.com');
+		header('Location: http://helloworld123.elasticbeanstalk.com/');
+		//header('Location: http://helloworld123.elasticbeanstalk.com');
 }
 ?>
