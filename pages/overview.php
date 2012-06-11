@@ -17,6 +17,6 @@ if(isset($_COOKIE['SESSID'])){
 		header('Location: http://helloworld123.elasticbeanstalk.com/');
 	}
 } else{
-	header('Location: http://http://helloworld123.elasticbeanstalk.com/');
+	header('Location: http://helloworld123.elasticbeanstalk.com/');
 }
 ?>
