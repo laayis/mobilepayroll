@@ -165,5 +165,73 @@ function countPeopleAtLocation(){
 	$company_id = $row['company_id'];
 	return($company_id);
 }
+
+function printRowHours(){
+
+}
+function printRowWeek($date){
+// set the default timezone to use. Available since PHP 5.1
+date_default_timezone_set('UTC');
+$temp = split('-',$date);
+
+$month = $temp[1];
+$day = $temp[3];
+$year = $temp;
+// Prints something like: Monday
+// Prints something like: Monday 8th of August 2005 03:12:46 PM
+
+$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
+$milli_day = 60*60*24;
+
+echo'
+	<tr>
+	<td width="20%" align="center" class="normal"><strong>Punches /<br />
+	Time Off</strong></td>
+';
+
+
+for($i=0; $i<7;++$i){
+$tomo = strtotime("today", $from_unix_time);
+$formatted = date('D M d', $tomo);
+$temp = split(' ', $formatted);
+echo '
+	<td width="10%" align="center" class="normal"><strong>
+';
+echo $temp[0] . "<br />" . $temp[1] . " " . $temp[2];
+echo '</strong></td>';
+$from_unix_time += $milli_day;
+}
+echo '
+	<td width="20%" class="normal">
+		<strong>Weekly Total</strong>
+	    </td>
+	</tr>
+	
+';
+
+
+// Prints: July 1, 2000 is on a Saturday
+
+/*
+	$query = "SELECT DATE_FORMAT('2012-06-09', '%a %b %d') AS date WHERE "
+	."date BETWEEN '"
+	. $date .
+	"' AND DATE_ADD('"
+	. $date .
+	"', INTERVAL 14 DAY) ORDER BY date ASC LIMIT 14";
+
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	//get company_id to filter clock
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
+		$temp = $row['date'];
+		echo $temp;
+	}
+*/
+	//return($temp);
+}
 ?>
 

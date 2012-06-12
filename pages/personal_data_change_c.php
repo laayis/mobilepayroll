@@ -13,7 +13,7 @@
 			<!-- US Associate Info -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="4">
 		<tr><td colspan="2" class="small">
-			<div align="left"><span>Name:&nbsp<strong>WINICIUS&nbsp;SIQUEIRA&nbsp;&nbsp;&nbsp;</strong>&nbsp;
+			<div align="left"><span>Name:&nbsp<strong><?php echo showName(); ?>&nbsp;&nbsp;&nbsp;</strong>&nbsp;
 			Associate ID:&nbsp<strong>115838849</strong>
 			<br /><br />
 			On this page you may update your personal Information.

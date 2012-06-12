@@ -52,56 +52,11 @@
 			</strong>
 			</legend>
 			<table width="100%" border="2" cellpadding="0" cellspacing="0">
-				<tr>
-					<td width="20%" align="center" class="normal"><strong>Punches /<br />
-					Time Off</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Mon
-							<br>
-							Jun
-							04
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Tue
-							<br>
-							Jun
-							05
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Wed
-							<br>
-							Jun
-							06
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Thu
-							<br>
-							Jun
-							07
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Fri
-							<br>
-							Jun
-							08
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Sat
-							<br>
-							Jun
-							09
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Sun
-							<br>
-							Jun
-							10
-						</strong></td>
-					<td width="20%" class="normal">
-						<strong>Weekly Total</strong>
-				    </td>
-				</tr>
-				<tr>
+<?php
+include('../TableClass.php');
+printRowWeek('06-06-2012');
+?>					
+			<tr>
 					<td align="center">In</td>
 						<td class="columnColor0">
 						16:06
