@@ -1,6 +1,6 @@
 <?php
 function extinitDb(){
-	$link = mysql_connect('localhost', 'pussyeater', 'win2210760');
+	$link = mysql_connect('Location: http://helloworld123.elasticbeanstalk.com/', 'pussyeater', 'win2210760');
 	if (!$link) { die('Could not connect: ' . mysql_error());}
 	return $link;
 }
