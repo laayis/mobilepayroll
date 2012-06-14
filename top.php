@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/style/style.css" type="text/css" />
 <link rel="stylesheet" href="/style/ESSWrapper.css" type="text/css" />
 <link rel="stylesheet" href="/style/ESSstyles.css" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 <body>
 <div class="main_wrapper" align="center">

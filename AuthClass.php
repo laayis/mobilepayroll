@@ -13,6 +13,18 @@ function selectDb($link){
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 }
+function queryDb($link, $query){
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+}
+
 function isValidLogin($link){
 	// make 'live' the current db
 	$db_selected = mysql_select_db('live', $link);
@@ -52,6 +64,23 @@ function getEmployeeId($link){
 		return $row['id'];
 	}else{return 0;}
 
+}
+
+function selectContact($link, $selected){
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+	
+	$query = "SELECT " . $selected . " FROM contact_info WHERE contact_info.id=" . $_COOKIE['id'];
+	$result=mysql_query($query);
+        if(!$result) {
+            die('Invalid query: ' . mysql_error());
+        }
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	$tossed_salad=$row[$selected];
+	echo $tossed_salad;
+	return $tossed_salad;
 }
 
 function showName($link){

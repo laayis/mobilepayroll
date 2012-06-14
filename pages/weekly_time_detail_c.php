@@ -4,8 +4,13 @@
 
 <form name="timeDetailFormBean" method="post" action="/EssTimeDetail/loadTimeDetail.do">
 <span class="normal"> 
-		Name:<strong>WINICIUS &nbsp; SIQUEIRA</strong>&nbsp;
-	             Associate ID:<strong>115838849</strong>
+		Name:<strong>
+			<?php $link=initDb();
+			selectDb($link);
+			echo showName($link);
+			 ?>
+ 		</strong>&nbsp;
+	             Associate ID: <strong><?php echo $_COOKIE['id'] ?></strong>
 	</span>
 	<div align="center"> 
 	<table width="100%" cellpadding=0 cellspacing=0 border="0">
@@ -55,6 +60,9 @@
 <?php
 include('../TableClass.php');
 printRowWeek('06-06-2012');
+$link = initDb();
+selectDb($link);
+printRowIn();
 ?>					
 			<tr>
 					<td align="center">In</td>

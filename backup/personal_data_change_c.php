@@ -1,7 +1,6 @@
 
-<!--
 <script type="text/javascript" src="/js/personal_data_change.js"></script>
--->
+
 <h1>ESS Personal Data Change</h1>
 <hr />
 
@@ -9,7 +8,7 @@
 <table width="800"   border="0" cellpadding="0" cellspacing="0"  align="center">
 <tr><td>
 <div style="display: none; visibility: invisible;">
-<input type="text" name="country" maxlength="2" size="5" value="<?php ?>" class="entertext" />
+<input type="text" name="tot_country" maxlength="2" size="5" value="<?php ?>" class="entertext">
 </div>
 			<!-- US Associate Info -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="4">
@@ -53,14 +52,14 @@
 						<div align="right"><strong>First:
 						</strong></div></td>
 						<td class="normal"><div align="left">&nbsp; 
-						<input type="text" name="totable_first" maxlength="30" size="15" value="<?php selectContact($link, 'first'); ?>" onfocus="displayNameNote()" class="entertext" id="first" />
+						<input type="text" name="totable_first" maxlength="30" size="15" value="<?php selectContact($link, 'first'); ?>" onfocus="displayNameNote()" class="entertext" id="first">
 						<span ><strong>M.I.:
 						</strong></span> 
                         <input type="text" name="totable_mi" maxlength="1" size="1" value="<?php selectContact($link, 'mi'); ?>" onfocus="displayNameNote()" class="entertext" id="mi">
 						<strong><span>Last:
 						</span></strong> 
                         <input type="text" name="totable_last" maxlength="30" size="15" value="<?php selectContact($link, 'last'); ?>" onfocus="displayNameNote()" class="entertext" id="last">
-                        <span><select name="suffix" onchange="displayNameNote()" class="entertext" id="suffix"><option value="" selected="selected"></option>
+                        <span><select name="totable_suffix" onchange="displayNameNote()" class="entertext" id="suffix"><option value="" selected="selected"></option>
 							      <option value="JR">JR</option>
 							      <option value="SR">SR</option>
 	                              <option value="II">II</option>
@@ -76,7 +75,7 @@
 					<tr><td class="normal"> 
 						<div align="right"><strong>Address line 1:</strong></div></td>
 						<td ><div align="left"><strong>&nbsp; 
-						<input type="text" name="totable_addr1" maxlength="24" size="35" value="<?php selectContact($link, 'addr1'); ?>" onfocus="displayAdrNote()" class="entertext" id="addr1">
+						<input type="text" name="totable_addr2" maxlength="24" size="35" value="<?php selectContact($link, 'addr1'); ?>" onfocus="displayAdrNote()" class="entertext" id="addr1">
 						</strong></div></td>
 					</tr>
 					<tr><td class="normal"> 
@@ -181,7 +180,7 @@
 					<tr><td class="normal"> 
 						<div align="right"><strong>Personal Email Address:</strong></div></td>
 						<td><div align="left"><strong>&nbsp; 
-						<input type="text" name="totable_email" size="35" value="<?php selectContact($link, 'email'); ?>" class="entertext" id="personalEmail">
+						<input type="text" name="personalEmail" size="35" value="" class="entertext" id="personalEmail">
 						</strong></div></td>
 					</tr>
 				</table>
@@ -221,7 +220,7 @@
 						<td ><div align="left"><strong>&nbsp; 
 						
 						<input type="text" name="totable_emergency1contact21" maxlength="3" size="3" value="<?php selectContact($link, 'emergency1contact21'); ?>" class="entertext" id="emergenc1ycontact21"> - 
-						<input type="text" name="totable_emergency1contact22" maxlength="3" size="3" value="<?php selectContact($link, 'emergency1contact22'); ?>" class="entertext" id="emergency1contact22"> -
+						<input type="text" name="totable_emergencycontact22" maxlength="3" size="3" value="<?php selectContact($link, 'emergency1contact22'); ?>" class="entertext" id="emergency1contact22"> -
 						<input type="text" name="totable_emergency1contact23" maxlength="4" size="4" value="<?php selectContact($link, 'emergency1contact23'); ?>" class="entertext" id="emergency1contact23">
 	
 

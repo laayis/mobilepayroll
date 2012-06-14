@@ -1,4 +1,6 @@
-<?php include('top.php')?>
+<?php
+include('AuthClass.php');
+include('top.php')?>
 <html>
  <head>
   <title>PHP Test</title>

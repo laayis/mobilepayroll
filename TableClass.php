@@ -78,12 +78,52 @@ function getPunchOut($date){
 	$temp = $row['date'];
 	return($temp);
 }
+function printRowIn(){
+$temp = split('-',$date);
+$month = $temp[1];
+$day = $temp[3];
+$year = $temp;
+$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
+$milli_day = 60*60*24;
+
+$tomo = strtotime("today", $from_unix_time);
+$formatted = date('D M d', $tomo);
+
+	$temp = array();
+	for($i=0;$i<7;++$i){
+		$tomo = strtotime("today", $from_unix_time);
+		$formatted = date('Y-m-d', $tomo);
+		$temp[] = getPunchesForDay($formatted);
+		$from_unix_time += $milli_day;
+	}
+print_r($temp);
+
+for($i=0;$i<50; ++$i){
+	for($i=0;$i<50; ++$i){
+		$temp[$i];
+	}
+}
+/*
+	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
+	. $_COOKIE['id'] .
+	"' AND date BETWEEN '"
+	. $date .
+	"' AND DATE_ADD('"
+	. $date .
+	"', INTERVAL 1 DAY) ORDER BY date ASC LIMIT 1";
+*/
+
+}
 
 function getPunchesForDay($date){
 	$look = isLookAheadZero($date);
 	$punches = array();
-	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $_COOKIE['id'] . "' AND date BETWEEN '2012-06-09' AND '2012-06-10' ORDER BY date ASC";
-
+	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $_COOKIE['id'] . "' AND date BETWEEN '"
+	. $date .
+	"' AND DATE_ADD('"
+	. $date .
+	"', INTERVAL 1 DAY) ORDER BY date ASC";
+	
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -172,23 +212,21 @@ function printRowHours(){
 function printRowWeek($date){
 // set the default timezone to use. Available since PHP 5.1
 date_default_timezone_set('UTC');
-$temp = split('-',$date);
-
-$month = $temp[1];
-$day = $temp[3];
-$year = $temp;
 // Prints something like: Monday
 // Prints something like: Monday 8th of August 2005 03:12:46 PM
 
-$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
-$milli_day = 60*60*24;
 
 echo'
 	<tr>
 	<td width="20%" align="center" class="normal"><strong>Punches /<br />
 	Time Off</strong></td>
 ';
-
+$temp = split('-',$date);
+$month = $temp[1];
+$day = $temp[3];
+$year = $temp;
+$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
+$milli_day = 60*60*24;
 
 for($i=0; $i<7;++$i){
 $tomo = strtotime("today", $from_unix_time);
