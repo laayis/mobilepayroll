@@ -59,11 +59,11 @@
 			<table width="100%" border="2" cellpadding="0" cellspacing="0">
 <?php
 include('../TableClass.php');
-printRowWeek('06-06-2012');
+printRowWeek('06-04-2012');
 $link = initDb();
 selectDb($link);
-printRowIn();
-?>					
+printRowIn('06-04-2012');
+/*
 			<tr>
 					<td align="center">In</td>
 						<td class="columnColor0">
@@ -90,7 +90,10 @@ printRowIn();
 					<td>
 						&nbsp;
 					</td>
-				</tr>
+			
+	</tr>
+
+*/ ?>					
 				<tr>
 					<td align="center">Out</td>
 						<td class="columnColor0">

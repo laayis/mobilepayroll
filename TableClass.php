@@ -78,11 +78,24 @@ function getPunchOut($date){
 	$temp = $row['date'];
 	return($temp);
 }
-function printRowIn(){
+
+
+function getMax($temp){
+	$max = 0;
+	for($i=0; $i<count($temp); ++$i){
+		if(count($temp[$i]) > $max){ $max=count($temp[$i]);}
+	}
+
+	return($max);
+}
+
+
+
+function printRowIn($date){
 $temp = split('-',$date);
-$month = $temp[1];
-$day = $temp[3];
-$year = $temp;
+$month = $temp[0];
+$day = $temp[1];
+$year = $temp[2];
 $from_unix_time = mktime(0, 0, 0, $month, $day, $year);
 $milli_day = 60*60*24;
 
@@ -90,19 +103,51 @@ $tomo = strtotime("today", $from_unix_time);
 $formatted = date('D M d', $tomo);
 
 	$temp = array();
+
+	//conditional, $i < x is the days of the week
+
 	for($i=0;$i<7;++$i){
+			
 		$tomo = strtotime("today", $from_unix_time);
 		$formatted = date('Y-m-d', $tomo);
+		echo  $formatted;
 		$temp[] = getPunchesForDay($formatted);
 		$from_unix_time += $milli_day;
 	}
+
+	$max = getMax($temp);
+	echo $max;
+	echo '<tr>
+	<td align="center">In</td>
+	';
+	for($i=0;$i<7;++$i){
+		echo '<td class="columnColor0">';
+		echo $temp[$i][0];
+		echo '</td>';
+	}
+
+
+	echo '<tr><td align="center">Out</td>';
+	for($i=0;$i<7;++$i){
+		echo '<td class="columnColor0">';
+		echo $temp[$i][0];
+		echo '</td>';
+	}
+
+	echo '</tr>';
+
+
+
+
+
+
+
+
+
+
+
 print_r($temp);
 
-for($i=0;$i<50; ++$i){
-	for($i=0;$i<50; ++$i){
-		$temp[$i];
-	}
-}
 /*
 	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
 	. $_COOKIE['id'] .
@@ -222,9 +267,9 @@ echo'
 	Time Off</strong></td>
 ';
 $temp = split('-',$date);
-$month = $temp[1];
-$day = $temp[3];
-$year = $temp;
+$month = $temp[0];
+$day = $temp[1];
+$year = $temp[2];
 $from_unix_time = mktime(0, 0, 0, $month, $day, $year);
 $milli_day = 60*60*24;
 
