@@ -27,7 +27,7 @@ if($result){
 	setcookie('id', getEmployeeId($link), time()+3600);	
 	header('Location: pages/overview.php');
 } else{
-	header('Location: http://localhost');
+	header('Location: http://helloworld123.elasticbeanstalk.com/');
 }
 
 ?>
