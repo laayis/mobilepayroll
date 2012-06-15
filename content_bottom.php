@@ -1,7 +1,7 @@
 <div class="bottom_content">
 	<ul class="bottom_links">
 		<li class="dotted">
-		<img style="padding-right: 10px;" src="/images/parksman.png" />
+		<img style="padding-right: 10px;" width="100px" src="/images/parksman.png" />
 		</li>
 		<li>
 			<ul class="bottom_menu">
