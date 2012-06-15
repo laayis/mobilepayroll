@@ -10,10 +10,10 @@ function getCompanyId($user_id){
 	$company_id = $row['company_id'];
 	return($company_id);
 }
-
-function getHoursForId($user_id){
-	$company_id = getCompanyId($user_id);
-	$query = "SELECT clock.date FROM clock WHERE clock.id='" . $user_id . "' AND clock.company_id = '" . $company_id . "'";
+/*
+function getHours(){
+	$company_id = getCompanyId($_COOKIE['id']);
+	$query = "SELECT clock.date FROM clock WHERE clock.id='" . $_COOKIE['id'] . "' AND clock.company_id = '" . $company_id . "'";
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -27,8 +27,9 @@ function getHoursForId($user_id){
 	for($i=0; $i <count($time); ++$i){
 		echo $time[$i];
 	}
+	return $time;
 }
-
+*/
 /*
 The lookAhead function is required. It makes sure that the first entry has a look_ahead of 0. 0 refers to a clockin, 1 refers to a clockout.
 
@@ -91,7 +92,10 @@ function getMax($temp){
 
 
 
-function printRowIn($date){
+function printRowIn($link, $date, $weeks=1){
+	echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
+printRowWeek($date, $weeks);
+
 $temp = split('-',$date);
 $month = $temp[0];
 $day = $temp[1];
@@ -104,61 +108,80 @@ $formatted = date('D M d', $tomo);
 
 	$temp = array();
 
-	//conditional, $i < x is the days of the week
-
-	for($i=0;$i<7;++$i){
+	//get the amount of punches for employee
+	for($i=0;$i<7*$weeks;++$i){
 			
 		$tomo = strtotime("today", $from_unix_time);
 		$formatted = date('Y-m-d', $tomo);
-		echo  $formatted;
 		$temp[] = getPunchesForDay($formatted);
 		$from_unix_time += $milli_day;
 	}
 
+
+//print a rectangular screen
+//since data input looks like this:
+/*
+Example: dashes are timestamps in a 2 dimentional array
+---------
+---
+--------
+---
+-
+
+---------
+*/
 	$max = getMax($temp);
-	echo $max;
+for($j=0; $j<($max); $j=$j+2){
 	echo '<tr>
 	<td align="center">In</td>
 	';
-	for($i=0;$i<7;++$i){
-		echo '<td class="columnColor0">';
-		echo $temp[$i][0];
+	//print time for row 'In'
+	for($i=0;$i<7*$weeks;++$i){
+		echo '<td class="columnColor0">&nbsp;';
+		if(isset($temp[$i][$j])){echo $temp[$i][$j];}
 		echo '</td>';
 	}
+	echo '<td class="columnColor0">&nbsp;';
+	echo '</td>';
 
 
-	echo '<tr><td align="center">Out</td>';
-	for($i=0;$i<7;++$i){
-		echo '<td class="columnColor0">';
-		echo $temp[$i][0];
+	//print time for row 'Out'
+	echo '</tr><tr><td align="center">Out</td>';
+	for($i=0;$i<7*$weeks;++$i){
+		echo '<td class="columnColor0">&nbsp;';
+		if(isset($temp[$i][$j+1])){echo $temp[$i][$j+1];}
 		echo '</td>';
 	}
+	echo '<td class="columnColor0">&nbsp;';
+	echo '</td>';
 
 	echo '</tr>';
+	
+}
+	echo '
+	<tr>
+		<td align="left" class="normal"><strong>Hours Worked</strong></td>
+	';
+	$hours = getHours($temp);
+	for($i=0;$i<7*$weeks;++$i){
+			echo '<td class="columnColor1"><strong>';
+			echo $hours[$i];
+			echo '</strong></td>';
+	}
 
-
-
-
-
-
-
-
-
-
-
-print_r($temp);
-
-/*
-	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
-	. $_COOKIE['id'] .
-	"' AND date BETWEEN '"
-	. $date .
-	"' AND DATE_ADD('"
-	. $date .
-	"', INTERVAL 1 DAY) ORDER BY date ASC LIMIT 1";
-*/
+	$seconds = getSeconds($temp);
+	$totalhours=0;
+	for($i=0;$i<count($seconds); ++$i){
+		$totalhours += $seconds[$i];
+	}
+	echo '<td class="columnColor1"><strong>';
+	echo convertSecondsToTime($totalhours);
+	echo '</strong></td>';
+	echo '</table>';
 
 }
+
+
 
 function getPunchesForDay($date){
 	$look = isLookAheadZero($date);
@@ -219,24 +242,32 @@ function convertSecondsToTime($sec){
 	$hours = ($sec/60/60)%60;
 	return($hours . "H" . $minutes . "M");
 }
-function displayDayPunches($punches){
 
+function getHours($punches){
+	$seconds = getSeconds($punches);
+	for($i=0; $i<count($punches);++$i){
+		$seconds[$i] = convertSecondsToTime($seconds[$i]);
+	}
+	return $seconds;
+}
+function getSeconds($punches){
+
+	$seconds=array();
+for($j=0;$j<count($punches); ++$j){
+	//echo "<br /> -------------" . count($punches[$j]);
 	$temp=0;
-	for($i=0;$i<count($punches); $i=$i+2){
-		$workinghours = (strtotime($punches[$i+1])
-				- strtotime($punches[$i]));
-		$temp = $temp + $workinghours;
-	}
-	echo "<br />TOTAL HOURS:" . convertSecondsToTime($temp) . "<br />";
 
+	for($i=0;$i<count($punches[$j]); $i=$i+2){
+		$workingsecs = (strtotime($punches[$j][$i+1])
+				- strtotime($punches[$j][$i]));
+		$temp += $workingsecs;
+	}
 	
-	for($i=0;$i<count($punches); $i=$i+2){
-		$workinghours = (strtotime($punches[$i+1])
-				- strtotime($punches[$i]));
+	$seconds[] = $temp;
+}
+	//echo "<br />TOTAL HOURS:" . print_r($punches) . "<br />";
 
-		echo "<br />" . convertSecondsToTime($workinghours) . "<br />";
-	}
-	//if previous date is odd
+	return $seconds;
 }
 
 function countPeopleAtLocation(){
@@ -251,10 +282,22 @@ function countPeopleAtLocation(){
 	return($company_id);
 }
 
-function printRowHours(){
+function addDaysToDate($days, $date){
+	$temp = split('-',$date);
+	$month = $temp[0];
+	$day = $temp[1];
+	$year = $temp[2];
+	$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
+	$milli_day = 60*60*24;
+
+	$secondsperday = 60*60*24;
+	$tomo = strtotime("today", $from_unix_time+($secondsperday*$days));
+	$formatted = date('m-d-Y', $tomo);
+	return $formatted;
 
 }
-function printRowWeek($date){
+
+function printRowWeek($date, $weeks){
 // set the default timezone to use. Available since PHP 5.1
 date_default_timezone_set('UTC');
 // Prints something like: Monday
@@ -273,7 +316,7 @@ $year = $temp[2];
 $from_unix_time = mktime(0, 0, 0, $month, $day, $year);
 $milli_day = 60*60*24;
 
-for($i=0; $i<7;++$i){
+for($i=0; $i<7*$weeks;++$i){
 $tomo = strtotime("today", $from_unix_time);
 $formatted = date('D M d', $tomo);
 $temp = split(' ', $formatted);
@@ -293,28 +336,6 @@ echo '
 ';
 
 
-// Prints: July 1, 2000 is on a Saturday
-
-/*
-	$query = "SELECT DATE_FORMAT('2012-06-09', '%a %b %d') AS date WHERE "
-	."date BETWEEN '"
-	. $date .
-	"' AND DATE_ADD('"
-	. $date .
-	"', INTERVAL 14 DAY) ORDER BY date ASC LIMIT 14";
-
-	$result = mysql_query($query);
-	if (!$result) {
-	    die('Invalid query: ' . mysql_error());
-	}
-	//get company_id to filter clock
-	$row = mysql_fetch_array($result, MYSQL_ASSOC);
-	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
-		$temp = $row['date'];
-		echo $temp;
-	}
-*/
-	//return($temp);
 }
 ?>
 

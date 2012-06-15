@@ -15,7 +15,7 @@
 <div class="main_wrapper" align="center">
 <div class="main">
 	<div class="header_top">
-		<div class="header_logo"><img src="/images/logo.png" width="30" /></div>
+		<div class="header_logo"><img src="/images/parksman.png" width="30" /></div>
 		<div class="header_login">
 			<?php echo "Welcome, "; //. extgetName(extinitDb());
 			?>  | <a href="../logout.php">Exit</a>
