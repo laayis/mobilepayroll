@@ -394,7 +394,8 @@ function addDaysToDate($days, $date){
 }
 
 function userAddTimeForm(){
-echo 'FUCK  YOU';
+//echo 'FUCK  YOU';
+echo '<br />';
 echo '<form method="POST" action="">';
 echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
 
@@ -487,7 +488,7 @@ for($i=0; $i<7*$weeks;++$i){
 //print hidden date
 $tomo = strtotime("today", $from_unix_time);
 $formatted = date('Y-m-d', $tomo);
-echo '<div id="'. $i . '">'. $formatted .'</div>';
+echo '<div style="display:none;" id="'. $i . '">'. $formatted .'</div>';
 
 $tomo = strtotime("today", $from_unix_time);
 $formatted = date('D M d', $tomo);

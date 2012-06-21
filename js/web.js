@@ -1,6 +1,6 @@
 var rem='0';
 function deleteframe(temp){
-alert('awd');
+//alert('awd');
 	rem = temp;
 	var x = temp + "_1";
 	var time1 = document.getElementById(x).innerHTML;
@@ -13,14 +13,14 @@ alert('awd');
 	var date = document.getElementById(date_id[1]).innerHTML;
 
 	var sendget = date + " " + n[1] + " " + nn[1];
-	alert(sendget);
+//	alert(sendget);
 	//$.post("../pages/deleteframe.php", { id: id, date: temp, timei: n[1], timef: nn[1]},
 	$.post("../pages/deleteframe.php", { id: "id", date: date, timei: n[1], timef: nn[1]},
 	function(data){
 		if(1){
-		alert('---');
+//		alert('---');
 		var temp = rem;
-		alert(temp);
+//		alert(temp);
 			//remove
 			var x = document.getElementById(temp);
 			x.innerHTML = '&nbsp;';
@@ -28,7 +28,7 @@ alert('awd');
 			time1.innerHTML = '&nbsp;';
 			var time2 = document.getElementById(temp+'_2');
 			time2.innerHTML = '&nbsp;';
-			alert(data);
+//			alert(data);
 		}
 	}
 	);
