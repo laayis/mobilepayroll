@@ -19,7 +19,7 @@ function setAppKey(){
 
 
 	$active = queryDb2($link, $query);
-	if($active != '0'){
+	if($active != 'Error: In queryDb2'){
 		$query = "UPDATE `subscribed_devices` SET `active` = '1' WHERE `subscribed_devices`.`active`='0'
 			AND `subscribed_devices`.`license` = '{$form['license']}'";
 		queryDb($link, $query);
