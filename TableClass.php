@@ -270,7 +270,7 @@ function getPunchesForDay($date){
 	//0,1 corresponds to in,out respectively
 	//$look = isLookAheadZero($date);
 	$look = getLookAhead($date);
-	echo '<br />----' . $look;
+	//echo '<br />----' . $look;
 	$punches = array();
 	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $_COOKIE['id'] . "' AND date BETWEEN '"
 	. $date .
@@ -311,7 +311,7 @@ function getPunchesForDay($date){
 		$punches[] = $nextday['date'];
 		array_shift($punches);
 	}
-	print_r($punches);
+//	print_r($punches);
 /*
 	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
 	. $_COOKIE['id'] .
@@ -496,7 +496,7 @@ $temp = split(' ', $formatted);
 echo '
 	<td colspan="2" width="10%" align="center" class="normal"><strong>
 ';
-echo $temp[0] . "<br />" . $temp[1] . " " . $temp[2];
+//echo $temp[0] . "<br />" . $temp[1] . " " . $temp[2];
 echo '</strong></td>';
 $from_unix_time += $milli_day;
 }
