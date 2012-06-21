@@ -496,7 +496,7 @@ $temp = split(' ', $formatted);
 echo '
 	<td colspan="2" width="10%" align="center" class="normal"><strong>
 ';
-//echo $temp[0] . "<br />" . $temp[1] . " " . $temp[2];
+echo $temp[0] . "<br />" . $temp[1] . " " . $temp[2];
 echo '</strong></td>';
 $from_unix_time += $milli_day;
 }
