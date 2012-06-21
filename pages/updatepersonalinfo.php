@@ -30,7 +30,7 @@ selectDb($link);
 $query= "UPDATE contact_info SET " . $t . " WHERE id=" . $_COOKIE['id'];
 echo "<br />" . $query;
 queryDb($link, $query);
-header('Location: http://Location: http://timesheet.elasticbeanstalk.com//pages/personal_data_change.php');
+header('Location: http://timesheet.elasticbeanstalk.com/pages/personal_data_change.php');
 
 //echo "<br />------hello";
 ?>
