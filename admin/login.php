@@ -27,7 +27,7 @@ if($result){
 	setcookie('id', getEmployeeId($link, 'company'), time()+3600);	
 	header('Location: pages/overview.php');
 } else{
-	header('Location: http://timesheet.elasticbeanstalk.com//admin');
+	header('Location: http://timesheet.elasticbeanstalk.com/admin');
 }
 
 ?>

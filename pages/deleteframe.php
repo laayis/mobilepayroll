@@ -7,10 +7,10 @@ if(isset($_COOKIE['SESSID'])){
 		echo $_POST['timei'];
 		
 	}else {
-		header('Location: http://timesheet.elasticbeanstalk.com/');
+		header('Location: http://timesheet.elasticbeanstalk.com');
 	}
 } else{
-	header('Location: http://timesheet.elasticbeanstalk.com/');
+	header('Location: http://timesheet.elasticbeanstalk.com');
 }
 ?>
 

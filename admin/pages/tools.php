@@ -14,9 +14,9 @@ if(isset($_COOKIE['SESSID'])){
 		include($temp[0] . "_c.php");
 		include('../../bottom.php');
 	}else {
-	header('Location: http://timesheet.elasticbeanstalk.com//admin');
+	header('Location: http://timesheet.elasticbeanstalk.com/admin');
 	}
 } else{
-	header('Location: http://timesheet.elasticbeanstalk.com//admin');
+	header('Location: http://timesheet.elasticbeanstalk.com/admin');
 }
 ?>
