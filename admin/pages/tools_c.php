@@ -33,18 +33,22 @@
 	<br />
 	<?php
 	//add hours and pay
-	printTableTop(array('ID','First','Last'), 'Employee Hours and Pay');
+	printTableTop(array('Weekly Schedule', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Employees');
 	$emp = getEmployeesInCompany($_COOKIE['id']);
-	printTableBottom($emp);
+	//print_r($emp);
+	$empf = prepareEmpOutput($emp);
+	printEmpTableBottom($empf)
+	//printTableBottom($emp);
 ?>
 </td>
+</tr>
 
-
+<tr>
 <td>
 	<br />
 	<?php
 	//add hours and pay
-	printTableTop(array('License','Active'), 'Subscribed Devices');
+	printTableTop(array('License','Activated', 'Generate'), 'Subscribed Devices', '200px');
 	$emp = getActiveKeysInCompany($_COOKIE['id']);
 	printTableBottom($emp);
 ?>
@@ -54,7 +58,7 @@
 	<br />
 	<?php
 	//add hours and pay
-	printTableTop(array('ID','First','Last'), 'Employee Hours and Pay');
+	printTableTop(array('ID','First','Last'), 'Employee Hours and Pay', '200px');
 	$emp = getEmployeesInCompany($_COOKIE['id']);
 	printTableBottom($emp);
 ?>

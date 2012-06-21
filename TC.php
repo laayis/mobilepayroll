@@ -264,7 +264,12 @@ for($j=0; $j<($max); $j=$j+2){
 
 
 
-function getPunchesForDay($date){
+function getPunchesForDay($date, $id='0'){
+	$tt = 0;
+	if($id='0'){
+		$tt=$_COOKIE['id'];
+	}
+	echo $tt;
 	//in current day make sure look_ahead=0.
 	//look_ahead determines if the user checked in or out.
 	//0,1 corresponds to in,out respectively
@@ -272,7 +277,7 @@ function getPunchesForDay($date){
 	$look = getLookAhead($date);
 	//echo '<br />----' . $look;
 	$punches = array();
-	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $_COOKIE['id'] . "' AND date BETWEEN '"
+	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
 	. $date .
 	"' AND DATE_ADD('"
 	. $date .
@@ -286,7 +291,7 @@ function getPunchesForDay($date){
 	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
 		$punches[] = $row['date'];
 	}
-
+	print_r($punches);
 	//$temp=getPunchOut($date);
 	//make punch card even
 	//4 combinations of look and max

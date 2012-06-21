@@ -1,5 +1,6 @@
 <?php
-include_once('../AuthClass.php');
+include_once('../../AuthClass.php');
+include_once('../../TableClass.php');
 
 function getEmployeesInCompany($company_id){
 	$link = initDb();
@@ -7,7 +8,7 @@ function getEmployeesInCompany($company_id){
 
 
 	$query = "
-	SELECT contact_info.id, contact_info.first, contact_info.last
+	SELECT contact_info.id, contact_info.first, contact_info.last, contact_info.wage
 	FROM contact_info
 	WHERE contact_info.company_id=$company_id
 	";
@@ -19,7 +20,7 @@ function getEmployeesInCompany($company_id){
 	$temp = array();
 
 	while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
-		$temp[] = array($row['id'],$row['first'],$row['last']);
+		$temp[] = array($row['id'],$row['first'],$row['last'],$row['wage']);
 	}
 
 	//print_r($temp);
@@ -46,7 +47,7 @@ function getActiveKeysInCompany($company_id){
 	$temp = array();
 
 	while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
-		$temp[] = array($row['license'],$row['active']);
+		$temp[] = array($row['license'],$row['active'], 'Renew');
 	}
 
 	//print_r($temp);
@@ -54,9 +55,12 @@ function getActiveKeysInCompany($company_id){
 	
 }
 
-function printTableTop($columns, $tbname){
+function printTableTop($columns, $tbname, $w='700px'){
 echo '
-	<table border="2" cellpadding="0" cellspacing="0" bordercolor="#EFEFE4" >
+	<table width='
+	.
+	$w
+	. '" border="2" cellpadding="0" cellspacing="0" bordercolor="#EFEFE4" >
 		<tr><td colspan="'.count($columns).'" bgcolor="EFEFE4" class="normal"> 
 			<div align="left"><strong>' .
 		$tbname
@@ -73,6 +77,48 @@ echo '
 		echo '</td>';
 	}
 	echo '</tr>';
+}
+
+function getCurrentWeek(){
+	return '06-18-2012';
+}
+
+function prepareEmpOutput($emp){
+//	print_r($emp);
+
+	//$r for return
+	$r = array();
+	for($i=0; $i<count($emp); ++$i){
+	//echo '---' . $emp[$i][0];
+		
+		$r[] = array($emp[$i][0], 
+				$emp[$i][1] . ' ' . $emp[$i][2], 
+				$emp[$i][3],
+		getHoursForId($emp[$i][0], getCurrentWeek()),
+	calculatePay(getHoursForId($emp[$i][0],getCurrentWeek()), $emp[$i][3])
+			);
+	}
+//	print_r($r);
+	return $r;
+}
+
+function printEmpTableBottom($emp){
+
+	for($i=0; $i<count($emp); ++$i){
+		echo '<tr>';
+		for($j=0; $j<count($emp[$i]);++$j){
+			echo '<td>';
+			echo $emp[$i][$j];
+			echo '</td>';
+		}
+		echo '</tr>';
+		
+	}
+	echo '
+	</table>
+	<br />
+	';
+
 }
 
 function printTableBottom($emp){

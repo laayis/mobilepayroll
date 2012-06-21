@@ -125,7 +125,10 @@ function getFirstPunchForNextDay($date){
 	//get company_id to filter clock
 	$row = mysql_fetch_array($result, MYSQL_ASSOC);
 	//$temp = $row['date'];
-	return($row);
+	if(isset($row['date']) == FALSE){
+		return 0;
+	}
+	return $row;
 }
 
 
@@ -262,9 +265,60 @@ for($j=0; $j<($max); $j=$j+2){
 
 }
 
+function getHoursForId($id, $date, $weeks=1){
+	$temp = split('-',$date);
+	$month = $temp[0];
+	$day = $temp[1];
+	$year = $temp[2];
+	$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
+	$milli_day = 60*60*24;
 
+	$tomo = strtotime("today", $from_unix_time);
+	$formatted = date('D M d', $tomo);
 
-function getPunchesForDay($date){
+	$temp = array();
+	//echo $date;
+
+	//get the amount of punches for employee
+	for($i=0;$i<7*$weeks;++$i){
+			
+		$tomo = strtotime("today", $from_unix_time);
+		$formatted = date('Y-m-d', $tomo);
+		//print_r(getPunchesForDay($formatted, $id));
+		$temp[] = getPunchesForDay($formatted, $id);
+		$from_unix_time += $milli_day;
+	}
+
+	$seconds = getSeconds($temp);
+	$totalhours=0;
+	for($i=0;$i<count($seconds); ++$i){
+		$totalhours += $seconds[$i];
+	}
+	//echo convertSecondsToTime($totalhours);
+	return convertSecondsToTime($totalhours);
+}
+
+function calculatePay($time, $wage){
+	$matches = 0;
+	$pattern = '/([0-9]+)H([0-9]+)M/';
+	preg_match($pattern, $time, $matches);
+	//print_r($matches);
+	
+	$pay = $matches[1]*$wage;
+	$pay += ($matches[2]/60)*$wage;
+
+	$pay = '$'.$pay;
+	return($pay);
+}
+
+function getPunchesForDay($date, $id='0'){
+	$tt = 0;
+	if($id=='0'){
+		$tt=$_COOKIE['id'];
+	} else{
+		$tt=$id;
+	}
+	//echo $tt;
 	//in current day make sure look_ahead=0.
 	//look_ahead determines if the user checked in or out.
 	//0,1 corresponds to in,out respectively
@@ -272,7 +326,7 @@ function getPunchesForDay($date){
 	$look = getLookAhead($date);
 	//echo '<br />----' . $look;
 	$punches = array();
-	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $_COOKIE['id'] . "' AND date BETWEEN '"
+	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
 	. $date .
 	"' AND DATE_ADD('"
 	. $date .
@@ -286,12 +340,17 @@ function getPunchesForDay($date){
 	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
 		$punches[] = $row['date'];
 	}
-
+	//echo '<br/><br/>';
+	//print_r($punches);
 	//$temp=getPunchOut($date);
 	//make punch card even
 	//4 combinations of look and max
 	
 	$nextday = getFirstPunchForNextDay($date);
+	
+	//echo '<br/><br/>';
+	//echo '---' . print_r($nextday) . '---<br /> <br />';
+if(isset($nextday['look']) == 1){
 	if(
 	$look==0 && $nextday['look']==0
 	){
@@ -301,17 +360,24 @@ function getPunchesForDay($date){
 	){
 		//add last punchout
 		$punches[] = $nextday['date'];
-	}else if(
+	}
+}else{
+	array_pop($punches);
+}
+
+if($nextday!=0){	
+	if(
 	$look==1 && $nextday['look']==0
 	){
 		array_shift($punches);
 	} else if(
 	$look==1 && $nextday['look']==1
 	){
-		$punches[] = $nextday['date'];
+		//$punches[] = $nextday['date'];
 		array_shift($punches);
+		$punches[] = $nextday['date'];
 	}
-//	print_r($punches);
+}
 /*
 	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
 	. $_COOKIE['id'] .
@@ -338,6 +404,13 @@ function getHours($punches){
 	}
 	return $seconds;
 }
+
+function getSecondsFromHH($time){
+	$secs = (substr($time, 0, 2) * 3600) + (substr($time, 3, 2) * 60);
+
+	return $secs;
+}
+
 function getSeconds($punches){
 
 	$seconds=array();
@@ -347,16 +420,22 @@ for($j=0;$j<count($punches); ++$j){
 	$workingsecs=0;
 	for($i=0;$i<count($punches[$j]); $i=$i+2){
 		if(strtotime($punches[$j][$i+1]) < strtotime($punches[$j][$i])){
-			$workingsecs = (strtotime('00:00')
-					- strtotime($punches[$j][$i]));
+			//how many seconds in 24 hours? 86 400
+			$aa = 86400;
+			$workingsecs = $aa-getSecondsFromHH($punches[$j][$i]);
+			$workingsecs += getSecondsFromHH($punches[$j][$i+1]);
+		/*
+			$workingsecs = strtotime($punches[$j][$i]));
 			//echo '<br />' . $workingsecs;
 			$workingsecs += strtotime($punches[$j][$i+1]);
-			echo '<br />' . $workingsecs;
+			//echo '<br />' . $workingsecs;
+		*/
 		} else{
 			$workingsecs = (strtotime($punches[$j][$i+1])
 					- strtotime($punches[$j][$i]));
 		}
 		$temp += $workingsecs;
+		//echo '<br />' . $temp;
 	}
 	
 	$seconds[] = $temp;
