@@ -60,11 +60,15 @@
 include('../TableClass.php');
 $link = initDb();
 selectDb($link);
-$date = addDaysToDate(0, '06-04-2012');
+
+$today = '06-18-2012';
+$date = addDaysToDate(0, $today);
 printRowIn($link, $date);
+userAddTimeForm();
+
 /*
 
-*/ ?>					
+*/ ?>
 			</fieldset>
 			<br/>
 			<fieldset><legend> <strong>
@@ -74,14 +78,15 @@ printRowIn($link, $date);
 			</strong>
 			</legend>
 <?php
-$date = addDaysToDate(-7*1, '06-04-2012');
+$date = addDaysToDate(-7*1, $today);
 printRowIn($link, $date);
+userAddTimeForm();
 ?>
 
 
 			<br/>
 <?php
-$date = addDaysToDate(-7*2, '06-04-2012');
+$date = addDaysToDate(-7*2, $today);
 printRowIn($link, $date);
 ?>
 

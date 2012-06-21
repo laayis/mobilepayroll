@@ -13,6 +13,81 @@ function selectDb($link){
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 }
+
+function queryDbAll($link, $query){
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	//get company_id to filter clock
+	/*
+	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
+		$temp = $row['id'];
+	}
+*/
+	$temp = array();
+
+	while($row = mysql_fetch_array($result, MYSQL_NUM)){
+		$t=array();
+		for($i=0; $i<count($row); ++$i){
+			$t[] = $row[$i];
+		}
+		$temp[]=$t;
+	}
+	return $temp;
+}
+
+function queryDb2($link, $query){
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	//get company_id to filter clock
+	/*
+	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
+		$temp = $row['id'];
+	}
+*/
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	if(isset($row['id'])){
+		//print_r($row);
+		return $row['id'];
+	} else{
+		return 'Error: In queryDb2';
+	}
+}
+
+function grabForm(){
+
+$t = array_keys($_POST);
+//print_r($t);
+$select = array();
+
+//get key_value pair
+for($i=0;$i<count($t); ++$i){
+	$sp = preg_split("/totable_/", $t[$i]);
+	if(isset($sp[1])){
+		if($sp[1] != ''){
+			$select[$sp[1]] = $_POST['totable_' . $sp[1]];
+			//$value[] = $_POST['totable_' . $sp[1]];
+		}
+	}
+}
+return($select);
+
+}
+
+
 function queryDb($link, $query){
 	$db_selected = mysql_select_db('live', $link);
 	if (!$db_selected) {
@@ -23,16 +98,22 @@ function queryDb($link, $query){
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
 	}
+
+	return $result;
 }
 
-function isValidLogin($link){
+function isValidLogin($link, $table='contact_info'){
 	// make 'live' the current db
 	$db_selected = mysql_select_db('live', $link);
 	if (!$db_selected) {
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 
-	$query = "SELECT employee.username, employee.password FROM employee WHERE employee.username='" . $_POST['username'] . "'";
+	if($table=='contact_info'){
+	$query = "SELECT contact_info.username, contact_info.password FROM contact_info WHERE contact_info.username='" . $_POST['username'] . "'";
+	} else{
+	$query = "SELECT company.username, company.password FROM company WHERE company.username='" . $_POST['username'] . "'";
+	}
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -45,14 +126,14 @@ function isValidLogin($link){
 }
 
 //only works at login because of $_POST
-function getEmployeeId($link){
+function getEmployeeId($link, $table='contact_info'){
 	// make 'live' the current db
 	$db_selected = mysql_select_db('live', $link);
 	if (!$db_selected) {
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 
-	$query = "SELECT employee.id, employee.password, employee.username FROM employee WHERE employee.username='" . $_POST['username'] . "'";
+	$query = "SELECT {$table}.id, {$table}.password, {$table}.username FROM $table WHERE {$table}.username='" . $_POST['username'] . "'";
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -83,13 +164,13 @@ function selectContact($link, $selected){
 	return $tossed_salad;
 }
 
-function showName($link){
+function showName($link, $table='contact_info'){
 	$db_selected = mysql_select_db('live', $link);
 	if (!$db_selected) {
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 	
-	$query = "SELECT contact_info.first, contact_info.last FROM contact_info WHERE contact_info.id=" . $_COOKIE['id'];
+	$query = "SELECT {$table}.first, {$table}.last FROM {$table} WHERE {$table}.id=" . $_COOKIE['id'];
 	$result=mysql_query($query);
         if(!$result) {
             die('Invalid query: ' . mysql_error());

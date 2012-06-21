@@ -1,5 +1,5 @@
 <?php
-include('AuthClass.php');
+include('../AuthClass.php');
 ?>
 
 <?php
@@ -12,7 +12,7 @@ $result = 0;
 //prevents injection
 if( isset($_POST['username']) && isset($_POST['password']) ){
 	if(isAlphaNumeric($_POST['password']) && isAlphaNumeric($_POST['password'])){
-		$result = isValidLogin($link);
+		$result = isValidLogin($link, 'company');
 	}
 }
 /*
@@ -24,10 +24,10 @@ echo "Result: " . $result;
 
 if($result){
 	setcookie('SESSID', session_id(), time()+3600);	
-	setcookie('id', getEmployeeId($link), time()+3600);	
+	setcookie('id', getEmployeeId($link, 'company'), time()+3600);	
 	header('Location: pages/overview.php');
 } else{
-	header('Location: http://Location: http://timesheet.elasticbeanstalk.com/');
+	header('Location: http://localhost/admin');
 }
 
 ?>
