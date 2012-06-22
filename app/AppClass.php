@@ -35,6 +35,17 @@ function make_seed(){
   list($usec, $sec) = explode(' ', microtime());
   return (float) $sec + ((float) $usec * 100000);
 }
+function generateLetter(){
+	$temp = 0;
+	$key='';
+
+	// seed with microseconds
+	mt_srand(make_seed());
+	$temp = mt_rand();
+	$letter = chr(($num % 26) + 97);
+	//$temp=mt_rand(5, 15);
+	return $letter;
+}
 
 function generateKey(){
 	$temp = 0;
@@ -72,6 +83,51 @@ function getallemployees(){
 	$t = array('employees' => $t);
 	$temp = json_encode($t);
 	echo $temp;
+}
+
+function generateUsername($f, $l){
+	$letter = generateLetter();
+	$username = substr($f,0,1) . $letter . substr($l,0,1);
+	$key = generateKey();
+	$password = substr($key,0,6);
+	return(array('username'=>$username, 'password'=>$password));
+}
+
+function createUser(){
+	$form = grabForm();
+	$link=initDb();
+	selectDb($link);
+//get company_id
+$query = "SELECT subscribed_devices.company_id AS id 
+FROM subscribed_devices
+WHERE subscribed_devices.license = '" . $form['license'] .
+"' LIMIT 1";
+
+	//get company_id
+	$id = queryDb2($link, $query);
+	//print_r($id);
+	if($id == 0){
+		//echo "Wrong login information.";
+		echo '0';
+		return;
+	}
+// 	date 	id  	location 	company_id 	look_ahead 	license 
+
+	//$inout = isClockInOrOut($form['id'], $form['license']);
+	$user = generateUsername($form['first'], $form['last']);
+	$query = "INSERT INTO employee (" . 
+	"`username`, `password`, `company_id`) VALUES( " . 
+        "'" . $user['username'] . "', " .
+        "'" . $user['password'] . "', " .
+        "'" . $id . "')";
+	//insert
+	$temp = queryDb($link, $query);
+	if($temp == TRUE){
+		echo "1";
+	} else{
+		echo "0";
+	}
+
 }
 
 function clockUser(){
