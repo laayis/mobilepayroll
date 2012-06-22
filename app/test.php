@@ -4,13 +4,12 @@
 <?php
 include('AppClass.php');
 
-getallemployees();
 ?>
 
 <form method='POST' action='addemployee.php'>
-<input name='totable_id' type='text' value='id'/>
-<input name='totable_first' type='text' value='license'/>
-<input name='totable_last' type='text' value='date'/>
+<input name='totable_license' type='text' value='8169-7300-8184-cc00'/>
+<input name='totable_first' type='text' value='first'/>
+<input name='totable_last' type='text' value='last'/>
 <input type='submit' value='submit' />
 </form>
 </body>

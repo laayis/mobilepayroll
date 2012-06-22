@@ -31,10 +31,12 @@ function setAppKey(){
 	return;
 }
 
+/*
 function make_seed(){
   list($usec, $sec) = explode(' ', microtime());
   return (float) $sec + ((float) $usec * 100000);
 }
+*/
 function generateFourDigit(){
 	$temp = 0;
 	$key='';
@@ -56,23 +58,6 @@ function generateLetter(){
 	$letter = chr(($temp % 26) + 97);
 	//$temp=mt_rand(5, 15);
 	return $letter;
-}
-
-function generateKey(){
-	$temp = 0;
-	$key='';
-
-	// seed with microseconds
-	for($i=0; $i<4; ++$i){
-		mt_srand(make_seed());
-		$temp = mt_rand();
-		//$temp=mt_rand(5, 15);
-		$temp=md5($temp);
-		echo $temp;
-		$key .= substr($temp,0,4) . "-";
-	}
-	echo rtrim($key, '-');
-
 }
 
 function getallemployees(){
@@ -101,7 +86,7 @@ function generateUsername($f, $l){
 	$username = strtolower(substr($f,0,1) . $letter . substr($l,0,1));
 	$username .= generateFourDigit();
 	$key = generateKey();
-	$password = substr($key,0,6);
+	$password = substr($key,0,4);
 	return(array('username'=>$username, 'password'=>$password));
 }
 
@@ -127,11 +112,14 @@ WHERE subscribed_devices.license = '" . $form['license'] .
 
 	//$inout = isClockInOrOut($form['id'], $form['license']);
 	$user = generateUsername($form['first'], $form['last']);
-	$query = "INSERT INTO employee (" . 
-	"`username`, `password`, `company_id`) VALUES( " . 
+	//print_r($user);
+	$query = "INSERT INTO contact_info (" . 
+	"`username`, `password`, `company_id`, `first`, `last`) VALUES( " . 
         "'" . $user['username'] . "', " .
         "'" . $user['password'] . "', " .
-        "'" . $id . "')";
+        "'" . $id . "', " .
+        "'" . $form['first'] . "', " .
+        "'" . $form['last'] . "')";
 	//insert
 	$temp = queryDb($link, $query);
 	if($temp == TRUE){
