@@ -352,17 +352,17 @@ function getPunchesForDay($date, $id='0'){
 	
 	//echo '<br/><br/>';
 	//echo '---' . print_r($nextday) . '---<br /> <br />';
-if(isset($nextday['look']) == 1){
-	if($look==0 && $nextday['look']==1){
-		//add last punchout
-		$punches[] = $nextday['date'];
-	}
+	if(isset($nextday['look']) == 1){
+		if($look==0 && $nextday['look']==1){
+			//add last punchout
+			$punches[] = $nextday['date'];
+		}
 	
-	if($look==1 && $nextday['look']==1){
-		$punches[] = $nextday['date'];
-		array_shift($punches);
+		if($look==1 && $nextday['look']==1){
+			$punches[] = $nextday['date'];
+			array_shift($punches);
+		}
 	}
-}
 	if($look==1){
 		//add last punchout
 		array_shift($punches);

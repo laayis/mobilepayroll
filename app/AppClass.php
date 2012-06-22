@@ -78,7 +78,7 @@ function clockUser(){
 	$form = grabForm();
 	$link=initDb();
 	selectDb($link);
-print_r($form);
+//print_r($form);
 	//insert into clock if license==company_id && company_id==emp_id
 $query = "SELECT contact_info.id 
 FROM contact_info, company, subscribed_devices
