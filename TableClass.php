@@ -370,6 +370,9 @@ if(isset($nextday['look']) == 1){
 		array_pop($punches);
 		print_r($punches);
 	}
+	if(count($punches) %2 == 1){
+		array_pop($punches)
+	}
 	//if even do nothing, if odd then pop to make it even
 	//*
 	
