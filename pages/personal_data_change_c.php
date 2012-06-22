@@ -70,7 +70,7 @@
 					</tr>
 					<tr><td colspan="2" class="small" align="left">
 						<div id="adrNote">
-                    		Note: Your change may affect your State and/or Local Tax withholdings.  Please visit www.myTHDHR.com or contact the HR Service Center at 1-866-myTHDHR (1-866-698-4347) or email myTHDHR@homedepot.com to obtain the appropriate Federal, State, or Local Tax forms to submit to payroll.
+                    		Note: Your change may affect your State and/or Local Tax withholdings.  Please visit contact the HR Service Center to obtain the appropriate Federal, State, or Local Tax forms to submit to payroll.
                     	</div>
 					</td></tr>
 					<tr><td class="normal"> 

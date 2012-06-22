@@ -202,6 +202,7 @@ printRowIn($link, $date);
 			</fieldset>
 			<br/>
 			</div>			
+<!--
 			<br />
 			<fieldset>
 			<table width="100%" border="1" align="center" cellpadding="0"
@@ -221,16 +222,17 @@ printRowIn($link, $date);
 				</tr>
 				<tr>
 					<td align="center"> 
-					1-866-MYTHDHR<br />(698-4347)<br />
+					786-488-5097<br />786-488-5097<br />
 					</td>					
-			           	<td align="center">mythdhr@homedepot.com<br /></td>
-			           	<td align="right">www.mythdhr.com</td>
+			           	<td align="center">email address<br /></td>
+			           	<td align="right">company url</td>
 					<td align="right">
 					<div align="center">&nbsp;</div>
 					</td>
 				</tr>
 			</table>
 			</fieldset>
+-->
 			<div align="center"><br />
 			<input name="printButton" type="button" class="entertext noprint" value="Print"
 				onclick="window.print()" /> <br />

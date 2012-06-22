@@ -9,6 +9,16 @@ a:hover { text-decoration: underline;}
 h1 { margin-bottom: 20px;}
 hr { margin-bottom: 15px;}
 
+/*
+table:first-child { font-weight: bold; }
+*/
+td {padding: 3px 2px 3px 2px;}
+input { padding: 2px}
+select { padding: 2px}
+#sub {text-transform: capitalize;}
+fieldset { padding: 10px;}
+.login input {padding: 0px 0px 0px 0px;}
+
 .main_wrapper { }
 .main { width: 1000px; border: 0px solid #000000; text-align: left;}
 
