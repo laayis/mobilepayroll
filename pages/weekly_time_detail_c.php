@@ -80,7 +80,7 @@ userAddTimeForm();
 <?php
 $date = addDaysToDate(-7*1, $today);
 printRowIn($link, $date);
-userAddTimeForm();
+//userAddTimeForm();
 ?>
 
 
@@ -89,116 +89,13 @@ userAddTimeForm();
 $date = addDaysToDate(-7*2, $today);
 printRowIn($link, $date);
 ?>
-
-
-
 			<br/>
-			<table width="100%" border="2" cellpadding="0" cellspacing="0">
-				<tr>
-					<td width="20%" align="center" class="normal"><strong>Punches /<br />
-					Time Off</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Mon
-							<br>
-							May
-							14
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Tue
-							<br>
-							May
-							15
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Wed
-							<br>
-							May
-							16
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Thu
-							<br>
-							May
-							17
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Fri
-							<br>
-							May
-							18
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Sat
-							<br>
-							May
-							19
-						</strong></td>
-						<td width="10%" align="center" class="normal"><strong>
-							Sun
-							<br>
-							May
-							20
-						</strong></td>
-					<td width="20%" class="normal">
-						<strong>Weekly Total</strong>
-				    </td>
-				</tr>
-				<tr>
-					<td align="left" class="normal"><strong>
-					Hours Worked</strong></td>				
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="columnColor1">
-						&nbsp;
-					</td>
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="columnColor1">
-						&nbsp;
-					</td>
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="columnColor1">
-						&nbsp;
-					</td>
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="weeklyTotalColumn">
-							&nbsp;
-					</td>
-				</tr>
-				<tr>
-					<td align="left" class="normal"><strong>Totals</strong></td>
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="columnColor1">
-						&nbsp;
-					</td>
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="columnColor1">
-						&nbsp;
-					</td>
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="columnColor1">
-						&nbsp;
-					</td>
-					<td class="columnColor0">
-						&nbsp;
-					</td>
-					<td class="weeklyTotalColumn">
-							&nbsp;
-					</td>
-				</tr>
-			</table>
+<?php
+$date = addDaysToDate(-7*3, $today);
+printRowIn($link, $date);
+?>
+			
+
 			</fieldset>
 			<br/>
 			</div>			
