@@ -289,6 +289,8 @@ function getHoursForId($id, $date, $weeks=1){
 		$from_unix_time += $milli_day;
 	}
 
+	//print_r($temp);
+	//echo '</br></br>';
 	$seconds = getSeconds($temp);
 	$totalhours=0;
 	for($i=0;$i<count($seconds); ++$i){
@@ -325,7 +327,6 @@ function getPunchesForDay($date, $id='0'){
 	//$look = isLookAheadZero($date);
 	$look = getLookAhead($date);
 	//echo '<br />----' . $look;
-	$punches = array();
 	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
 	. $date .
 	"' AND DATE_ADD('"
@@ -336,6 +337,7 @@ function getPunchesForDay($date, $id='0'){
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
 	}
+	$punches = array();
 	//get company_id to filter clock
 	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
 		$punches[] = $row['date'];
@@ -351,20 +353,25 @@ function getPunchesForDay($date, $id='0'){
 	//echo '<br/><br/>';
 	//echo '---' . print_r($nextday) . '---<br /> <br />';
 if(isset($nextday['look']) == 1){
-	if(
-	$look==0 && $nextday['look']==0
-	){
-		//do nothing
-	} else if(
-	$look==0 && $nextday['look']==1
-	){
+	if($look==0 && $nextday['look']==1){
 		//add last punchout
 		$punches[] = $nextday['date'];
 	}
+	
+	if($look==1 && $nextday['look']==1){
+		$punches[] = $nextday['date'];
+		array_shift($punches);
+	}
 }else{
-	array_pop($punches);
+	if($look==1){
+		//add last punchout
+		array_shift($punches);
+	}
+	//if even do nothing, if odd then pop to make it even
+	//*
+	
 }
-
+/*
 if($nextday!=0){	
 	if(
 	$look==1 && $nextday['look']==0
@@ -378,6 +385,7 @@ if($nextday!=0){
 		$punches[] = $nextday['date'];
 	}
 }
+*/
 /*
 	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
 	. $_COOKIE['id'] .

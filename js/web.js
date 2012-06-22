@@ -34,3 +34,13 @@ function deleteframe(temp){
 	);
 
 }
+
+function renew(temp){
+	//alert(temp+'1');
+	$.post("../renew.php", { totable_license: temp },
+	function(data){
+		alert(data);
+		//window.location.reload();
+	}
+	);
+}

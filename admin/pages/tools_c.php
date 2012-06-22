@@ -48,7 +48,7 @@
 	<br />
 	<?php
 	//add hours and pay
-	printTableTop(array('License','Activated', 'Generate'), 'Subscribed Devices', '200px');
+	printTableTop(array('License','Activated', 'Generate'), 'Subscribed Devices', '300px');
 	$emp = getActiveKeysInCompany($_COOKIE['id']);
 	printTableBottom($emp);
 ?>

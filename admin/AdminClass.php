@@ -47,7 +47,9 @@ function getActiveKeysInCompany($company_id){
 	$temp = array();
 
 	while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
-		$temp[] = array($row['license'],$row['active'], 'Renew');
+		$l= '<a href="javascript:void(null);renew(\''.
+		$row['license'] . '\');">Renew</a>';
+		$temp[] = array($row['license'],$row['active'], $l);
 	}
 
 	//print_r($temp);
