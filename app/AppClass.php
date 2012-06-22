@@ -35,6 +35,17 @@ function make_seed(){
   list($usec, $sec) = explode(' ', microtime());
   return (float) $sec + ((float) $usec * 100000);
 }
+function generateFourDigit(){
+	$temp = 0;
+	$key='';
+
+	// seed with microseconds
+	mt_srand(make_seed());
+	$temp = mt_rand();
+	$letter = $temp % 1000;
+	//$temp=mt_rand(5, 15);
+	return $letter;
+}
 function generateLetter(){
 	$temp = 0;
 	$key='';
@@ -42,7 +53,7 @@ function generateLetter(){
 	// seed with microseconds
 	mt_srand(make_seed());
 	$temp = mt_rand();
-	$letter = chr(($num % 26) + 97);
+	$letter = chr(($temp % 26) + 97);
 	//$temp=mt_rand(5, 15);
 	return $letter;
 }
@@ -87,7 +98,8 @@ function getallemployees(){
 
 function generateUsername($f, $l){
 	$letter = generateLetter();
-	$username = substr($f,0,1) . $letter . substr($l,0,1);
+	$username = strtolower(substr($f,0,1) . $letter . substr($l,0,1));
+	$username .= generateFourDigit();
 	$key = generateKey();
 	$password = substr($key,0,6);
 	return(array('username'=>$username, 'password'=>$password));
