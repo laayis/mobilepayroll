@@ -366,6 +366,8 @@ if(isset($nextday['look']) == 1){
 	if($look==1){
 		//add last punchout
 		array_shift($punches);
+	} else{
+		array_pop($punches);
 	}
 	//if even do nothing, if odd then pop to make it even
 	//*
