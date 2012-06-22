@@ -54,6 +54,7 @@
 ?>
 </td>
 
+<!--
 <td>
 	<br />
 	<?php
@@ -63,6 +64,7 @@
 	printTableBottom($emp);
 ?>
 </td>
+-->
 
 </tr>
 <br /> 
