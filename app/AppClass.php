@@ -42,7 +42,7 @@ function generateFourDigit(){
 	// seed with microseconds
 	mt_srand(make_seed());
 	$temp = mt_rand();
-	$letter = $temp % 1000;
+	$letter = substr($temp,0,4);
 	//$temp=mt_rand(5, 15);
 	return $letter;
 }
