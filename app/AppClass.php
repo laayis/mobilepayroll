@@ -123,9 +123,11 @@ WHERE subscribed_devices.license = '" . $form['license'] .
 	//insert
 	$temp = queryDb($link, $query);
 	if($temp == TRUE){
-		echo "1";
+		echo json_encode(array('employee'=>$user));
+		return;
 	} else{
 		echo "0";
+		return;
 	}
 
 }

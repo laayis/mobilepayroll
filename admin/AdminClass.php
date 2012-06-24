@@ -81,6 +81,61 @@ echo '
 	echo '</tr>';
 }
 
+function getEmployeesForDate($date){
+	$link = initDb();
+	selectDb($link);
+
+	$query = "SELECT id, DATE(date) AS date, look_ahead FROM clock WHERE date>'{$date}' ORDER BY date ASC";
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+
+	$temp = array();
+	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
+		$temp[] = $row;
+	}
+
+	return $temp;
+}
+//FIX ME: currently clocked in table does not account for employees who clocked-in the previous day 8 hours before midnight.
+function printCurrTableBottom(){
+
+	$date = date('Y-m-d');
+	$emp = getEmployeesForDate($date);
+	//check to see that the employee is currently logged in
+	$clocked = array();
+	for($i=0;$i<count($emp);++$i){
+		$clocked[$emp[$i]['id']] = array($emp[$i]['id'],
+						$emp[$i]['date'],
+						$emp[$i]['look_ahead']
+						);
+	}
+
+	$newemp = array();
+	foreach($clocked as $value){
+		if($value[2] == 0){
+			$newemp[] = $value;
+		}
+	}
+
+	//print
+	for($i=0; $i<count($newemp); ++$i){
+		echo '<tr>';
+		for($j=0; $j<count($newemp[$i]);++$j){
+			echo '<td>';
+			echo $newemp[$i][$j];
+			echo '</td>';
+		}
+		echo '</tr>';
+		
+	}
+	echo '
+	</table>
+	<br />
+	';
+}
+
 function getCurrentWeek(){
 	return '06-18-2012';
 }
