@@ -504,10 +504,14 @@ echo '
 	
 	<td width="15%" align="left">
 	<div>
-	<input type="text" name="date' . $i . '" value="yyyy-mm-dd" onclick="">&nbsp;
+';
+	if($i==0){
+		echo '<input type="text" name="date' . $i . '" value="yyyy-mm-dd" onclick="">&nbsp;';
+	}
+
+echo '
 	</div>
 	</td>
-
 	<td width="15%" align="left">
 	<div>
 	<input type="text" name="time' . $i . '" value="hh:mm:ss" onclick="">&nbsp;
@@ -517,7 +521,7 @@ echo '
 	<td width="15%" align="left">
 	<div>
 ';
-	if($i==0){
+	if($i==1){
 	echo '<input type="checkbox" name="rollover" value="1" onclick="">&nbsp; <span class="normal"><strong>Roll-over Hours</strong></span>
 	';
 	}
@@ -537,8 +541,8 @@ echo '
 	</div>
 	</td>
 
-	<td rowspan="2">
-	<input size="50" type="text" id="reason" value="Please specify a reason e.g. Forgot to clock in, Forgot to punch out" class="entertext"/>
+	<td colspan="2">
+	<input size="85%" type="text" id="reason" value="Please specify a reason (E.g. Forgot to punch in)" class="entertext"/>
 	</td>
 
 

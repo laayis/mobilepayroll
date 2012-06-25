@@ -61,8 +61,8 @@ include('../TableClass.php');
 $link = initDb();
 selectDb($link);
 
-$monday = date("m-d-Y", strtotime("previous monday"));
-
+$monday = date("m-d-Y", strtotime("monday"));
+//echo $monday;
 $date = addDaysToDate(0, $monday);
 printRowIn($link, $date);
 userAddTimeForm();
