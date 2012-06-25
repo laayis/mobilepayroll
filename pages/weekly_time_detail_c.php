@@ -61,8 +61,9 @@ include('../TableClass.php');
 $link = initDb();
 selectDb($link);
 
-$today = '06-18-2012';
-$date = addDaysToDate(0, $today);
+$monday = date("m-d-Y", strtotime("previous monday"));
+
+$date = addDaysToDate(0, $monday);
 printRowIn($link, $date);
 userAddTimeForm();
 
@@ -78,7 +79,7 @@ userAddTimeForm();
 			</strong>
 			</legend>
 <?php
-$date = addDaysToDate(-7*1, $today);
+$date = addDaysToDate(-7*1, $monday);
 printRowIn($link, $date);
 //userAddTimeForm();
 ?>
@@ -86,12 +87,12 @@ printRowIn($link, $date);
 
 			<br/>
 <?php
-$date = addDaysToDate(-7*2, $today);
+$date = addDaysToDate(-7*2, $monday);
 printRowIn($link, $date);
 ?>
 			<br/>
 <?php
-$date = addDaysToDate(-7*3, $today);
+$date = addDaysToDate(-7*3, $monday);
 printRowIn($link, $date);
 ?>
 			
