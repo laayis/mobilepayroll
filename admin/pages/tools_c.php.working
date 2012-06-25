@@ -6,7 +6,7 @@
 <hr />
 
 <table width="800"   border="0" cellpadding="0" cellspacing="0"  align="center">
-<tr><td colspan="3">
+<tr><td>
 			<!-- US Associate Info -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="4">
 		<tr><td colspan="2" class="small">
@@ -27,11 +27,9 @@
 			</div>
 		</td></tr>
     </table>
-</td>
-
-</tr>
+</td></tr>
 <tr>
-<td colspan="3">
+<td>
 	<br />
 	<?php
 	printTableTop(array('Weekly Schedule', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Employees');
