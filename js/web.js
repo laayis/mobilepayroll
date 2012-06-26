@@ -1,7 +1,13 @@
+function getweek(id){
+	alert(id);
+}
+
 var rem='0';
 function deleteframe(temp){
 //alert('awd');
 	rem = temp;
+	var id = document.getElementById('getid').innerHTML;
+	//alert(id);
 	var x = temp + "_1";
 	var time1 = document.getElementById(x).innerHTML;
 	var x = temp + "_2";
@@ -15,7 +21,9 @@ function deleteframe(temp){
 	var sendget = date + " " + n[1] + " " + nn[1];
 //	alert(sendget);
 	//$.post("../pages/deleteframe.php", { id: id, date: temp, timei: n[1], timef: nn[1]},
-	$.post("../pages/deleteframe.php", { id: "id", date: date, timei: n[1], timef: nn[1]},
+
+
+	$.post("../pages/deleteframe.php", { id: id, date: date, timei: n[1], timef: nn[1]},
 	function(data){
 		if(1){
 //		alert('---');
@@ -28,11 +36,10 @@ function deleteframe(temp){
 			time1.innerHTML = '&nbsp;';
 			var time2 = document.getElementById(temp+'_2');
 			time2.innerHTML = '&nbsp;';
-//			alert(data);
+			alert(data);
 		}
 	}
 	);
-
 }
 
 function renew(temp){

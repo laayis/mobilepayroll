@@ -165,10 +165,10 @@ function getMax($temp){
 
 
 
-function printRowIn($link, $date, $weeks=1){
+function printRowIn($link, $date, $section, $weeks=1){
 	echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
-printRowWeek($date, $weeks);
-
+printRowWeek($date, $weeks, $section);
+echo $date;
 $temp = split('-',$date);
 $month = $temp[0];
 $day = $temp[1];
@@ -211,9 +211,9 @@ for($j=0; $j<($max); $j=$j+2){
 	//print time for row 'In'
 	for($i=0;$i<7*$weeks;++$i){
 		//check
-		echo '<td id="'. $j .'_'. $i  .'" rowspan="2" class="columnColor0">&nbsp;';
+		echo '<td id="'. $j .'_'. $section . "" . $i  .'" rowspan="2" class="columnColor0">&nbsp;';
 			if(isset($temp[$i][$j])){
-				echo '<a href="javascript:void(null);deleteframe(\''. $j .'_'. $i.'\')';
+				echo '<a href="javascript:void(null);deleteframe(\''. $j .'_'. $section . "" . $i.'\')';
 				echo ';">X</a>';
 			} else{
 				echo '&nbsp;';
@@ -221,7 +221,7 @@ for($j=0; $j<($max); $j=$j+2){
 		echo '</td>';
 		
 
-		echo '<td id="'. $j .'_'. $i . '_1' . '" class="columnColor0">&nbsp;';
+		echo '<td id="'. $j .'_'. $section . "" . $i . '_1' . '" class="columnColor0">&nbsp;';
 		if(isset($temp[$i][$j])){echo $temp[$i][$j];}
 		echo '</td>';
 	}
@@ -232,7 +232,7 @@ for($j=0; $j<($max); $j=$j+2){
 	//print time for row 'Out'
 	echo '</tr><tr><td align="center">Out</td>';
 	for($i=0;$i<7*$weeks;++$i){
-		echo '<td id="'. $j .'_'. $i . '_2' . '" class="columnColor0">&nbsp;';
+		echo '<td id="'. $j .'_'. $section . "". $i . '_2' . '" class="columnColor0">&nbsp;';
 		if(isset($temp[$i][$j+1])){echo $temp[$i][$j+1];}
 		echo '</td>';
 	}
@@ -487,7 +487,7 @@ function userAddTimeForm(){
 //echo 'FUCK  YOU';
 echo '<br />';
 echo '<form method="POST" action="">';
-echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
+echo '<table width="50%" border="2" cellpadding="0" cellspacing="0">';
 
 $i=0;
 for($i=0; $i < 2;++$i){
@@ -504,10 +504,14 @@ echo '
 	
 	<td width="15%" align="left">
 	<div>
-	<input type="text" name="date' . $i . '" value="yyyy-mm-dd" onclick="">&nbsp;
+';
+	if($i==0){
+		echo '<input type="text" name="date' . $i . '" value="yyyy-mm-dd" onclick="">&nbsp;';
+	}
+
+echo '
 	</div>
 	</td>
-
 	<td width="15%" align="left">
 	<div>
 	<input type="text" name="time' . $i . '" value="hh:mm:ss" onclick="">&nbsp;
@@ -517,7 +521,7 @@ echo '
 	<td width="15%" align="left">
 	<div>
 ';
-	if($i==0){
+	if($i==1){
 	echo '<input type="checkbox" name="rollover" value="1" onclick="">&nbsp; <span class="normal"><strong>Roll-over Hours</strong></span>
 	';
 	}
@@ -537,8 +541,8 @@ echo '
 	</div>
 	</td>
 
-	<td rowspan="2">
-	<input size="50" type="text" id="reason" value="Please specify a reason e.g. Forgot to clock in, Forgot to punch out" class="entertext"/>
+	<td colspan="2">
+	<input size="85%" type="text" id="reason" value="Please specify a reason (E.g. Forgot to punch in)" class="entertext"/>
 	</td>
 
 
@@ -554,7 +558,9 @@ echo '</table></form>';
 
 }
 
-function printRowWeek($date, $weeks){
+//section is used to create id for the date that goes into the database when
+//the user deletes a frame
+function printRowWeek($date, $weeks, $section){
 // set the default timezone to use. Available since PHP 5.1
 date_default_timezone_set('UTC');
 // Prints something like: Monday
@@ -578,7 +584,7 @@ for($i=0; $i<7*$weeks;++$i){
 //print hidden date
 $tomo = strtotime("today", $from_unix_time);
 $formatted = date('Y-m-d', $tomo);
-echo '<div style="display:none;" id="'. $i . '">'. $formatted .'</div>';
+echo '<div style="display:none;" id="'. $section . "" . $i . '">'. $formatted .'</div>';
 
 $tomo = strtotime("today", $from_unix_time);
 $formatted = date('D M d', $tomo);

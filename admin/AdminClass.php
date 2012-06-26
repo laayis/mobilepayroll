@@ -137,7 +137,7 @@ function printCurrTableBottom(){
 }
 
 function getCurrentWeek(){
-	return '06-18-2012';
+	return '06-25-2012';
 }
 
 function prepareEmpOutput($emp){
@@ -165,7 +165,14 @@ function printEmpTableBottom($emp){
 		echo '<tr>';
 		for($j=0; $j<count($emp[$i]);++$j){
 			echo '<td>';
-			echo $emp[$i][$j];
+			if($j==0){
+				//echo '<a href="javascript:void(null);getweek(\'';
+				echo '<a href="weekly_time_detail.php?id=';
+				echo $emp[$i][$j];
+				echo '" target="_blank">';
+				echo $emp[$i][$j];
+				echo '</a>';
+			} else { echo $emp[$i][$j]; }
 			echo '</td>';
 		}
 		echo '</tr>';

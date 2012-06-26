@@ -1,5 +1,5 @@
 <?php
-include('../TableClass.php');
+//include('../TableClass.php');
 
 $id = getID();
 ?>

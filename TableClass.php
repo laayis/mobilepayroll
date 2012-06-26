@@ -165,10 +165,11 @@ function getMax($temp){
 
 
 
-function printRowIn($link, $date, $weeks=1){
+function printRowIn($link, $date, $section, $id){
+	$weeks=1;
 	echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
-printRowWeek($date, $weeks);
-
+printRowWeek($date, $weeks, $section);
+echo $date;
 $temp = split('-',$date);
 $month = $temp[0];
 $day = $temp[1];
@@ -186,7 +187,7 @@ $formatted = date('D M d', $tomo);
 			
 		$tomo = strtotime("today", $from_unix_time);
 		$formatted = date('Y-m-d', $tomo);
-		$temp[] = getPunchesForDay($formatted);
+		$temp[] = getPunchesForDay($formatted, $id);
 		$from_unix_time += $milli_day;
 	}
 
@@ -211,9 +212,9 @@ for($j=0; $j<($max); $j=$j+2){
 	//print time for row 'In'
 	for($i=0;$i<7*$weeks;++$i){
 		//check
-		echo '<td id="'. $j .'_'. $i  .'" rowspan="2" class="columnColor0">&nbsp;';
+		echo '<td id="'. $j .'_'. $section . "" . $i  .'" rowspan="2" class="columnColor0">&nbsp;';
 			if(isset($temp[$i][$j])){
-				echo '<a href="javascript:void(null);deleteframe(\''. $j .'_'. $i.'\')';
+				echo '<a href="javascript:void(null);deleteframe(\''. $j .'_'. $section . "" . $i.'\')';
 				echo ';">X</a>';
 			} else{
 				echo '&nbsp;';
@@ -221,7 +222,7 @@ for($j=0; $j<($max); $j=$j+2){
 		echo '</td>';
 		
 
-		echo '<td id="'. $j .'_'. $i . '_1' . '" class="columnColor0">&nbsp;';
+		echo '<td id="'. $j .'_'. $section . "" . $i . '_1' . '" class="columnColor0">&nbsp;';
 		if(isset($temp[$i][$j])){echo $temp[$i][$j];}
 		echo '</td>';
 	}
@@ -232,7 +233,7 @@ for($j=0; $j<($max); $j=$j+2){
 	//print time for row 'Out'
 	echo '</tr><tr><td align="center">Out</td>';
 	for($i=0;$i<7*$weeks;++$i){
-		echo '<td id="'. $j .'_'. $i . '_2' . '" class="columnColor0">&nbsp;';
+		echo '<td id="'. $j .'_'. $section . "". $i . '_2' . '" class="columnColor0">&nbsp;';
 		if(isset($temp[$i][$j+1])){echo $temp[$i][$j+1];}
 		echo '</td>';
 	}
@@ -313,13 +314,28 @@ function calculatePay($time, $wage){
 	return($pay);
 }
 
+function getID(){
+	
+	$uri = $_SERVER['REQUEST_URI'];
+	$pieces = explode("/", $uri);
+	if(isset($_GET['id']) && $pieces[1]=='admin'){
+		return $_GET['id'];
+	} else{
+		return $_COOKIE['id'];
+	}
+
+}
+
 function getPunchesForDay($date, $id='0'){
+	/*
 	$tt = 0;
 	if($id=='0'){
 		$tt=$_COOKIE['id'];
 	} else{
 		$tt=$id;
 	}
+	*/
+	$tt=$id;
 	//echo $tt;
 	//in current day make sure look_ahead=0.
 	//look_ahead determines if the user checked in or out.
@@ -483,54 +499,44 @@ function addDaysToDate($days, $date){
 
 }
 
-function userAddTimeForm(){
+function userAddTimeForm($id){
 //echo 'FUCK  YOU';
 echo '<br />';
-echo '<form method="POST" action="">';
-echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
+echo '<form method="POST" action="approval.php">';
+echo '<table width="50%" border="2" cellpadding="0" cellspacing="0">';
 
 $i=0;
-for($i=0; $i < 2;++$i){
 echo '
 	<tr>
 	<td width="15%" align="left">
 	<div>
 ';
 	
-	if($i==0){echo 'IN';}else{echo 'OUT';}
+	echo 'Hours';
 echo '
 	</div>
 	</td>
 	
-	<td width="15%" align="left">
-	<div>
 ';
-	if($i==0){
-		echo '<input type="text" name="date' . $i . '" value="yyyy-mm-dd" onclick="">&nbsp;';
-	}
 
 echo '
-	</div>
-	</td>
-	<td width="15%" align="left">
+	<td colspan="2" width="15%" align="left">
 	<div>
-	<input type="text" name="time' . $i . '" value="hh:mm:ss" onclick="">&nbsp;
+	<input type="text" name="hours" value="hh:mm" onclick="">&nbsp;
+	<input style="display:none;" type="text" name="id" value="'. $id .'" onclick="">&nbsp;
 	</div>
 	</td>
 
-	<td width="15%" align="left">
+	<td align="left">
 	<div>
 ';
-	if($i==1){
 	echo '<input type="checkbox" name="rollover" value="1" onclick="">&nbsp; <span class="normal"><strong>Roll-over Hours</strong></span>
 	';
-	}
 echo '
 	</div>
 	</td>
 	</tr>
 ';
-}
 
 echo '
 	<tr>
@@ -542,13 +548,13 @@ echo '
 	</td>
 
 	<td colspan="2">
-	<input size="85%" type="text" id="reason" value="Please specify a reason (E.g. Forgot to punch in)" class="entertext"/>
+	<input size="55%" type="text" name="reason" value="Please specify a reason (E.g. Forgot to punch in)" class="entertext"/>
 	</td>
 
 
 	<td>
 	<div>
-	<input type="submit" id="sub" value="Send for Approval" name="send" class="entertext"/>
+	<input type="submit" id="sub" value="Send for Approval" class="entertext"/>
 	</div>
 	</td>
 	</tr>
@@ -558,7 +564,9 @@ echo '</table></form>';
 
 }
 
-function printRowWeek($date, $weeks){
+//section is used to create id for the date that goes into the database when
+//the user deletes a frame
+function printRowWeek($date, $weeks, $section){
 // set the default timezone to use. Available since PHP 5.1
 date_default_timezone_set('UTC');
 // Prints something like: Monday
@@ -582,7 +590,7 @@ for($i=0; $i<7*$weeks;++$i){
 //print hidden date
 $tomo = strtotime("today", $from_unix_time);
 $formatted = date('Y-m-d', $tomo);
-echo '<div style="display:none;" id="'. $i . '">'. $formatted .'</div>';
+echo '<div style="display:none;" id="'. $section . "" . $i . '">'. $formatted .'</div>';
 
 $tomo = strtotime("today", $from_unix_time);
 $formatted = date('D M d', $tomo);
