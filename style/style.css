@@ -12,6 +12,7 @@ hr { margin-bottom: 15px;}
 /*
 table:first-child { font-weight: bold; }
 */
+table a {text-decoration: underline; color:#0000FF;}
 td {padding: 3px 2px 3px 2px;}
 input { padding: 2px}
 select { padding: 2px}

@@ -62,9 +62,9 @@ function getHours(){
 The lookAhead function is required. It makes sure that the first entry has a look_ahead of 0. 0 refers to a clockin, 1 refers to a clockout.
 
 */
-function getLookAhead($date){
+function getLookAhead($date, $id='0'){
 	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
-	. $_COOKIE['id'] .
+	. $id .
 	"' AND date BETWEEN '"
 	. $date .
 	"' AND DATE_ADD('"
@@ -108,9 +108,9 @@ function isLookAheadZero($date){
 
 
 
-function getFirstPunchForNextDay($date){
+function getFirstPunchForNextDay($date, $id){
 	$query = "SELECT TIME(date) AS date, look_ahead AS look FROM clock WHERE id='"
-	. $_COOKIE['id'] .
+	. $id .
 	"' AND date BETWEEN DATE_ADD('"
 	. $date .
 	"', INTERVAL 1 DAY) AND DATE_ADD('"
@@ -166,8 +166,8 @@ function getMax($temp){
 
 
 function printRowIn($link, $date, $section, $id){
-	$weeks=1;
-	echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
+$weeks=1;
+echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
 printRowWeek($date, $weeks, $section);
 echo $date;
 $temp = split('-',$date);
@@ -341,7 +341,7 @@ function getPunchesForDay($date, $id='0'){
 	//look_ahead determines if the user checked in or out.
 	//0,1 corresponds to in,out respectively
 	//$look = isLookAheadZero($date);
-	$look = getLookAhead($date);
+	$look = getLookAhead($date, $id);
 	//echo '<br />----' . $look;
 	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
 	. $date .
@@ -364,7 +364,7 @@ function getPunchesForDay($date, $id='0'){
 	//make punch card even
 	//4 combinations of look and max
 	
-	$nextday = getFirstPunchForNextDay($date);
+	$nextday = getFirstPunchForNextDay($date, $id);
 	
 	//echo '<br/><br/>';
 	//echo '---' . print_r($nextday) . '---<br /> <br />';

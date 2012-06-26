@@ -137,7 +137,7 @@ function printCurrTableBottom(){
 }
 
 function getCurrentWeek(){
-	return '06-25-2012';
+	return '06-18-2012';
 }
 
 function prepareEmpOutput($emp){
@@ -151,8 +151,8 @@ function prepareEmpOutput($emp){
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
 				$emp[$i][3],
-		getHoursForId($emp[$i][0], getCurrentWeek()),
-	calculatePay(getHoursForId($emp[$i][0],getCurrentWeek()), $emp[$i][3])
+		getHoursForId($emp[$i][0], getCurrentWeek(), 2),
+	calculatePay(getHoursForId($emp[$i][0],getCurrentWeek(), 2), $emp[$i][3])
 			);
 	}
 //	print_r($r);
@@ -172,7 +172,13 @@ function printEmpTableBottom($emp){
 				echo '" target="_blank">';
 				echo $emp[$i][$j];
 				echo '</a>';
-			} else { echo $emp[$i][$j]; }
+			} else if($j==1){
+				echo '<a href="personal_data_change.php?id=';
+				echo $emp[$i][$j-1];
+				echo '" target="_blank">';
+				echo $emp[$i][$j];
+				echo '</a>';
+			}else { echo $emp[$i][$j]; }
 			echo '</td>';
 		}
 		echo '</tr>';

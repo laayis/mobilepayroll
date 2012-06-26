@@ -1,5 +1,5 @@
 <?php
-//include('../TableClass.php');
+//include('../../TableClass.php');
 
 $id = getID();
 ?>
@@ -76,7 +76,7 @@ $monday = date("m-d-Y", strtotime("previous monday"));
 //echo $monday;
 $date = addDaysToDate(0, $monday);
 printRowIn($link, $date, 0, $id);
-userAddTimeForm($_COOKIE['id']);
+userAddTimeForm($id);
 
 /*
 
@@ -91,20 +91,20 @@ userAddTimeForm($_COOKIE['id']);
 			</legend>
 <?php
 $date = addDaysToDate(-7*1, $monday);
-printRowIn($link, $date, 1, $_COOKIE['id']);
+printRowIn($link, $date, 1, $id);
 //userAddTimeForm();
 ?>
 
 
 			<br/>
 <?php
-$date = addDaysToDate(-7*2, $monday, $_COOKIE['id']);
-printRowIn($link, $date, 2, $_COOKIE['id']);
+$date = addDaysToDate(-7*2, $monday);
+printRowIn($link, $date, 2, $id);
 ?>
 			<br/>
 <?php
-$date = addDaysToDate(-7*3, $monday, $_COOKIE['id']);
-printRowIn($link, $date, 3);
+$date = addDaysToDate(-7*3, $monday);
+printRowIn($link, $date, 3, $id);
 ?>
 			
 

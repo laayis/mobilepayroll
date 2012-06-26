@@ -170,7 +170,8 @@ function showName($link, $table='contact_info'){
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 	
-	$query = "SELECT {$table}.first, {$table}.last FROM {$table} WHERE {$table}.id=" . $_COOKIE['id'];
+	$query = "SELECT {$table}.first, {$table}.last FROM {$table} WHERE {$table}.id=" . getID();
+	//$query = "SELECT {$table}.first, {$table}.last FROM {$table} WHERE {$table}.id=" . $_COOKIE['id'];
 	$result=mysql_query($query);
         if(!$result) {
             die('Invalid query: ' . mysql_error());
