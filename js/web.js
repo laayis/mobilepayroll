@@ -23,7 +23,7 @@ alert('awd');
 	//$.post("../pages/deleteframe.php", { id: id, date: temp, timei: n[1], timef: nn[1]},
 
 
-	$.post("../pages/deleteframe.php", { id: id, date: date, timei: n[1], timef: nn[1]},
+	$.post("../deleteframe.php", { id: id, date: date, timei: n[1], timef: nn[1]},
 	function(data){
 		if(1){
 //		alert('---');
