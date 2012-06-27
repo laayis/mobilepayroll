@@ -9,7 +9,7 @@ $id = getID();
 <h1>ESS Personal Data Change</h1>
 <hr />
 
-<form name="personaldataform" method="post" action="updatepersonalinfo.php">
+<form name="personaldataform" method="post" action="">
 <table width="800"   border="0" cellpadding="0" cellspacing="0"  align="center">
 <tr><td>
 <div style="display: none; visibility: invisible;">
