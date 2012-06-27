@@ -6,7 +6,7 @@
 <hr />
 
 <table width="800"   border="0" cellpadding="0" cellspacing="0"  align="center">
-<tr><td>
+<tr><td colspan="3">
 			<!-- US Associate Info -->
 	<table width="100%" border="0" cellpadding="0" cellspacing="4">
 		<tr><td colspan="2" class="small">
@@ -27,9 +27,11 @@
 			</div>
 		</td></tr>
     </table>
-</td></tr>
+</td>
+
+</tr>
 <tr>
-<td>
+<td colspan="3">
 	<br />
 	<?php
 	printTableTop(array('Weekly Schedule', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Employees');
@@ -55,8 +57,8 @@
 <td>
 	<br />
 	<?php
-	printTableTop(array('ID', 'Date', 'IN'), 'Currently Clocked-In', '200px');
-	$emp = getEmployeesInCompany($_COOKIE['id']);
+	printTableTop(array('ID', 'Date', 'Logged in From'), 'Currently Clocked-In', '300px');
+	//$emp = getEmployeesInCompany($_COOKIE['id']);
 	printCurrTableBottom($emp);
 ?>
 </td>
