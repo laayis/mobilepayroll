@@ -4,7 +4,7 @@ function getweek(id){
 
 var rem='0';
 function deleteframe(temp){
-//alert('awd');
+alert('awd');
 	rem = temp;
 	var id = document.getElementById('getid').innerHTML;
 	//alert(id);
