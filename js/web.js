@@ -4,7 +4,7 @@ function getweek(id){
 
 var rem='0';
 function deleteframe(temp){
-alert('awd');
+//alert('awd');
 	rem = temp;
 	var id = document.getElementById('getid').innerHTML;
 	//alert(id);
@@ -22,7 +22,7 @@ alert('awd');
 //	alert(sendget);
 	//$.post("../pages/deleteframe.php", { id: id, date: temp, timei: n[1], timef: nn[1]},
 
-
+	var check = confirm('Are you sure you want to delete this?');
 	$.post("../deleteframe.php", { id: id, date: date, timei: n[1], timef: nn[1]},
 	function(data){
 		if(1){
