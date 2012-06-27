@@ -63,7 +63,8 @@ function queryDb2($link, $query){
 		//print_r($row);
 		return $row['id'];
 	} else{
-		return 'Error: In queryDb2';
+		//return 'Error: In queryDb2';
+		return 0;
 	}
 }
 
