@@ -43,7 +43,7 @@
 </tr>
 
 <tr>
-<td>
+<td colspan="2">
 	<br />
 	<?php
 	printTableTop(array('License','Activated', 'Generate'), 'Subscribed Devices', '300px');
@@ -60,7 +60,17 @@
 	printCurrTableBottom();
 ?>
 </td>
-
 </tr>
+
+<tr><td colspan="3">
+	<?php
+	printTableTop(array('ID', 'Hours', 'Wage', 'Rollover', 'Reason', 'Approved?'), 'Approvals', '800px');
+	//$emp = getEmployeesInCompany($_COOKIE['id']);
+	//printCurrTableBottom();
+?>
+
+</td></tr>
+
+
 <br /> 
 </table>
