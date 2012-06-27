@@ -13,13 +13,14 @@ if(isset($_COOKIE['SESSID'])){
 			. getID() . "'";
 		$link = initDb();
 		selectDb($link);
-		echo $query;
+		//echo $query;
 
 		queryDb($link, $query);
 		
 		$query = "DELETE FROM `clock` WHERE `date` = '"
 			. $_POST['date'] . " "
-			. $_POST['timef'] . "' AND id='{$_COOKIE['id']}'";
+			. $_POST['timef'] . "' AND id='"
+			. getID() . "'";
 		queryDb($link, $query);
 	}else {
 		header('Location: http://timesheet.elasticbeanstalk.com');
