@@ -112,7 +112,7 @@ function printCurrTableBottom(){
 						$emp[$i]['look_ahead'],
 						);
 	}
-
+	print_r($emp);
 	$newemp = array();
 	foreach($clocked as $value){
 		if($value[3] == 0){
