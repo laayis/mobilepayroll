@@ -119,7 +119,7 @@ function printCurrTableBottom(){
 			$newemp[] = $value;
 		}
 	}
-	print_r($newemp);
+	//print_r($newemp);
 
 	//print
 	for($i=0; $i<count($newemp); ++$i){
