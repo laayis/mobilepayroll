@@ -85,7 +85,7 @@ function getEmployeesForDate($date, $id=0){
 	$link = initDb();
 	selectDb($link);
 
-	$query = "SELECT id, DATE(date) AS date, license, look_ahead FROM clock WHERE date>'{$date}' AND company_id='{$id}' ORDER BY date ASC";
+	$query = "SELECT id, date AS date, license, look_ahead FROM clock WHERE date>'{$date}' AND company_id='{$id}' ORDER BY date ASC";
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
