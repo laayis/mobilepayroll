@@ -38,7 +38,7 @@ function deleteframe(temp){
 				time1.innerHTML = '&nbsp;';
 				var time2 = document.getElementById(temp+'_2');
 				time2.innerHTML = '&nbsp;';
-				alert(data);
+				//alert(data);
 			}
 		}
 		);
