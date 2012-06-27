@@ -21,8 +21,6 @@
 				echo $_COOKIE['id'];
 			 ?>
 			</strong>
-			<br /><br />
-			On this page you may update your personal Information.
 			</span><br />
 			</div>
 		</td></tr>
