@@ -104,8 +104,9 @@ WHERE subscribed_devices.license = '" . $form['license'] .
 	$id = queryDb2($link, $query);
 	//print_r($id);
 	if($id == 0){
+		echo $query;
 		echo "Wrong login information.";
-		echo '0';
+		//echo '0';
 		return;
 	}
 // 	date 	id  	location 	company_id 	look_ahead 	license 

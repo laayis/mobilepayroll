@@ -154,7 +154,7 @@ function selectContact($link, $selected){
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 	
-	$query = "SELECT " . $selected . " FROM contact_info WHERE contact_info.id=" . $_COOKIE['id'];
+	$query = "SELECT " . $selected . " FROM contact_info WHERE contact_info.id=" . getID();
 	$result=mysql_query($query);
         if(!$result) {
             die('Invalid query: ' . mysql_error());
