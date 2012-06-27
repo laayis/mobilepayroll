@@ -3,12 +3,13 @@
 include('../AuthClass.php');
 if(isset($_COOKIE['SESSID'])){
        if($_COOKIE['SESSID'] == session_id()){
-		echo $_POST['date'];
-		echo $_POST['timei'];
-		echo $_POST['timef'];
+		//echo $_POST['date'];
+		//echo $_POST['timei'];
+		//echo $_POST['timef'];
 		$query = "DELETE FROM `clock` WHERE `date` = '"
 			. $_POST['date'] . " "
-			. $_POST['timei'] . "' AND id='{$_COOKIE['id']}'";
+			. $_POST['timei'] . "' AND id='"
+			. getID() . "'";
 		$link = initDb();
 		selectDb($link);
 		echo $query;

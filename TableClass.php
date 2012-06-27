@@ -320,6 +320,8 @@ function getID(){
 	$pieces = explode("/", $uri);
 	if(isset($_GET['id']) && $pieces[1]=='admin'){
 		return $_GET['id'];
+	} else if(isset($_POST['id'])){
+		return $_POST['id'];
 	} else{
 		return $_COOKIE['id'];
 	}
