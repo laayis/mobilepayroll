@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/style/ESSWrapper.css" type="text/css" />
 <link rel="stylesheet" href="/style/ESSstyles.css" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="js/web.js"></script>
+<script type="text/javascript" src="../../js/web.js"></script>
 
 </head>
 <body>
