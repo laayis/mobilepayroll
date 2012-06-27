@@ -85,7 +85,7 @@ function getEmployeesForDate($date, $id=0){
 	$link = initDb();
 	selectDb($link);
 
-	$query = "SELECT id, DATE(date) AS date, license FROM clock WHERE date>'{$date}' AND company_id='{$id}' ORDER BY date ASC";
+	$query = "SELECT id, DATE(date) AS date, license, look_ahead FROM clock WHERE date>'{$date}' AND company_id='{$id}' ORDER BY date ASC";
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -108,13 +108,14 @@ function printCurrTableBottom(){
 	for($i=0;$i<count($emp);++$i){
 		$clocked[$emp[$i]['id']] = array($emp[$i]['id'],
 						$emp[$i]['date'],
-						$emp[$i]['license']
+						$emp[$i]['license'],
+						$emp[$i]['look_ahead'],
 						);
 	}
 
 	$newemp = array();
 	foreach($clocked as $value){
-		if($value[2] == 0){
+		if($value[3] == 0){
 			$newemp[] = $value;
 		}
 	}
