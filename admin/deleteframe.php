@@ -1,6 +1,7 @@
 <?php
 
 include('../AuthClass.php');
+include('../TableClass.php');
 if(isset($_COOKIE['SESSID'])){
        if($_COOKIE['SESSID'] == session_id()){
 		//echo $_POST['date'];
