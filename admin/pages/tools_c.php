@@ -16,7 +16,7 @@
 			echo showName($link, 'company');
 			 ?>&nbsp;&nbsp;&nbsp;
 			</strong>&nbsp;
-			Associate ID:&nbsp<strong>
+			Administrator ID:&nbsp<strong>
 			<?php
 				echo $_COOKIE['id'];
 			 ?>
