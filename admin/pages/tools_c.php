@@ -55,7 +55,7 @@
 <td>
 	<br />
 	<?php
-	printTableTop(array('ID', 'Date', 'Logged in From', 'IN'), 'Currently Clocked-In', '300px');
+	printTableTop(array('ID', 'Date', 'Logged in From'), 'Currently Clocked-In', '300px');
 	//$emp = getEmployeesInCompany($_COOKIE['id']);
 	printCurrTableBottom();
 ?>

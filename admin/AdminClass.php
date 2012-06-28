@@ -108,8 +108,8 @@ function printCurrTableBottom(){
 	for($i=0;$i<count($emp);++$i){
 		$clocked[$emp[$i]['id']] = array($emp[$i]['id'],
 						$emp[$i]['date'],
-						$emp[$i]['license'],
-						$emp[$i]['look_ahead'],
+						$emp[$i]['license']
+						//$emp[$i]['look_ahead'],
 						);
 	}
 	//print_r($emp);
