@@ -64,7 +64,7 @@
 
 <tr><td colspan="3">
 	<?php
-	printTableTop(array('ID', 'Hours', 'Wage', 'Rollover', 'Reason', 'Approved?'), 'Approvals', '100%');
+	//printTableTop(array('ID', 'Hours', 'Wage', 'Rollover', 'Reason', 'Approved?'), 'Approvals', '100%');
 	//$emp = getEmployeesInCompany($_COOKIE['id']);
 	//printCurrTableBottom();
 ?>
