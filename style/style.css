@@ -23,8 +23,13 @@ fieldset { padding: 10px;}
 .main_wrapper { }
 .main { width: 1000px; border: 0px solid #000000; text-align: left;}
 
-.red {background-color: #FF0000;}
-.green {background-color: #00FF00;}
+.red {background-color: #FF0F0F;}
+.green {background-color: #00FF00;
+	background-image:url('../images/green-check.png');
+	background-position:center; 
+	background-size:40px 40px;
+	background-repeat:no-repeat;
+}
 
 .header_top {}
 .header_logo { float: left;}

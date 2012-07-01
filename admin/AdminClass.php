@@ -242,7 +242,7 @@ function printApprovalTableBottom(){
 	selectDb($link);
 
 	$query = 0;
-	echo $user_id;
+	//echo $user_id;
 	if(!isset($_GET['id'])){
 	$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
@@ -298,6 +298,7 @@ function printApprovalTableBottom(){
 			}else {
 				if($j==5 && $emp[$i][$j] == 1 ){
 					echo '<td class="green">';
+					//echo '<img src="/images/green-check.png" alt="Green Check Mark"/>';
 					echo '&nbsp;';
 				} else if($j==5){
 					echo '<td class="red">';

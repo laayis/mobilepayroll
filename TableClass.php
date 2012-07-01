@@ -266,6 +266,50 @@ for($j=0; $j<($max); $j=$j+2){
 
 }
 
+function getApprovalSecondsForId($id, $date, $weeks=1){
+	$link = initDb();
+	selectDb($link);
+	$temp = split('-',$date);
+	$month = $temp[0];
+	$day = $temp[1];
+	$year = $temp[2];
+	$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
+	$milli_day = 60*60*24;
+	
+	$range = $milli_day*$weeks*7;
+
+	$tomo = strtotime("today", $from_unix_time+$range);
+	$range = date('Y-m-d', $tomo);
+
+	$query = "SELECT hours, wage, rollover FROM approvals
+		WHERE user_id='{$id}' AND date>='{$date}'
+		AND date<'{$range}' ";
+	$result = queryDbAll($link, $query);
+
+	$seconds = 0;
+	//previous billing cycle pay
+	$prev_pay = 0;
+	$prev_sec = 0;
+	$curr_pay = 0;
+	$curr_sec = 0;
+	
+	for($i=0;$i<count($result);++$i){
+		//if rollover, then hours are for this billing cycle
+		if($result[$i][2] == 0){
+			$curr_pay += $result[$i][0]*$result[$i][1];
+			$curr_sec += $result[$i][0]*60*60;
+		} else{
+			$prev_pay += $result[$i][0]*$result[$i][1];
+			$prev_sec += $result[$i][0]*60*60;
+		}
+	}
+	$result = array('current'=> array($curr_sec, $curr_pay),
+		'previous'=>array($prev_sec, $prev_pay));
+
+	return $result;
+
+}
+
 function getHoursForId($id, $date, $weeks=1){
 	$temp = split('-',$date);
 	$month = $temp[0];
@@ -298,6 +342,8 @@ function getHoursForId($id, $date, $weeks=1){
 		$totalhours += $seconds[$i];
 	}
 	//echo convertSecondsToTime($totalhours);
+	
+	//return $totalhours;
 	return convertSecondsToTime($totalhours);
 }
 
@@ -499,6 +545,24 @@ function addDaysToDate($days, $date){
 	$formatted = date('m-d-Y', $tomo);
 	return $formatted;
 
+}
+
+function hoursHeader($id){
+echo '<br /><br /><span class="normal"> 
+		Regular Hours:<strong>
+';
+	$link=initDb();
+	selectDb($link);
+	echo getHoursForId($id, getCurrentWeek(), 2);
+
+echo '</strong><br />Approved Hours: <strong>
+			<span id="getid">
+';
+	$temp = getApprovalSecondsForId($id, getCurrentWeek(), 2);
+	echo convertSecondsToTime($temp['current'][0]+
+				$temp['previous'][0]);
+
+echo '</strong></span>';
 }
 
 function userAddTimeForm($id){

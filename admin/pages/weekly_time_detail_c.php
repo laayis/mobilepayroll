@@ -20,7 +20,12 @@ $id = getID();
 			//$gook = getID();
 			echo $id;
 			?>
-			</span>
+				</strong>
+</span>
+
+<?php
+
+hoursHeader($id); ?>
 
 	</strong>
 	</span>
