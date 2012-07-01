@@ -23,6 +23,9 @@ fieldset { padding: 10px;}
 .main_wrapper { }
 .main { width: 1000px; border: 0px solid #000000; text-align: left;}
 
+.red {background-color: #FF0000;}
+.green {background-color: #00FF00;}
+
 .header_top {}
 .header_logo { float: left;}
 .header_login { float: right; margin: 10px 10px 0px 0px;}

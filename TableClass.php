@@ -539,7 +539,7 @@ echo '
 	</tr>
 	<tr>
 	<td>
-		<input type="text" name="hours" value="hh:mm" onclick="">&nbsp;
+		<input type="text" name="hours" value="4.5" onclick="">&nbsp;
 	</td>
 	<td>
 		<input type="text" name="wage" value="7" onclick="">&nbsp;

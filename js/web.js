@@ -55,6 +55,15 @@ function update(request, user_id, action){
 	} else
 	if(action=='un'){
 		sendget = 'unapprove?'
+	}else
+	if(action=='del'){
+		sendget = 'delete?'
+	}else
+	if(action=='act'){
+		sendget = 'activate?'
+	}else
+	if(action=='deact'){
+		sendget = 'deactivate?'
 	}
 
 	var check = confirm('Are you sure you want to ' + sendget);

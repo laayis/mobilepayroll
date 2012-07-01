@@ -64,6 +64,26 @@ $id = getID();
 			<div class="timeDetailData">
 			<fieldset><legend> <strong>
 			<font color="#000000" class="normal">
+				Bi-weekly Approvals
+			</font>
+			</strong>
+			</legend>
+<?php
+$link = initDb();
+selectDb($link);
+
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Overtime', 'Approved?', 'Reason'), 'Approvals', '100%');
+	//$emp = getEmployeesInCompany($_COOKIE['id']);
+	printApprovalTableBottom();
+
+/*
+
+*/ ?>
+			</fieldset>
+			<br />
+			<div class="timeDetailData">
+			<fieldset><legend> <strong>
+			<font color="#000000" class="normal">
 				TIME DETAIL - CURRENT WEEK
 			</font>
 			</strong>

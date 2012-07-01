@@ -150,8 +150,18 @@ function printCurrTableBottom(){
 	';
 }
 
+//this function is based on the company's billing schedule. Select
+//dates that are on a monday.
 function getCurrentWeek(){
-	return '06-18-2012';
+	$link = initDb();
+	selectDb($link);
+
+	$query = "SELECT DATE_FORMAT(biweekly, '%m-%d-%Y') as id FROM company
+		WHERE id='{$_COOKIE['id']}'";
+	$result = queryDb2($link, $query);
+	//echo $result;
+	//return '06-18-2012';
+	return $result;
 }
 
 function prepareEmpOutput($emp){
@@ -177,6 +187,28 @@ function printEmpTableBottom($emp){
 
 	for($i=0; $i<count($emp); ++$i){
 		echo '<tr>';
+
+		echo '
+		<td>
+			<a href="javascript:void(null);update(\''.
+			$emp[$i][0] . '\', \''.
+			$emp[$i][0] . '\',
+			\'del\');">Delete</a>' .
+		'<br/>
+
+			<a href="javascript:void(null);update(\''.
+			$emp[$i][0] . '\', \''.
+			$emp[$i][0] . '\',
+			\'act\');">Activate</a>' .
+		'<br />
+			<a href="javascript:void(null);update(\''.
+			$emp[$i][0] . '\', \''.
+			$emp[$i][0] . '\',
+			\'unact\');">Deactivate</a>
+		</td>
+		';
+
+		//ACTIONS GO HERE
 		for($j=0; $j<count($emp[$i]);++$j){
 			echo '<td>';
 			if($j==0){
@@ -209,11 +241,23 @@ function printApprovalTableBottom(){
 	$link = initDb();
 	selectDb($link);
 
+	$query = 0;
+	echo $user_id;
+	if(!isset($_GET['id'])){
 	$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
 			WHERE date>='" . getCurrentWeek() . "' 
 			AND company_id='{$_COOKIE['id']}'
 			ORDER BY approved ASC";
+	} else{
+		$query = "SELECT request, user_id, hours, wage, rollover,
+			approved, reason FROM approvals
+			WHERE date>='" . getCurrentWeek() . "' 
+			AND company_id='{$_COOKIE['id']}'
+			AND user_id='{$_GET['id']}'
+			ORDER BY approved ASC";
+	
+	}
 	$emp = queryDbAll($link, $query);
 	
 	for($i=0; $i<count($emp); ++$i){
@@ -252,8 +296,16 @@ function printApprovalTableBottom(){
 				echo '</a>';
 				echo '</td>';
 			}else {
-				echo '<td>';
-				echo $emp[$i][$j];
+				if($j==5 && $emp[$i][$j] == 1 ){
+					echo '<td class="green">';
+					echo '&nbsp;';
+				} else if($j==5){
+					echo '<td class="red">';
+					echo '&nbsp;';
+				} else{
+					echo '<td>';
+					echo $emp[$i][$j];
+				}
 				echo '</td>';
 			}
 		}

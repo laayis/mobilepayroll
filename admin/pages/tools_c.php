@@ -32,7 +32,7 @@
 <td colspan="3">
 	<br />
 	<?php
-	printTableTop(array('Associate ID', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Employees');
+	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Employees');
 	$emp = getEmployeesInCompany($_COOKIE['id']);
 	//print_r($emp);
 	$empf = prepareEmpOutput($emp);
