@@ -2,6 +2,18 @@
 include_once('../../AuthClass.php');
 include_once('../../TableClass.php');
 
+function getAdminCompanyId($user_id){
+	$query = "SELECT company.id FROM company WHERE id='" . $user_id . "'";
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	//get company_id to filter clock
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	$company_id = $row['id'];
+	return($company_id);
+}
+
 function getEmployeesInCompany($company_id){
 	$link = initDb();
 	selectDb($link);
@@ -191,6 +203,67 @@ function printEmpTableBottom($emp){
 	<br />
 	';
 
+}
+
+function printApprovalTableBottom(){
+	$link = initDb();
+	selectDb($link);
+
+	$query = "SELECT request, user_id, hours, wage, rollover,
+			approved, reason FROM approvals
+			WHERE date>='" . getCurrentWeek() . "' 
+			AND company_id='{$_COOKIE['id']}'
+			ORDER BY approved ASC";
+	$emp = queryDbAll($link, $query);
+	
+	for($i=0; $i<count($emp); ++$i){
+		//$l= '<a href="javascript:void(null);update(\''.
+		//$emp[$i][0] . '\', \'d\');">Delete</a>';
+	
+		
+		for($j=0; $j<count($emp[$i]);++$j){
+			if($j==0){
+		echo '<tr>
+		<td>
+			<a href="javascript:void(null);update(\''.
+			$emp[$i][$j] . '\', \''.
+			$emp[$i][1] . '\',
+			\'d\');">Delete</a>' .
+		'<br/>
+
+			<a href="javascript:void(null);update(\''.
+			$emp[$i][$j] . '\', \''.
+			$emp[$i][1] . '\',
+			\'a\');">Approve</a>' .
+		'<br />
+			<a href="javascript:void(null);update(\''.
+			$emp[$i][$j] . '\', \''.
+			$emp[$i][1] . '\',
+			\'un\');">Unapprove</a>
+		</td>
+		';
+				
+			}else if($j==1){
+				echo '<td>';
+				echo '<a href="weekly_time_detail.php?id=';
+				echo $emp[$i][$j];
+				echo '" target="_blank">';
+				echo $emp[$i][$j];
+				echo '</a>';
+				echo '</td>';
+			}else {
+				echo '<td>';
+				echo $emp[$i][$j];
+				echo '</td>';
+			}
+		}
+		echo '</tr>';
+		
+	}
+	echo '
+	</table>
+	<br />
+	';
 }
 
 function printTableBottom($emp){

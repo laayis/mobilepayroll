@@ -1,0 +1,47 @@
+<?php
+
+include('../../AuthClass.php');
+include('../../TableClass.php');
+if(isset($_COOKIE['SESSID'])){
+       if($_COOKIE['SESSID'] == session_id()){
+	$link = initDb();
+	selectDb($link);
+	if(isset($_POST['user_id']) &&
+	$_COOKIE['id'] == getCompanyId($_POST['user_id'])){
+		if(isset($_POST['request']) && isset($_POST['action'])){
+			$act = $_POST['action'];
+			
+			if($act=='d'){
+				$query = "DELETE FROM `approvals` WHERE `user_id` = '{$_POST['user_id']}' 
+					AND `request`='{$_POST['request']}'";
+			} else if($act=='a'){
+				$query = "UPDATE `approvals` SET `approved`='1' WHERE `request` = '{$_POST['request']}'
+					AND `user_id`='{$_POST['user_id']}'";
+			}else if($act=='un'){
+				$query = "UPDATE `approvals` SET `approved`='0' WHERE `request` = '{$_POST['request']}'
+					AND `user_id`='{$_POST['user_id']}'";
+			}
+			queryDb($link, $query);
+			
+		} else{
+		print_r($_POST);
+/*
+		$query = "DELETE FROM `clock` WHERE `date` = '"
+			. $_POST['date'] . " "
+			. $_POST['timei'] . "' AND id='{$_COOKIE['id']}'";
+*/
+		$query = "INSERT INTO `approvals` (`company_id`, `user_id`, `hours`, `rollover`, `reason`, `approved`)
+					VALUES ('{$_COOKIE['id']}', '{$_POST['user_id']}', '{$_POST['hours']}', '{$_POST['rollover']}', '{$_POST['reason']}', '1')";
+
+		queryDb($link, $query);
+		}
+	}
+		
+	}else {
+		header('Location: http://timesheet.elasticbeanstalk.com');
+	}
+} else{
+	header('Location: http://timesheet.elasticbeanstalk.com');
+}
+?>
+

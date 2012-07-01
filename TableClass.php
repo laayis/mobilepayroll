@@ -1,5 +1,5 @@
 <?php
-function getCompanyId($user_id){
+function getCompanyId($user_id, $link=0){
 	$query = "SELECT contact_info.company_id FROM contact_info WHERE contact_info.id='" . $user_id . "'";
 	$result = mysql_query($query);
 	if (!$result) {
@@ -522,20 +522,33 @@ echo '
 ';
 
 echo '
-	<td colspan="2" width="15%" align="left">
+	<td colspan="1" width="15%" align="left">
 	<div>
-	<input type="text" name="hours" value="hh:mm" onclick="">&nbsp;
-	<input style="display:none;" type="text" name="id" value="'. $id .'" onclick="">&nbsp;
+	Wages
+	<input style="display:none;" type="text" name="user_id" value="'. $id .'" onclick="">&nbsp;
 	</div>
 	</td>
-
+	<td>
+	&nbsp;
+	</td>
 	<td align="left">
 	<div>
-';
-	echo '<input type="checkbox" name="rollover" value="1" onclick="">&nbsp; <span class="normal"><strong>Roll-over Hours</strong></span>
-	';
-echo '
+	<input type="checkbox" name="rollover" value="1" onclick="">&nbsp; <span class="normal"><strong>Roll-over Hours</strong></span>
 	</div>
+	</td>
+	</tr>
+	<tr>
+	<td>
+		<input type="text" name="hours" value="hh:mm" onclick="">&nbsp;
+	</td>
+	<td>
+		<input type="text" name="wage" value="7" onclick="">&nbsp;
+	</td>
+	<td>
+		&nbsp;
+	</td>
+	<td>
+		&nbsp;
 	</td>
 	</tr>
 ';

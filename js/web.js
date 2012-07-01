@@ -44,7 +44,32 @@ function deleteframe(temp){
 		);
 	}
 }
+function update(request, user_id, action){
+	//alert(temp+'1');
+	sendget=0;
+	if(action=='d'){
+		sendget = 'delete?'
+	} else
+	if(action=='a'){
+		sendget = 'approve?'
+	} else
+	if(action=='un'){
+		sendget = 'unapprove?'
+	}
 
+	var check = confirm('Are you sure you want to ' + sendget);
+
+	if(check==true){
+
+		$.post("approval.php", { request: request, user_id: user_id, action: action  },
+		function(data){
+			//alert(data);
+			window.location.reload();
+		}
+		);
+
+	}
+}
 function renew(temp){
 	//alert(temp+'1');
 	$.post("../renew.php", { totable_license: temp },
