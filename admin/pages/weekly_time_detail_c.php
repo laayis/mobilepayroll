@@ -96,8 +96,15 @@ selectDb($link);
 <?php
 $link = initDb();
 selectDb($link);
+$monday=0;
+if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtotime("previous monday")) ){
 
-$monday = date("m-d-Y", strtotime("previous monday"));
+	$monday = date("m-d-Y", strtotime("today"));
+} else{
+	$monday = date("m-d-Y", strtotime("previous monday"));
+}
+
+
 //echo $monday;
 $date = addDaysToDate(0, $monday);
 printRowIn($link, $date, 0, $id);

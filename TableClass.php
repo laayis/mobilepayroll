@@ -310,6 +310,44 @@ function getApprovalSecondsForId($id, $date, $weeks=1){
 
 }
 
+function getSecondsForId($id, $date, $weeks=1){
+	$temp = split('-',$date);
+	$month = $temp[0];
+	$day = $temp[1];
+	$year = $temp[2];
+	$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
+	$milli_day = 60*60*24;
+
+	$tomo = strtotime("today", $from_unix_time);
+	$formatted = date('D M d', $tomo);
+
+	$temp = array();
+	//echo $date;
+
+	//get the amount of punches for employee
+	for($i=0;$i<7*$weeks;++$i){
+			
+		$tomo = strtotime("today", $from_unix_time);
+		$formatted = date('Y-m-d', $tomo);
+		//print_r(getPunchesForDay($formatted, $id));
+		$temp[] = getPunchesForDay($formatted, $id);
+		$from_unix_time += $milli_day;
+	}
+
+	//print_r($temp);
+	//echo '</br></br>';
+	$seconds = getSeconds($temp);
+	$totalhours=0;
+	for($i=0;$i<count($seconds); ++$i){
+		$totalhours += $seconds[$i];
+	}
+	//echo convertSecondsToTime($totalhours);
+	
+	//return $totalhours;
+	return array($totalhours, $wage);
+}
+
+
 function getHoursForId($id, $date, $weeks=1){
 	$temp = split('-',$date);
 	$month = $temp[0];

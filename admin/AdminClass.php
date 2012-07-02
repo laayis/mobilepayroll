@@ -157,7 +157,7 @@ function getCurrentWeek(){
 	selectDb($link);
 
 	$query = "SELECT DATE_FORMAT(biweekly, '%m-%d-%Y') as id FROM company
-		WHERE id='{$_COOKIE['id']}'";
+		WHERE `company`.`id`='{$_COOKIE['id']}'";
 	$result = queryDb2($link, $query);
 	//echo $result;
 	//return '06-18-2012';
@@ -171,12 +171,64 @@ function prepareEmpOutput($emp){
 	$r = array();
 	for($i=0; $i<count($emp); ++$i){
 	//echo '---' . $emp[$i][0];
+$date = addDaysToDate(-7*1, getCurrentWeek());
+//echo $date;
+//echo "---" . getCurrentWeek() . "<br />";
 		
+		//week one and week 2 of biweek
+		$regular1=getSecondsForId($emp[$i][0], getCurrentWeek(), 1);
+		$regular2=getSecondsForId($emp[$i][0], $date, 1);
+		$approved1=getApprovalSecondsForId($emp[$i][0], getCurrentWeek(), 1);
+		$approved2=getApprovalSecondsForId($emp[$i][0], $date, 1);
+
+		$regular1[0]=$regular1[0]=$regular1[0]/60/60;
+		$approved1['current'][0]=$approved1['current'][0]/60/60;
+		//print_r($approved1);
+		//echo '<br /><br />';
+		//print_r($approved2);
+		//echo '<br />---------';
+		//if($regular[0] >)
+		
+		$total_pay = 0;
+		//$approved1['previous'][1];
+		//$total_pay += $approved2['previous'][1];
+
+		//$total_pay += $approved1['previous'][1]+$approved2['previous'][1];
+
+		//FIX ME approved regular hours needs to have overtime pay. add this functionality asap
+		//calculate pay for regular hours
+	$week1 = ($regular1[0]+$approved1['current'][0]);
+	echo $week1;
+	echo '<br/>';
+		
+	if($week1 > 40){
+		if($regular1[0]/60/60 > 40){
+			$total_pay += ($regular1[0]-40)*$regular1[1]*1.5;
+			$total_pay += 40*$regular1[1];
+		} else if($regular1[0]<=40){
+			if($approved1['current'][0]/(60/60)>40-$regular1[0]){
+				$total_pay += $approved1['current'][0]/(60/60)*40;
+				$total_pay += $approved1['current'][0]/(60/60)*40*1.5;
+			}
+			$total_pay += ($regular1[0])*$regular1[1];
+				
+		}
+		if($approved1['current'][0] > 40){
+			$total_pay += $regular1[0];
+		}
+	} else{
+				$total_pay += ($regular1[0])*$regular1[1]+$approved1['current'][1]
+						+$approved1['previous'][1];
+	}
+
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
 				$emp[$i][3],
-		getHoursForId($emp[$i][0], getCurrentWeek(), 2),
-	calculatePay(getHoursForId($emp[$i][0],getCurrentWeek(), 2), $emp[$i][3])
+			convertSecondsToTime($regular1[0]+$approved1['current'][0]+$approved1['previous'][0]
+					    +$regular2[0]+$approved2['current'][0]+$approved2['previous'][0]),
+//		getHoursForId($emp[$i][0], getCurrentWeek(), 2),
+			"$" . number_format(round($total_pay, 2), 2)
+//	calculatePay(getHoursForId($emp[$i][0],getCurrentWeek(), 2), $emp[$i][3])
 			);
 	}
 //	print_r($r);
@@ -248,14 +300,14 @@ function printApprovalTableBottom(){
 			approved, reason FROM approvals
 			WHERE date>='" . getCurrentWeek() . "' 
 			AND company_id='{$_COOKIE['id']}'
-			ORDER BY approved ASC";
+			ORDER BY user_id ASC";
 	} else{
 		$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
 			WHERE date>='" . getCurrentWeek() . "' 
 			AND company_id='{$_COOKIE['id']}'
 			AND user_id='{$_GET['id']}'
-			ORDER BY approved ASC";
+			ORDER BY user_id ASC";
 	
 	}
 	$emp = queryDbAll($link, $query);
