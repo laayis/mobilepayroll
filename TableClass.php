@@ -280,7 +280,7 @@ function getApprovalSecondsForId($id, $date, $weeks=1){
 
 	$tomo = strtotime("today", $from_unix_time+$range);
 	$range = date('Y-m-d', $tomo);
-	echo 'AWWD' . $range . 'AWWD<br />';
+	//echo 'AWWD' . $range . 'AWWD<br />';
 	$query = "SELECT hours, wage, rollover FROM approvals
 		WHERE user_id='{$id}' AND date>='{$date}'
 		AND date<='{$range}' AND approved='1'";
@@ -591,7 +591,17 @@ echo '<br /><br /><span class="normal">
 ';
 	$link=initDb();
 	selectDb($link);
-	echo getHoursForId($id, getCurrentWeek(), 2);
+
+$monday=0;
+if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtotime("previous monday")) ){
+
+	$monday = date("m-d-Y", strtotime("today"));
+} else{
+	$monday = date("m-d-Y", strtotime("previous monday"));
+}
+
+
+	echo getHoursForId($id, $monday, 2);
 
 echo '</strong><br />
 <span="normal">Current Pay Period (Approved Hours):<strong>
