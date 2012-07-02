@@ -266,9 +266,10 @@ for($j=0; $j<($max); $j=$j+2){
 
 }
 
-function getApprovalSecondsForId($id, $date, $weeks=1){
+function getApprovalSecondsForId($id, $from, $to){
 	$link = initDb();
 	selectDb($link);
+/*
 	$temp = split('-',$date);
 	$month = $temp[0];
 	$day = $temp[1];
@@ -281,10 +282,13 @@ function getApprovalSecondsForId($id, $date, $weeks=1){
 	$tomo = strtotime("today", $from_unix_time+$range);
 	$range = date('Y-m-d', $tomo);
 	//echo 'RANGE' . $range . 'AWWD<br />';
+*/
 	$query = "SELECT hours, wage, rollover FROM approvals
-		WHERE user_id='{$id}' AND date>='{$date}'
-		AND date<'{$range}' AND approved='1'";
-
+		WHERE user_id='{$id}'
+		AND DATE_FORMAT(`date`,'%m-%d-%Y')>='{$from}'
+		AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
+		AND approved='1'";
+	//echo $query;
 	//echo $query;
 	$result = queryDbAll($link, $query);
 
@@ -600,7 +604,7 @@ echo '
         </legend>
 ';
 
-echo '<br /><br /><span class="normal"> 
+echo '<span class="normal"> 
 		Regular Hours:<strong>
 ';
 	$link=initDb();
@@ -620,14 +624,14 @@ if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtot
 	echo getHoursForId($id, $from, 2);
 
 echo '</strong><br />
-<span="normal">Current Pay Period (Approved Hours):<strong>
+<span="normal">Approved Hours:<strong>
 ';
-	$temp = getApprovalSecondsForId($id, $from, 2);
+	$temp = getApprovalSecondsForId($id, $from, $to);
 	echo convertSecondsToTime($temp['current'][0]);
 
 echo '</strong>';
 
-echo '<br />Previous Pay Period (Approved Hours): <strong>
+echo '<br />Roll-over Hours (Approved Hours): <strong>
 ';
 	echo convertSecondsToTime($temp['previous'][0]);
 

@@ -181,8 +181,8 @@ $date = addDaysToDate(-7*1, getCurrentWeek());
 		//week one and week 2 of biweek
 		$regular1=getSecondsForId($emp[$i][0], getCurrentWeek(), 1);
 		$regular2=getSecondsForId($emp[$i][0], $date, 1);
-		$approved1=getApprovalSecondsForId($emp[$i][0], getCurrentWeek(), 1);
-		$approved2=getApprovalSecondsForId($emp[$i][0], $date, 1);
+//		$approved1=getApprovalSecondsForId($emp[$i][0], getCurrentWeek(), getCurrentWeek());
+//		$approved2=getApprovalSecondsForId($emp[$i][0], $date, getCurrentWeek());
 
 		$regular1[0]=$regular1[0]/60/60;
 		$approved1['current'][0]=$approved1['current'][0]/60/60;
