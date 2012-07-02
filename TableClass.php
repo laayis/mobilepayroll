@@ -280,10 +280,10 @@ function getApprovalSecondsForId($id, $date, $weeks=1){
 
 	$tomo = strtotime("today", $from_unix_time+$range);
 	$range = date('Y-m-d', $tomo);
-
+	echo 'AWWD' . $range . 'AWWD<br />';
 	$query = "SELECT hours, wage, rollover FROM approvals
 		WHERE user_id='{$id}' AND date>='{$date}'
-		AND date<'{$range}' AND approved='1'";
+		AND date<='{$range}' AND approved='1'";
 	$result = queryDbAll($link, $query);
 
 	$seconds = 0;

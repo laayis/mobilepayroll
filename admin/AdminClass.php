@@ -172,8 +172,8 @@ function prepareEmpOutput($emp){
 	for($i=0; $i<count($emp); ++$i){
 	//echo '---' . $emp[$i][0];
 $date = addDaysToDate(-7*1, getCurrentWeek());
-//echo $date;
-//echo "---" . getCurrentWeek() . "<br />";
+echo $date;
+echo "---" . getCurrentWeek() . "<br />";
 		
 		//week one and week 2 of biweek
 		$regular1=getSecondsForId($emp[$i][0], getCurrentWeek(), 1);
@@ -181,8 +181,10 @@ $date = addDaysToDate(-7*1, getCurrentWeek());
 		$approved1=getApprovalSecondsForId($emp[$i][0], getCurrentWeek(), 1);
 		$approved2=getApprovalSecondsForId($emp[$i][0], $date, 1);
 
-		$regular1[0]=$regular1[0]=$regular1[0]/60/60;
+		$regular1[0]=$regular1[0]/60/60;
 		$approved1['current'][0]=$approved1['current'][0]/60/60;
+		$regular2[0]=$regular2[0]/60/60;
+		$approved2['current'][0]=$approved2['current'][0]/60/60;
 		//print_r($approved1);
 		//echo '<br /><br />';
 		//print_r($approved2);
@@ -199,7 +201,6 @@ $date = addDaysToDate(-7*1, getCurrentWeek());
 		//calculate pay for regular hours
 	$week1 = ($regular1[0]+$approved1['current'][0]);
 	echo $week1;
-	echo '<br/>';
 		
 	if($week1 > 40){
 		if($regular1[0]/60/60 > 40){
@@ -220,6 +221,47 @@ $date = addDaysToDate(-7*1, getCurrentWeek());
 				$total_pay += ($regular1[0])*$regular1[1]+$approved1['current'][1]
 						+$approved1['previous'][1];
 	}
+	$week2 = ($regular2[0]+$approved2['current'][0]);
+	echo ' --- ' . $week2;
+	echo '<br/>';
+
+	if($week2 > 40){
+		if($regular2[0]/60/60 > 40){
+			$total_pay += ($regular2[0]-40)*$regular2[1]*1.5;
+			$total_pay += 40*$regular2[1];
+		} else if($regular2[0]<=40){
+			if($approved2['current'][0]/(60/60)>40-$regular2[0]){
+				$total_pay += $approved2['current'][0]/(60/60)*40;
+				$total_pay += $approved2['current'][0]/(60/60)*40*1.5;
+			}
+			$total_pay += ($regular2[0])*$regular2[1];
+				
+		}
+		if($approved2['current'][0] > 40){
+			$total_pay += $regular2[0];
+		}
+	} else{
+			print_r($approved1);
+			echo '---------<br />';
+			print_r($approved2);
+			echo '<br /><br /><br /><br />';
+			//echo $regular2[0];
+			//echo $approved2['current'][1];
+				$total_pay += ($regular2[0])*$regular2[1]+$approved2['current'][1]
+						+$approved2['previous'][1];
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
