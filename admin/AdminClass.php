@@ -364,26 +364,31 @@ function printEmpTableBottom($emp){
 
 }
 
-function printApprovalTableBottom(){
+function printApprovalTableBottom($from, $to){
 	$link = initDb();
 	selectDb($link);
-
+	
+	echo $from . '<br />' . $to;
 	$query = 0;
 	//echo $user_id;
 	if(!isset($_GET['id'])){
 	$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
-			WHERE date>='" . getCurrentWeek() . "' 
+			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
+			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
 			AND company_id='{$_COOKIE['id']}'
 			ORDER BY user_id ASC";
+	echo $query;
 	} else{
 		$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
-			WHERE date>='" . getCurrentWeek() . "' 
+			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
+			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
 			AND company_id='{$_COOKIE['id']}'
 			AND user_id='{$_GET['id']}'
 			ORDER BY user_id ASC";
 	
+	echo $query;
 	}
 	$emp = queryDbAll($link, $query);
 	

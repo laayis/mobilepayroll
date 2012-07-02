@@ -25,7 +25,24 @@ $id = getID();
 
 <?php
 
-hoursHeader($id); ?>
+$from = getCurrentWeek();
+//add 1 day to current date to display up-to-date approvals
+$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
+
+echo '<br /><br /><table width="100%" border="0" cellpadding="0" cellspacing="0">'; 
+echo '<tr><td>';
+hoursHeader($id, $from, $to);
+echo '</td>';
+
+$to = $from;
+$from = addDaysToDate(-7*2, $to);
+echo '<td>';
+hoursHeader($id, $from, $to);
+echo '</td></tr>';
+
+echo '</table>';
+
+?>
 
 	</strong>
 	</span>
@@ -69,7 +86,7 @@ hoursHeader($id); ?>
 			<div class="timeDetailData">
 			<fieldset><legend> <strong>
 			<font color="#000000" class="normal">
-				Bi-weekly Approvals
+				Approvals
 			</font>
 			</strong>
 			</legend>
@@ -77,10 +94,18 @@ hoursHeader($id); ?>
 $link = initDb();
 selectDb($link);
 
-	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals', '100%');
-	//$emp = getEmployeesInCompany($_COOKIE['id']);
-	printApprovalTableBottom();
+	$from = getCurrentWeek();
+	//add 1 day to current date to display up-to-date approvals
+	$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to
+			, '100%');
+	printApprovalTableBottom($from, $to);
 
+	$to = $from;
+	$from = addDaysToDate(-7*2, $to);
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to
+			, '100%');
+	printApprovalTableBottom($from, $to);
 /*
 
 */ ?>

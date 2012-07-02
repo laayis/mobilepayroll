@@ -587,7 +587,19 @@ function addDaysToDate($days, $date){
 
 }
 
-function hoursHeader($id){
+function hoursHeader($id, $from, $to){
+
+echo '
+	<div class="timeDetailData">
+        <fieldset><legend> <strong>
+        <font color="#000000" class="normal">
+        Approvals from ' .
+	$from . ' to ' . $to
+        . '</font>
+        </strong>
+        </legend>
+';
+
 echo '<br /><br /><span class="normal"> 
 		Regular Hours:<strong>
 ';
@@ -595,21 +607,22 @@ echo '<br /><br /><span class="normal">
 	selectDb($link);
 
 $monday=0;
+/*
 if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtotime("previous monday")) ){
 
 	$monday = date("m-d-Y", getCurrentWeek());
 	//$monday = date("m-d-Y", strtotime("today"));
 } else{
 	$monday = date("m-d-Y", strtotime("previous monday"));
-}
+}*/
 
 
-	echo getHoursForId($id, $monday, 2);
+	echo getHoursForId($id, $from, 2);
 
 echo '</strong><br />
 <span="normal">Current Pay Period (Approved Hours):<strong>
 ';
-	$temp = getApprovalSecondsForId($id, getCurrentWeek(), 2);
+	$temp = getApprovalSecondsForId($id, $from, 2);
 	echo convertSecondsToTime($temp['current'][0]);
 
 echo '</strong>';
@@ -619,6 +632,10 @@ echo '<br />Previous Pay Period (Approved Hours): <strong>
 	echo convertSecondsToTime($temp['previous'][0]);
 
 echo '</strong></span>';
+
+echo '
+	</fieldset>
+';
 
 }
 
