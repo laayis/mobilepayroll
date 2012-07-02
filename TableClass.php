@@ -565,7 +565,6 @@ echo '</strong>';
 
 echo '<br />Previous Pay Period (Approved Hours): <strong>
 ';
-	$temp = getApprovalSecondsForId($id, getCurrentWeek(), 2);
 	echo convertSecondsToTime($temp['previous'][0]);
 
 echo '</strong></span>';
