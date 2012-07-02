@@ -72,8 +72,15 @@ $id = getID();
 $link = initDb();
 selectDb($link);
 
-$monday = date("m-d-Y", strtotime("previous monday"));
-//echo $monday;
+$monday = 0;
+//echo $mon$monday=0;
+if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtotime("previous monday")) ){
+
+	$monday = date("m-d-Y", strtotime("today"));
+} else{
+	$monday = date("m-d-Y", strtotime("previous monday"));
+}
+
 $date = addDaysToDate(0, $monday);
 printRowIn($link, $date, 0, $id);
 userAddTimeForm($id);
