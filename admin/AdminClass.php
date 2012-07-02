@@ -183,8 +183,10 @@ echo "---" . getCurrentWeek() . "<br />";
 
 		$regular1[0]=$regular1[0]/60/60;
 		$approved1['current'][0]=$approved1['current'][0]/60/60;
+		$approved1['previous'][0]=$approved1['previous'][0]/60/60;
 		$regular2[0]=$regular2[0]/60/60;
 		$approved2['current'][0]=$approved2['current'][0]/60/60;
+		$approved2['previous'][0]=$approved2['previous'][0]/60/60;
 		//print_r($approved1);
 		//echo '<br /><br />';
 		//print_r($approved2);
@@ -192,6 +194,7 @@ echo "---" . getCurrentWeek() . "<br />";
 		//if($regular[0] >)
 		
 		$total_pay = 0;
+		$total_time = 0;
 		//$approved1['previous'][1];
 		//$total_pay += $approved2['previous'][1];
 
@@ -218,6 +221,7 @@ echo "---" . getCurrentWeek() . "<br />";
 			$total_pay += $regular1[0];
 		}
 	} else{
+				$total_time += ($regular1[0]+$approved1['current'][0]+$approved1['previous'][0])*60*60;
 				$total_pay += ($regular1[0])*$regular1[1]+$approved1['current'][1]
 						+$approved1['previous'][1];
 	}
@@ -247,6 +251,7 @@ echo "---" . getCurrentWeek() . "<br />";
 			echo '<br /><br /><br /><br />';
 			//echo $regular2[0];
 			//echo $approved2['current'][1];
+				$total_time += ($regular2[0]+$approved2['current'][0]+$approved2['current'][0])*60*60;
 				$total_pay += ($regular2[0])*$regular2[1]+$approved2['current'][1]
 						+$approved2['previous'][1];
 	}
@@ -266,8 +271,7 @@ echo "---" . getCurrentWeek() . "<br />";
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
 				$emp[$i][3],
-			convertSecondsToTime($regular1[0]+$approved1['current'][0]+$approved1['previous'][0]
-					    +$regular2[0]+$approved2['current'][0]+$approved2['previous'][0]),
+			convertSecondsToTime($total_time),
 //		getHoursForId($emp[$i][0], getCurrentWeek(), 2),
 			"$" . number_format(round($total_pay, 2), 2)
 //	calculatePay(getHoursForId($emp[$i][0],getCurrentWeek(), 2), $emp[$i][3])
