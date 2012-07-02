@@ -97,7 +97,8 @@ function getEmployeesForDate($date, $id=0){
 	$link = initDb();
 	selectDb($link);
 
-	$query = "SELECT id, date AS date, license, look_ahead FROM clock WHERE date>'{$date}' AND company_id='{$id}' ORDER BY date ASC";
+	$query = "SELECT id, date AS date, license, look_ahead FROM clock WHERE date>='{$date}' AND company_id='{$id}' ORDER BY date ASC";
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -107,7 +108,7 @@ function getEmployeesForDate($date, $id=0){
 	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
 		$temp[] = $row;
 	}
-
+	//print_r($temp);
 	return $temp;
 }
 //FIX ME: currently clocked in table does not account for employees who clocked-in the previous day 8 hours before midnight.
@@ -119,13 +120,13 @@ function printCurrTableBottom(){
 	$clocked = array();
 	$look = array();
 	for($i=0;$i<count($emp);++$i){
-		$clocked[$emp[$i]['id']] = array($emp[$i]['id'],
+		$clocked[((string)$emp[$i]['id'])] = array($emp[$i]['id'],
 						$emp[$i]['date'],
 						$emp[$i]['license'],
 						$emp[$i]['look_ahead']
 						);
 	}
-	//print_r($emp);
+	//print_r($clocked);
 	$newemp = array();
 	foreach($clocked as $value){
 		//print_r($value);
@@ -136,9 +137,9 @@ function printCurrTableBottom(){
 	//print_r($newemp);
 
 	//print
-	for($i=0; $i<count($newemp)-1; ++$i){
+	for($i=0; $i<count($newemp); ++$i){
 		echo '<tr>';
-		for($j=0; $j<count($newemp[$i]);++$j){
+		for($j=0; $j<count($newemp[$i])-1;++$j){
 			echo '<td>';
 			echo $newemp[$i][$j];
 			echo '</td>';
