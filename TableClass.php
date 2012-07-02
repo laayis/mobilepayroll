@@ -595,7 +595,8 @@ echo '<br /><br /><span class="normal">
 $monday=0;
 if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtotime("previous monday")) ){
 
-	$monday = date("m-d-Y", strtotime("today"));
+	$monday = date("m-d-Y", getCurrentWeek());
+	//$monday = date("m-d-Y", strtotime("today"));
 } else{
 	$monday = date("m-d-Y", strtotime("previous monday"));
 }
