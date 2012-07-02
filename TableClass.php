@@ -283,7 +283,7 @@ function getApprovalSecondsForId($id, $date, $weeks=1){
 
 	$query = "SELECT hours, wage, rollover FROM approvals
 		WHERE user_id='{$id}' AND date>='{$date}'
-		AND date<'{$range}' ";
+		AND date<'{$range}' AND approved='1'";
 	$result = queryDbAll($link, $query);
 
 	$seconds = 0;
@@ -555,14 +555,21 @@ echo '<br /><br /><span class="normal">
 	selectDb($link);
 	echo getHoursForId($id, getCurrentWeek(), 2);
 
-echo '</strong><br />Approved Hours: <strong>
-			<span id="getid">
+echo '</strong><br />
+<span="normal">Current Pay Period (Approved Hours):<strong>
 ';
 	$temp = getApprovalSecondsForId($id, getCurrentWeek(), 2);
-	echo convertSecondsToTime($temp['current'][0]+
-				$temp['previous'][0]);
+	echo convertSecondsToTime($temp['current'][0]);
+
+echo '</strong>';
+
+echo '<br />Previous Pay Period (Approved Hours): <strong>
+';
+	$temp = getApprovalSecondsForId($id, getCurrentWeek(), 2);
+	echo convertSecondsToTime($temp['previous'][0]);
 
 echo '</strong></span>';
+
 }
 
 function userAddTimeForm($id){

@@ -77,7 +77,7 @@ hoursHeader($id); ?>
 $link = initDb();
 selectDb($link);
 
-	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Overtime', 'Approved?', 'Reason'), 'Approvals', '100%');
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals', '100%');
 	//$emp = getEmployeesInCompany($_COOKIE['id']);
 	printApprovalTableBottom();
 
