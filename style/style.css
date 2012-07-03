@@ -1,6 +1,7 @@
 * { padding:0; margin:0; font-family:Arial, Helvetica, sans-serif;}
 
 body { color: #606060; font-size: 12px;}
+.tiny { color: #606060; font-size: 10px;}
 
 a { color: #606060; text-decoration: none;}
 a:hover { text-decoration: underline;}
@@ -8,6 +9,11 @@ a:hover { text-decoration: underline;}
 /* Header */
 h1 { margin-bottom: 20px;}
 hr { margin-bottom: 15px;}
+.refresh{ height: 30px; width: 30px;
+	background-position:center;
+	float: right;
+}
+.bold { font-weight: bold; }
 
 /*
 table:first-child { font-weight: bold; }

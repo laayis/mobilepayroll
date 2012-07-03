@@ -18,7 +18,7 @@ Enter the e-mail address associated with your account, then click Continue. We'l
 <p>Please login to proceed</p>
 -->
 
-<form enctype="application/x-www-form-urlencoded" action="login.php" method="post">
+<form enctype="application/x-www-form-urlencoded" action="../validatecaptcha.php" method="post">
 <?php
 include('../inner_forgot.php');
 ?>

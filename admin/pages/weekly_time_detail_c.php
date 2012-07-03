@@ -55,7 +55,8 @@ echo '</table>';
 				Information shown is not finalized and may not contain missed punch, pay code, or other adjustments necessary.  
 				<br />
 			</div>
-			<br>
+			<br />
+<!--
 			<fieldset><legend> <strong><font color="#000000" class="normal">ALLOTTED TIME OFF</font></strong>
 			</legend>
 			<table width="100%" border="2" cellpadding=5 cellspacing=0>
@@ -83,6 +84,7 @@ echo '</table>';
    				</div>
 			</fieldset>
 			<br />
+-->
 			<div class="timeDetailData">
 			<fieldset><legend> <strong>
 			<font color="#000000" class="normal">

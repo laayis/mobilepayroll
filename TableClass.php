@@ -610,7 +610,7 @@ echo '<span class="normal">
 	$link=initDb();
 	selectDb($link);
 
-$monday=0;
+//$monday=0;
 /*
 if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtotime("previous monday")) ){
 

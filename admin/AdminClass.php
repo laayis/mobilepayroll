@@ -172,7 +172,7 @@ function prepareEmpOutput($emp, $from, $to){
 
 	//$r for return
 	$mid = addDaysToDate(7, $from);
-	echo $from . '-WWW'. $mid .'WWW-' . $to . '<br /><br />';
+	//echo $from . '-WWW'. $mid .'WWW-' . $to . '<br /><br />';
 	$r = array();
 	for($i=0; $i<count($emp); ++$i){
 	//echo '---' . $emp[$i][0];
@@ -369,7 +369,7 @@ function printApprovalTableBottom($from, $to){
 	$link = initDb();
 	selectDb($link);
 	
-	echo $from . '<br />' . $to;
+	//echo $from . '<br />' . $to;
 	$query = 0;
 	//echo $user_id;
 	if(!isset($_GET['id'])){
@@ -377,9 +377,9 @@ function printApprovalTableBottom($from, $to){
 			approved, reason FROM approvals
 			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
 			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
-			AND company_id='{$_COOKIE['id']}'
+			AND user_id='{$_COOKIE['id']}'
 			ORDER BY user_id ASC";
-	echo $query;
+	//echo $query;
 	} else{
 		$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
@@ -389,7 +389,7 @@ function printApprovalTableBottom($from, $to){
 			AND user_id='{$_GET['id']}'
 			ORDER BY user_id ASC";
 	
-	echo $query;
+	//echo $query;
 	}
 	$emp = queryDbAll($link, $query);
 	
