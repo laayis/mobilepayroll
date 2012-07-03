@@ -167,22 +167,23 @@ function getCurrentWeek(){
 	return $result;
 }
 
-function prepareEmpOutput($emp){
+function prepareEmpOutput($emp, $from, $to){
 //	print_r($emp);
 
 	//$r for return
+	$mid = addDaysToDate(7, $from);
+	echo $from . '-WWW'. $mid .'WWW-' . $to . '<br /><br />';
 	$r = array();
 	for($i=0; $i<count($emp); ++$i){
 	//echo '---' . $emp[$i][0];
-$date = addDaysToDate(-7*1, getCurrentWeek());
 //echo getCurrentWeek();
 //echo "---" . $date . "<br />";
 		
 		//week one and week 2 of biweek
-		$regular1=getSecondsForId($emp[$i][0], getCurrentWeek(), 1);
-		$regular2=getSecondsForId($emp[$i][0], $date, 1);
-//		$approved1=getApprovalSecondsForId($emp[$i][0], getCurrentWeek(), getCurrentWeek());
-//		$approved2=getApprovalSecondsForId($emp[$i][0], $date, getCurrentWeek());
+		$regular1=getSecondsForId($emp[$i][0], $from, $mid);
+		$regular2=getSecondsForId($emp[$i][0], $mid, $to);
+		$approved1=getApprovalSecondsForId($emp[$i][0], $from, $mid);
+		$approved2=getApprovalSecondsForId($emp[$i][0], $mid, $to);
 
 		$regular1[0]=$regular1[0]/60/60;
 		$approved1['current'][0]=$approved1['current'][0]/60/60;

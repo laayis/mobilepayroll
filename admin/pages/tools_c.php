@@ -32,10 +32,14 @@
 <td colspan="3">
 	<br />
 	<?php
-	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Employees');
+	$from = getCurrentWeek();
+	//add 1 day to current date to display up-to-date approvals
+	$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
+
+	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Pay from ' . $from . ' to Today');
 	$emp = getEmployeesInCompany($_COOKIE['id']);
 	//print_r($emp);
-	$empf = prepareEmpOutput($emp);
+	$empf = prepareEmpOutput($emp, $from, $to);
 	printEmpTableBottom($empf)
 	//printTableBottom($emp);
 ?>
@@ -64,9 +68,13 @@
 
 <tr><td colspan="3">
 	<?php
-	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Overtime', 'Approved?', 'Reason'), 'Approvals', '100%');
+	$from = addDaysToDate(-7*2, getCurrentWeek());
+	//add 1 day to current date to display up-to-date approvals
+	$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to Today', '100%');
 	//$emp = getEmployeesInCompany($_COOKIE['id']);
-	printApprovalTableBottom();
+
+printApprovalTableBottom($from, $to);
 ?>
 
 </td></tr>

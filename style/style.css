@@ -57,6 +57,7 @@ fieldset { padding: 10px;}
 
 /* Aux. Classes */
 .clear { clear: both;}
+.right { float: right;}
 .left { float: left;}
 .dotted { border-right: 1px dotted #000000;}
 .uppercase { text-transform: uppercase;}
