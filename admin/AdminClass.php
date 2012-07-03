@@ -377,7 +377,7 @@ function printApprovalTableBottom($from, $to){
 			approved, reason FROM approvals
 			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
 			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
-			AND user_id='{$_COOKIE['id']}'
+			AND company_id='{$_COOKIE['id']}'
 			ORDER BY user_id ASC";
 	//echo $query;
 	} else{
