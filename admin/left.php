@@ -17,6 +17,7 @@ if(isset($_COOKIE['SESSID'])){
 	<li><a href="/pages/w2_statements.php">View W-2 Statements</a></li>
 -->	
 	<li><a href="tools.php">Administrative Tools</a></li>
+	<li><a href="changepassword.php">Change Password</a></li>
 <?php
 	}
 }

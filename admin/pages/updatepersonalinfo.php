@@ -1,5 +1,5 @@
 <?php
-include('../AuthClass.php');
+include('../../AuthClass.php');
 
 $t = array_keys($_POST);
 //print_r($t);
