@@ -234,8 +234,8 @@ function authenticateUser(){
 		$link = initDb();
 		selectDb($link);
 		$result = queryDb2($link, $query);
-		echo $result . '--' . session_id();
-		echo '<br />' . strlen($result) . '--' . strlen(session_id());
+		//echo $result . '--' . session_id();
+		//echo '<br />' . strlen($result) . '--' . strlen(session_id());
 		if(strcmp($result, $sid) != 0){
 			//kick user out of the page, he is not authenticated
 			header('Location: http://mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com/admin');
@@ -255,6 +255,6 @@ function authenticateUser(){
 	
 }
 
-//authenticateUser();
+authenticateUser();
 
 ?>
