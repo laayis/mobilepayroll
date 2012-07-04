@@ -1,5 +1,5 @@
 <?php
-include('../AuthClass.php');
+//include('../AuthClass.php');
 include('top.php')?>
 <html>
  <head>
