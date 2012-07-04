@@ -21,7 +21,7 @@ echo "<br>" ;
 echo $_COOKIE['id'];
 echo "Result: " . $result;
 */
-echo $result;
+//echo $result;
 if($result){
 	selectDb($link);
 	$sid=session_id();
