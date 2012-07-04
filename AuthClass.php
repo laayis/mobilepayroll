@@ -1,7 +1,17 @@
 <?php
 session_start();
 
-//check if user sent correct username and password
+function isUserAdmin(){
+	$temp = explode('/', $_SERVER['SCRIPT_NAME']);
+
+	if($temp[1]=='admin'){
+		return 1;
+	}
+	
+	return 0;
+}
+
+
 function initDb(){
 	$link = mysql_connect('mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com', 'pussyeater', 'win2210760');
 	if (!$link) { die('Could not connect: ' . mysql_error());}
@@ -215,5 +225,36 @@ function isAlphaNumeric($str)
 {
     return preg_match('/^[A-Za-z0-9_]+$/',$str);
 }
+
+function authenticateUser(){
+	$sid = session_id();
+	if(isUserAdmin()){
+		//query company.sessid
+		$query = "SELECT sessid AS id FROM company WHERE sessid='{$sid}'";
+		$link = initDb();
+		selectDb($link);
+		$result = queryDb2($link, $query);
+		echo $result . '--' . session_id();
+		echo '<br />' . strlen($result) . '--' . strlen(session_id());
+		if(strcmp($result, $sid) != 0){
+			//kick user out of the page, he is not authenticated
+			header('Location: http://mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com/admin');
+		}
+
+	} else{
+		$query = "SELECT sessid AS id FROM contact_info WHERE sessid='{$sid}'";
+		$link = initDb();
+		selectDb($link);
+		$result = queryDb2($link, $query);
+		//echo $result . '--' . session_id();
+		if(strcmp($result, $sid) != 0){
+			//kick user out of the page, he is not authenticated
+			header('Location: http://mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com/');
+		}
+	}
+	
+}
+
+//authenticateUser();
 
 ?>

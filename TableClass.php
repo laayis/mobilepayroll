@@ -643,7 +643,12 @@ echo '
 
 }
 
-function userAddTimeForm($id){
+function dateForSQL($date){
+	$temp = explode('-', $date);
+	return ($temp[2].'-'.$temp[0].'-'.$temp[1]);
+}
+
+function userAddTimeForm($id, $from){
 //echo 'FUCK  YOU';
 echo '<br />';
 echo '<form method="POST" action="approval.php">';
@@ -717,7 +722,9 @@ echo '
 	</tr>
 ';
 
-echo '</table></form>';
+echo "</table>
+<input type='text' name='date' value='{$from}' style='display:none;'>
+</form>";
 
 }
 

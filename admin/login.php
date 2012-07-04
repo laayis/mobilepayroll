@@ -21,8 +21,13 @@ echo "<br>" ;
 echo $_COOKIE['id'];
 echo "Result: " . $result;
 */
-
+echo $result;
 if($result){
+	selectDb($link);
+	$sid=session_id();
+	$tid=getEmployeeId($link, 'company');	
+	$query = "UPDATE company SET sessid='{$sid}' WHERE id='{$tid}'";
+	queryDb($link, $query);
 	setcookie('SESSID', session_id(), time()+3600);	
 	setcookie('id', getEmployeeId($link, 'company'), time()+3600);	
 	header('Location: pages/overview.php');

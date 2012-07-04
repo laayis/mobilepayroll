@@ -2,6 +2,14 @@
 //include('../../TableClass.php');
 
 $id = getID();
+
+function getFrom(){
+	if(isset($_GET['from'])){
+		return $_GET['from'];
+	}else{
+		return getCurrentWeek();
+	}
+}
 ?>
 
 <h1>Welcome to Employee Self-Service</h1>
@@ -25,17 +33,16 @@ $id = getID();
 
 <?php
 
-$from = getCurrentWeek();
-//add 1 day to current date to display up-to-date approvals
-$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
+$from = getFrom();
+$to = addDaysToDate(7, $from);
 
 echo '<br /><br /><table width="100%" border="0" cellpadding="0" cellspacing="0">'; 
 echo '<tr><td>';
 hoursHeader($id, $from, $to);
 echo '</td>';
 
-$to = $from;
-$from = addDaysToDate(-7*2, $to);
+$from = $to;
+$to = addDaysToDate(7, $from);
 echo '<td>';
 hoursHeader($id, $from, $to);
 echo '</td></tr>';
@@ -96,21 +103,22 @@ echo '</table>';
 $link = initDb();
 selectDb($link);
 
-	$from = getCurrentWeek();
+	$from = getFrom();
 	//add 1 day to current date to display up-to-date approvals
-	$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
+	$to = addDaysToDate(7, $from);
 	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to
 			, '100%');
 	printApprovalTableBottom($from, $to);
-
-	$to = $from;
-	$from = addDaysToDate(-7*2, $to);
+	userAddTimeForm($id, $from);
+	echo '<br />';
+	$from = $to;
+	$to = addDaysToDate(7, $from);
 	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to
 			, '100%');
 	printApprovalTableBottom($from, $to);
-/*
+	userAddTimeForm($id, $from);
 
-*/ ?>
+ ?>
 			</fieldset>
 			<br />
 			<div class="timeDetailData">
@@ -131,11 +139,11 @@ if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtot
 	$monday = date("m-d-Y", strtotime("previous monday"));
 }
 
+$monday = getFrom();
 
 //echo $monday;
 $date = addDaysToDate(0, $monday);
 printRowIn($link, $date, 0, $id);
-userAddTimeForm($id);
 
 /*
 

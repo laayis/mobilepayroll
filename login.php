@@ -23,8 +23,12 @@ echo "Result: " . $result;
 */
 
 if($result){
-	setcookie('SESSID', session_id(), time()+3600);	
-	setcookie('id', getEmployeeId($link), time()+3600);	
+	selectDb($link);
+	$sid=session_id();
+	$tid=getEmployeeId($link, 'company');	
+	$query = "UPDATE company SET sessid='{$sid}' WHERE id='{$tid}'";
+	queryDb($link, $query);
+setcookie('id', getEmployeeId($link), time()+3600);	
 	header('Location: pages/overview.php');
 } else{
 	header('Location: http://timesheet.elasticbeanstalk.com');

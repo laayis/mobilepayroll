@@ -311,7 +311,7 @@ function prepareEmpOutput($emp, $from, $to){
 	return $r;
 }
 
-function printEmpTableBottom($emp){
+function printEmpTableBottom($emp, $from=0){
 
 	for($i=0; $i<count($emp); ++$i){
 		echo '<tr>';
@@ -343,6 +343,9 @@ function printEmpTableBottom($emp){
 				//echo '<a href="javascript:void(null);getweek(\'';
 				echo '<a href="weekly_time_detail.php?id=';
 				echo $emp[$i][$j];
+				if($from!=0){
+				echo '&from=' . $from;
+				}
 				echo '" target="_blank">';
 				echo $emp[$i][$j];
 				echo '</a>';
@@ -448,7 +451,6 @@ function printApprovalTableBottom($from, $to){
 	}
 	echo '
 	</table>
-	<br />
 	';
 }
 

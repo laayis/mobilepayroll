@@ -32,15 +32,30 @@
 <td colspan="3">
 	<br />
 	<?php
-	$from = getCurrentWeek();
-	//add 1 day to current date to display up-to-date approvals
-	$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
+	$from=0;
+	if(isset($_GET['from'])){
+		$from = $_GET['from'];
+	} else{
+		$from = getCurrentWeek();
+	}
 
-	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Pay from ' . $from . ' to Today');
+	$temp_from = $from;
+	for($i=0; $i<1; ++$i){
+		$temp_from = addDaysToDate(-7*2, $temp_from);
+		$to = addDaysToDate(7*2, $temp_from);
+		$redirect = $_SERVER['SCRIPT_NAME'] . '?from=' . $temp_from;
+		echo "
+			<a href='{$redirect}'>{$temp_from} to {$to}</a> | 
+		";
+	}
+	//add 1 day to current date to display up-to-date approvals
+	$to = addDaysToDate(7*2, $from);
+
+	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Pay from ' . $from . ' to '.$to);
 	$emp = getEmployeesInCompany($_COOKIE['id']);
 	//print_r($emp);
 	$empf = prepareEmpOutput($emp, $from, $to);
-	printEmpTableBottom($empf)
+	printEmpTableBottom($empf, $from)
 	//printTableBottom($emp);
 ?>
 </td>
@@ -68,10 +83,12 @@
 
 <tr><td colspan="3">
 	<?php
-	$from = addDaysToDate(-7*2, getCurrentWeek());
+/*	
+$from = addDaysToDate(0, getCurrentWeek());
 	//add 1 day to current date to display up-to-date approvals
-	$to = addDaysToDate(1, date('m-d-Y', strtotime('today')));
-	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to Today', '100%');
+	$to = addDaysToDate(7*2, $from);
+*/
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to , '100%');
 	//$emp = getEmployeesInCompany($_COOKIE['id']);
 
 printApprovalTableBottom($from, $to);

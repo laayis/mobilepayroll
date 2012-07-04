@@ -37,8 +37,9 @@ if(isset($_COOKIE['SESSID'])){
 			. $_POST['date'] . " "
 			. $_POST['timei'] . "' AND id='{$_COOKIE['id']}'";
 */
-	$formatted = date('Y-m-d');
-	echo $formatted;
+	$temp = $_POST['date'];
+	$formatted = dateForSQL($temp);
+	//echo $formatted;
 		
 		$query = "INSERT INTO `approvals` (`company_id`, `wage`, `user_id`, `hours`, `rollover`, `reason`, `approved`, `date`)
 					VALUES ('{$_COOKIE['id']}','{$_POST['wage']}', '{$_POST['user_id']}', '{$_POST['hours']}',
