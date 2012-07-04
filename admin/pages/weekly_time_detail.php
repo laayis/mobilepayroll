@@ -1,6 +1,7 @@
 <?php
 
 include('../../AuthClass.php');
+authenticateUser();
 include('../AdminClass.php');
 if(isset($_COOKIE['SESSID'])){
        if($_COOKIE['SESSID'] == session_id()){
