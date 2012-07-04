@@ -315,16 +315,17 @@ function printEmpTableBottom($emp, $from=0){
 
 	for($i=0; $i<count($emp); ++$i){
 		echo '<tr>';
-
 		echo '
-		<td>
+		<td>';
+/*
 			<a href="javascript:void(null);update(\''.
 			$emp[$i][0] . '\', \''.
 			$emp[$i][0] . '\',
 			\'del\');">Delete</a>' .
 		'<br/>
+*/
 
-			<a href="javascript:void(null);update(\''.
+		echo	'<a href="javascript:void(null);update(\''.
 			$emp[$i][0] . '\', \''.
 			$emp[$i][0] . '\',
 			\'act\');">Activate</a>' .

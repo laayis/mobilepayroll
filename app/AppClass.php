@@ -81,6 +81,30 @@ function getallemployees(){
 	echo $temp;
 }
 
+function generate9DigitId(){
+	$temp = 0;
+	$key='';
+
+	$result=1;
+	$link=initDb();
+	selectDb($link);
+	$id=0;
+	for(;$result!=0;){
+		// seed with microseconds
+		mt_srand(make_seed());
+		$temp = mt_rand();
+		$id = substr($temp,0,9);
+		//$temp=mt_rand(5, 15);
+
+		$query = "SELECT id FROM contact_info WHERE id={$letter}";
+		$result = queryDb2($link, $query);
+		//echo $result . '<br />';
+		//echo $i . '<br />';
+	}
+	//echo $id . '<br />';
+	return $letter;
+}
+
 function generateUsername($f, $l){
 	$letter = generateLetter();
 	$username = strtolower(substr($f,0,1) . $letter . substr($l,0,1));
@@ -104,7 +128,7 @@ WHERE subscribed_devices.license = '" . $form['license'] .
 	$id = queryDb2($link, $query);
 	//print_r($id);
 	if($id == 0){
-		echo $query;
+		//echo $query;
 		echo "Wrong login information.";
 		//echo '0';
 		return;
@@ -115,7 +139,8 @@ WHERE subscribed_devices.license = '" . $form['license'] .
 	$user = generateUsername($form['first'], $form['last']);
 	//print_r($user);
 	$query = "INSERT INTO contact_info (" . 
-	"`username`, `password`, `company_id`, `first`, `last`) VALUES( " . 
+	"`id`, `username`, `password`, `company_id`, `first`, `last`) VALUES( " . 
+        "'" . generate9DigitId() . "', " .
         "'" . $user['username'] . "', " .
         "'" . $user['password'] . "', " .
         "'" . $id . "', " .

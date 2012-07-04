@@ -77,9 +77,19 @@ $id = getID();
 	                              <option value="IV">IV</option></select></span> 
 						</div></td>
 					</tr>
+
+
+					<tr><td class="normal"> 
+						<div align="right"><strong>Wage:</strong></div></td>
+						<td ><div align="left"><strong>&nbsp; 
+						<input type="text" name="totable_wage" maxlength="2" size="4" value="<?php selectContact($link, 'wage'); ?>" onfocus="displayAdrNote()" class="entertext" id="addr1">
+						</strong></div></td>
+					</tr>
+
+
 					<tr><td colspan="2" class="small" align="left">
 						<div id="adrNote">
-                    		Note: Your change may affect your State and/or Local Tax withholdings.  Please visit contact the HR Service Center to obtain the appropriate Federal, State, or Local Tax forms to submit to payroll.
+                    		Note: Your change may affect your State and/or Local Tax withholdings.  Please contact the HR Service Center to obtain the appropriate Federal, State, or Local Tax forms to submit to payroll.
                     	</div>
 					</td></tr>
 					<tr><td class="normal"> 
