@@ -255,6 +255,5 @@ function authenticateUser(){
 	
 }
 
-authenticateUser();
 
 ?>
