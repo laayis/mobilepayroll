@@ -1,5 +1,6 @@
 <?php
 //include('../../TableClass.php');
+authenticateUser();
 
 $id = getID();
 

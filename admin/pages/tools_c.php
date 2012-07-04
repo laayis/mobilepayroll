@@ -1,4 +1,7 @@
+<?php
+authenticateUser();
 
+?>
 <!--
 <script type="text/javascript" src="/js/personal_data_change.js"></script>
 -->

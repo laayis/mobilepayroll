@@ -1,5 +1,6 @@
 <?php
 include('../../AuthClass.php');
+authenticateUser();
 include('../top.php')?>
 <html>
  <head>

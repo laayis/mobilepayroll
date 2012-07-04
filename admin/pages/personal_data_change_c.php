@@ -1,4 +1,5 @@
 <?php
+authenticateUser();
 include('../TableClass.php');
 $id = getID();
 ?>

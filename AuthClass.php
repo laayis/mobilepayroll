@@ -239,6 +239,7 @@ function authenticateUser(){
 		if(strcmp($result, $sid) != 0){
 			//kick user out of the page, he is not authenticated
 			header('Location: http://mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com/admin');
+			die();
 		}
 
 	} else{
@@ -250,11 +251,17 @@ function authenticateUser(){
 		if(strcmp($result, $sid) != 0){
 			//kick user out of the page, he is not authenticated
 			header('Location: http://mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com/');
+	    		die();
 		}
 	}
-	
+
 }
 
-
-
+function awdaccess($access){
+	if(empty($access)) {
+		header('Location: http://mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com/');
+		die();
+	}
+}
+$awdaccess = 'my_value';
 ?>
