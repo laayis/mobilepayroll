@@ -96,7 +96,7 @@ function generate9DigitId(){
 		$id = substr($temp,0,9);
 		//$temp=mt_rand(5, 15);
 
-		$query = "SELECT id FROM contact_info WHERE id={$letter}";
+		$query = "SELECT id FROM contact_info WHERE id={$id}";
 		$result = queryDb2($link, $query);
 		//echo $result . '<br />';
 		//echo $i . '<br />';
@@ -125,9 +125,9 @@ WHERE subscribed_devices.license = '" . $form['license'] .
 "' LIMIT 1";
 
 	//get company_id
-	$id = queryDb2($link, $query);
+	$company_id = queryDb2($link, $query);
 	//print_r($id);
-	if($id == 0){
+	if($company_id == 0){
 		//echo $query;
 		echo "Wrong login information.";
 		//echo '0';
@@ -137,13 +137,14 @@ WHERE subscribed_devices.license = '" . $form['license'] .
 
 	//$inout = isClockInOrOut($form['id'], $form['license']);
 	$user = generateUsername($form['first'], $form['last']);
+	//echo generate9DigitId();
 	//print_r($user);
 	$query = "INSERT INTO contact_info (" . 
 	"`id`, `username`, `password`, `company_id`, `first`, `last`) VALUES( " . 
         "'" . generate9DigitId() . "', " .
         "'" . $user['username'] . "', " .
         "'" . $user['password'] . "', " .
-        "'" . $id . "', " .
+        "'" . $company_id . "', " .
         "'" . $form['first'] . "', " .
         "'" . $form['last'] . "')";
 	//insert
