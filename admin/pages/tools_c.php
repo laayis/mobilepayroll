@@ -1,5 +1,8 @@
 <?php
-authenticateUser();
+if(empty($awdaccess)) {
+	header('Location: http://timesheet.elasticbeanstalk.com/');
+	die();
+}
 
 ?>
 <!--

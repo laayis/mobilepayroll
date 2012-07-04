@@ -258,7 +258,7 @@ function authenticateUser(){
 }
 
 function awdaccess($access){
-	if(empty($access)) {
+	if(empty($awdaccess)) {
 		header('Location: http://mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com/');
 		die();
 	}

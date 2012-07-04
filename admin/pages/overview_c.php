@@ -1,5 +1,8 @@
 <?php
-authenticateUser();
+if(empty($awdaccess)) {
+	header('Location: http://timesheet.elasticbeanstalk.com/');
+	die();
+}
 ?>
 <h1>Welcome to Employee Self-Service</h1>
 <hr />
