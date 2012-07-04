@@ -102,7 +102,7 @@ function generate9DigitId(){
 		//echo $i . '<br />';
 	}
 	//echo $id . '<br />';
-	return $letter;
+	return $id;
 }
 
 function generateUsername($f, $l){
