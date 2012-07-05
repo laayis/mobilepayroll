@@ -1,5 +1,5 @@
 <?php
-include('../AuthClass.php');
+include('AuthClass.php');
 include('top.php')?>
 <html>
  <head>
@@ -14,13 +14,9 @@ include('top.php')?>
 -->
 
 <?php
-include('../inner_login.php');
+include('inner_login.php');
+include('signup.php');
 ?>
 
-
-<?php
-
-?> 
- </body>
-</html>	
-<?php include('../bottom.php')?>
+</form>
+<?php include('bottom.php')?>

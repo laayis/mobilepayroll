@@ -1,120 +1,27 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en-US" >
 <head>
-    <title>MobilePay - Watch TV Shows Online, Watch Movies Online</title>
-    
-
-
-
-
-
+    <title>Netflix - Watch TV Shows Online, Watch Movies Online</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
     
     <meta name="description" content="Watch Movies & TV Shows Online or Streaming right to your TV via Xbox, Wii, PS3 & many other devices. Only $7.99/mo.  Start Your Free Trial Today.">
     <meta name="keywords" content="watch movies, movies online, watch TV, TV online, TV shows online, watch TV shows, stream movies, stream tv, instant streaming, watch online, movies, watch movies canada, watch TV online canada, no download, full length movies">
-    <meta name="title" content="MobilePay - Watch TV Shows Online, Watch Movies Online">
+    <meta name="title" content="Netflix - Watch TV Shows Online, Watch Movies Online">
     
     
     <meta name="ROBOTS" content="NOODP">
-   
-
-
-<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
-
-<script type="text/javascript">
-
-/*** 
-    Simple jQuery Slideshow Script
-    Released by Jon Raasch (jonraasch.com) under FreeBSD license: free to use or modify, not responsible for anything, etc.  Please link out to me if you like it :)
-***/
-
-function slideSwitch() {
-    var $active = $('#slideshow IMG.active');
-
-    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
-
-    // use this to pull the images in the order they appear in the markup
-    var $next =  $active.next().length ? $active.next()
-        : $('#slideshow IMG:first');
-
-    // uncomment the 3 lines below to pull the images in random order
-    
-    // var $sibs  = $active.siblings();
-    // var rndNum = Math.floor(Math.random() * $sibs.length );
-    // var $next  = $( $sibs[ rndNum ] );
-
-
-    $active.addClass('last-active');
-
-    $next.css({opacity: 0.0})
-        .addClass('active')
-        .animate({opacity: 1.0}, 1000, function() {
-            $active.removeClass('active last-active');
-        });
-}
-
-$(function() {
-    setInterval( "slideSwitch()", 5000 );
-});
-
-</script>
-
-<style type="text/css">
-
-/*** set the width and height to match your images **/
-
-#slideshow {
-    position:relative;
-    height:350px;
-}
-
-#slideshow IMG {
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:8;
-    opacity:0.0;
-}
-
-#slideshow IMG.active {
-    z-index:10;
-    opacity:1.0;
-}
-
-#slideshow IMG.last-active {
-    z-index:9;
-}
-
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-<link rel="shortcut icon" href="https://netflix.hs.llnwd.net/e1/us/icons/nficon.ico">
+    <link rel="shortcut icon" href="https://netflix.hs.llnwd.net/e1/us/icons/nficon.ico">
     <link rel="canonical" href="">
 <link type="text/css" rel="stylesheet" href="https://signup.netflix.com/css/include?f=core;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|shared;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|header_navigation;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|setLanguagePrefMenu;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|footer;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|registration_panel;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|login_pages;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|signup_flow;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|" />
+<link type="text/css" rel="stylesheet" href="https://signup.netflix.com/css/include?f=HOME;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|" />
+    <!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="https://signup.netflix.com/css/include?f=ie_fixer;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|" />
+    <![endif]-->
 
     
-
-
     
-
-    
+    <link type="text/css" rel="stylesheet" href="https://signup.netflix.com/css/include?f=overview_block_north_america;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|" />
 
     <style type="text/css">
         
@@ -193,7 +100,7 @@ $(function() {
 <header>
     <div id="masthead" class="clearfix">
         <div class="logo">
-            <a href="https://signup.netflix.com" title="MobilePay"><img src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/common/netflix_logo_only_140w.png" alt="MobilePay" border="0"></a>
+            <a href="https://signup.netflix.com" title="Netflix"><img src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/common/netflix_logo_only_140w.png" alt="Netflix" border="0"></a>
         </div>
         <div class="hlinks">
             <ul>
@@ -202,7 +109,7 @@ $(function() {
                 <li class="anonopts">
                     <ul>
                             
-                        <li id="msil"><a href="http://timesheet.elasticbeanstalk.com/admin">Member Sign In</a></li>
+                        <li id="msil"><a href="https://signup.netflix.com/Login">Member Sign In</a></li>
                     </ul>
                 </li>
 
@@ -366,7 +273,7 @@ $(function() {
 <article id="content" class="call-to-action clearfix">
     <h1 class="xx-large">
 
-        Instantly manage your business from anywhere! <br>For only <span class="price">$220</span> a year.</br>
+        Instantly watch as many TV episodes & movies as you want! <nobr>For only <span class="price">$7.99</span> a month.</nobr>
     </h1>
     <div class=" right  clearfix">
         <section id="reg-box" class="clearfix">
@@ -381,15 +288,9 @@ $(function() {
     }
 </style>
 
-
-
-
- 
-
-
 <form method="post" name="register_form" id="regform"   >
     <section class="header">
-        <h2> Try MobilePay Free for 1 Month</h2>
+        <h2> Try Netflix Free for 1 Month</h2>
     </section>
     <fieldset>
         <dl>
@@ -413,10 +314,10 @@ $(function() {
     </fieldset>
 
     <div class="privacy">
-        <img src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/common/padlock_grey.png" border="0" align=bottom><span class="emphasis">Secure Server</span>. We will not sell or rent your email address. We may contact you about the MobilePay service. See our <a href="https://signup.netflix.com/PrivacyPolicy" target="_blank">Privacy Policy</a>. <span class="poplink" ltkattr="/HowItWorks"><a class="popuplayer" data-width="450" data-pop="true" href="https://signup.netflix.com/PopupDetails" target="_blank">Free trial offer details</a></span>
+        <img src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/common/padlock_grey.png" border="0" align=bottom><span class="emphasis">Secure Server</span>. We will not sell or rent your email address. We may contact you about the Netflix service. See our <a href="https://signup.netflix.com/PrivacyPolicy" target="_blank">Privacy Policy</a>. <span class="poplink" ltkattr="/HowItWorks"><a class="popuplayer" data-width="450" data-pop="true" href="https://signup.netflix.com/PopupDetails" target="_blank">Free trial offer details</a></span>
     </div>
 
-    <input type="hidden" name="authURL" value="1341467514590.KbIE8ScrSfmLu7fdhG27v892L6k=">
+    <input type="hidden" name="authURL" value="1341468885160.88CZX7sL62iPOwTuaPHdSUTlrBs=">
     <input type="hidden" name="RememberMe" value="True">
     <input type="hidden" name="registrationLocation" value="main/HOME">
     <input type="hidden" name="SubmitButton" value="Continue">
@@ -467,46 +368,26 @@ $(function() {
 <div class="container  clearfix ">
     <section class="listitems clearfix">
         <ul class="left">
-            <li>Manage your company on any <strong>PC</strong>, <strong>Mac</strong>, <strong>Mobile</strong>, and <strong>Tablet</strong>.</li>
-            <li>Calculate payroll with just 3 clicks online – <strong>it’s easy</strong></li>
+            <li>Watch on your <strong>PS3</strong>, <strong>Wii</strong>, <strong>Xbox</strong>, <strong>PC</strong>, <strong>Mac</strong>, <strong>Mobile</strong>, <strong>Tablet</strong> and <a id="moredeviceslink" href="#moredevicescontent">more</a>.</li>
+            <div class=" arrow-up  hide"></div>
+            <div id="moredevicescontentlayer" class="hide">
+                <ul>
+                    <li>Smart TVs (Internet-connected TVs)</li>
+<li>Blu ray players</li>
+<li>Smart phones (iPhone, Android and Windows)</li>
+<li>And many other Internet-connected devices</li>
+                </ul>
+            </div>
+            <li>Instantly watch as much as you want – <strong>it’s unlimited</strong></li>
         </ul>
         <ul class="right">
-            <li>Verify that your employees are on the <strong>job</strong> and when they got there.</li>
-            <li>See detailed <strong>graphs</strong> and <strong>charts</strong> concerning your company.</li>
+            <li>Choose from <strong>thousands</strong> of <strong>TV</strong> episodes & <strong>movies</strong></li>
+            <li>No commitments, <strong>cancel anytime</strong> with just 3 clicks online</li>
         </ul>
     </section>
 </div>
     </div>
-
-
-
-
-
-
-
-<div id="slideshow">
-    <img src="image1.png" alt="Slideshow Image 1" class="active" />
-    <img src="image2.png" alt="Slideshow Image 2" />
-    <img src="image1.png" alt="Slideshow Image 3" />
-    <img src="image2.png" alt="Slideshow Image 4" />
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <img class=" left  clearfix" src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/home/lifestyle_3square.jpg">
 </article>
 
 
@@ -539,7 +420,7 @@ $(function() {
     <a id="priv_lnk" href="https://signup.netflix.com/PrivacyPolicy">Privacy Policy</a>. 
     <br>&copy; 1997-2012 Netflix, Inc. All rights reserved.
        U.S. Patent Nos. 6,584,450; 7,024,381; 7,631,323; 7,403,910; and 7,617,127.
-   <span class="serverid">(us-east-1 6402101d US)</span>
+   <span class="serverid">(us-east-1 6c021015 US)</span>
    [<span class="abtest-info">2514/13 - 2721/1 - </span>]
 </div>
 </footer>
@@ -557,47 +438,9 @@ $(function() {
     
     
 
-    <script src="https://signup.netflix.com/js/include?f=jquery_1_7_1;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|jquery_ui_1_8_16;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|"></script>
-<script src="https://signup.netflix.com/js/include?f=tracking;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|nflib_namespace;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|nfjs_constants;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|"></script>
-<script src="https://signup.netflix.com/js/include?f=auto_append_missing_reg_fields;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|"></script>
-<script src="https://signup.netflix.com/js/include?f=Silverlight_Netflix_RTW;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|userAgent;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|map;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|Silverlight_Plugin;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|Silverlight_InstallCheck;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|"></script>
-<script src="https://signup.netflix.com/js/include?f=registration;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|nflib_html5_shim;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|nflib_utils_common;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|bootstrap;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|HOME;WEB_JS;ab18e3cf0ed6ebf70dfb1b82c6d74d76|"></script>
 
-    <script type="text/javascript">
-    (function($) {
-        $(document).ready(function () {
 
-            $("#moredeviceslink").hover(
-                    function () {
-                        pos = $(this).offset();
-                        width = $(this).width();
-
-                        $('#moredevicescontentlayer').addClass('layer');
-
-                        layerW = $("#moredevicescontentlayer").width();
-
-                        $("#moredevicescontentlayer").css("left", (pos.left + width - 320) + "px").css("top", (pos.top + 45) +"px");
-                        $("section.listitems .arrow-up").css("left", (pos.left + width - 70) + "px").css("top", (pos.top + 20) +"px");
-
-                        $("#moredevicescontentlayer").toggle();
-                        $("section.listitems .arrow-left, section.listitems .arrow-up").toggle();
-                    },
-                    function () {
-                        $("#moredevicescontentlayer").toggle();
-                        $("section.listitems .arrow-left, section.listitems .arrow-up").toggle();
-                    }
-            ).click(function (evt) {evt.preventDefault()});
-        });
-    })(jQuery);
-
-</script><script type="text/javascript">
-jQuery(window).load(function(){
-var domscript = document.createElement('script');
-domscript.src = 'https://view.atdmt.com/jaction/nfxnfx_nonmemberremarketing_1';
-document.getElementsByTagName('body')[0].appendChild(domscript);
-});
-
-</script><script type="text/javascript">
+<script type="text/javascript">
 $(function(){
         logState = function(state){
             $.get("/beacons?silverlight=" + state);
@@ -625,5 +468,4 @@ $(function(){
 
 </body>
 </html>
-
 

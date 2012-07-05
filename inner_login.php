@@ -1,3 +1,4 @@
+<form enctype="application/x-www-form-urlencoded" action="login.php" method="post">
 <table width="250px" class="login">
 <tr>
 <td>
@@ -21,4 +22,4 @@
 </td>
 </tr>
 </table>
-
+</form>

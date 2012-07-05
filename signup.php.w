@@ -17,91 +17,21 @@
     
     
     <meta name="ROBOTS" content="NOODP">
-   
-
-
-<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
-
-<script type="text/javascript">
-
-/*** 
-    Simple jQuery Slideshow Script
-    Released by Jon Raasch (jonraasch.com) under FreeBSD license: free to use or modify, not responsible for anything, etc.  Please link out to me if you like it :)
-***/
-
-function slideSwitch() {
-    var $active = $('#slideshow IMG.active');
-
-    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
-
-    // use this to pull the images in the order they appear in the markup
-    var $next =  $active.next().length ? $active.next()
-        : $('#slideshow IMG:first');
-
-    // uncomment the 3 lines below to pull the images in random order
     
-    // var $sibs  = $active.siblings();
-    // var rndNum = Math.floor(Math.random() * $sibs.length );
-    // var $next  = $( $sibs[ rndNum ] );
-
-
-    $active.addClass('last-active');
-
-    $next.css({opacity: 0.0})
-        .addClass('active')
-        .animate({opacity: 1.0}, 1000, function() {
-            $active.removeClass('active last-active');
-        });
-}
-
-$(function() {
-    setInterval( "slideSwitch()", 5000 );
-});
-
-</script>
-
-<style type="text/css">
-
-/*** set the width and height to match your images **/
-
-#slideshow {
-    position:relative;
-    height:350px;
-}
-
-#slideshow IMG {
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:8;
-    opacity:0.0;
-}
-
-#slideshow IMG.active {
-    z-index:10;
-    opacity:1.0;
-}
-
-#slideshow IMG.last-active {
-    z-index:9;
-}
-
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+        <script src="js/slides.min.jquery.js"></script>
+        <script>
+                $(function(){
+                        $('#slides').slides({
+                                preload: true,
+                                preloadImage: 'img/loading.gif',
+                                play: 5000,
+                                pause: 2500,
+                                hoverPause: true
+                        });
+                });
+        </script>
 
 
 
@@ -202,7 +132,7 @@ $(function() {
                 <li class="anonopts">
                     <ul>
                             
-                        <li id="msil"><a href="http://timesheet.elasticbeanstalk.com/admin">Member Sign In</a></li>
+                        <li id="msil"><a href="https://signup.netflix.com/Login">Member Sign In</a></li>
                     </ul>
                 </li>
 
@@ -366,7 +296,7 @@ $(function() {
 <article id="content" class="call-to-action clearfix">
     <h1 class="xx-large">
 
-        Instantly manage your business from anywhere! <br>For only <span class="price">$220</span> a year.</br>
+        Instantly calculate pay for all employees! <br>For only <span class="price">$220</span> a year.</br>
     </h1>
     <div class=" right  clearfix">
         <section id="reg-box" class="clearfix">
@@ -380,12 +310,6 @@ $(function() {
         border: 1px solid #fff;
     }
 </style>
-
-
-
-
- 
-
 
 <form method="post" name="register_form" id="regform"   >
     <section class="header">
@@ -467,46 +391,26 @@ $(function() {
 <div class="container  clearfix ">
     <section class="listitems clearfix">
         <ul class="left">
-            <li>Manage your company on any <strong>PC</strong>, <strong>Mac</strong>, <strong>Mobile</strong>, and <strong>Tablet</strong>.</li>
-            <li>Calculate payroll with just 3 clicks online – <strong>it’s easy</strong></li>
+            <li>Watch on your <strong>PS3</strong>, <strong>Wii</strong>, <strong>Xbox</strong>, <strong>PC</strong>, <strong>Mac</strong>, <strong>Mobile</strong>, <strong>Tablet</strong> and <a id="moredeviceslink" href="#moredevicescontent">more</a>.</li>
+            <div class=" arrow-up  hide"></div>
+            <div id="moredevicescontentlayer" class="hide">
+                <ul>
+                    <li>Smart TVs (Internet-connected TVs)</li>
+<li>Blu ray players</li>
+<li>Smart phones (iPhone, Android and Windows)</li>
+<li>And many other Internet-connected devices</li>
+                </ul>
+            </div>
+            <li>Instantly watch as much as you want – <strong>it’s unlimited</strong></li>
         </ul>
         <ul class="right">
-            <li>Verify that your employees are on the <strong>job</strong> and when they got there.</li>
-            <li>See detailed <strong>graphs</strong> and <strong>charts</strong> concerning your company.</li>
+            <li>Choose from <strong>thousands</strong> of <strong>TV</strong> episodes & <strong>movies</strong></li>
+            <li>No commitments, <strong>cancel anytime</strong> with just 3 clicks online</li>
         </ul>
     </section>
 </div>
     </div>
-
-
-
-
-
-
-
-<div id="slideshow">
-    <img src="image1.png" alt="Slideshow Image 1" class="active" />
-    <img src="image2.png" alt="Slideshow Image 2" />
-    <img src="image1.png" alt="Slideshow Image 3" />
-    <img src="image2.png" alt="Slideshow Image 4" />
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <img class=" left  clearfix" src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/home/lifestyle_3square.jpg">
 </article>
 
 
