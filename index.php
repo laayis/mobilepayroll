@@ -512,8 +512,9 @@ $(function() {
 
 
     <footer>
-    
+<!--    
     <nav>
+
         <ul>
     <li class="firstli"><a href="https://signup.netflix.com">Start Your 1 Month Free Trial</a></li>
     <li><a href="https://signup.netflix.com/BrowseSelection">Browse Selection</a></li>
@@ -543,6 +544,7 @@ $(function() {
    <span class="serverid">(us-east-1 6402101d US)</span>
    [<span class="abtest-info">2514/13 - 2721/1 - </span>]
 </div>
+-->
 </footer>
     <noscript><iframe src="https://view.atdmt.com/iaction/nfxnfx_nonmemberremarketing_1" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript> 
 
