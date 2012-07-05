@@ -107,6 +107,7 @@ $(function() {
 
 <link rel="shortcut icon" href="https://netflix.hs.llnwd.net/e1/us/icons/nficon.ico">
     <link rel="canonical" href="">
+
 <link type="text/css" rel="stylesheet" href="https://signup.netflix.com/css/include?f=core;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|shared;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|header_navigation;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|setLanguagePrefMenu;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|footer;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|registration_panel;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|login_pages;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|signup_flow;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|" />
 
     
@@ -158,7 +159,7 @@ $(function() {
         margin-bottom: 5px;
     }
     #msil a {
-        background-color: #990000;
+        background-color: #9999CC;
         padding: 5px 20px;
         font-size: 15px;
         font-weight: 700;
@@ -184,7 +185,7 @@ $(function() {
     }
 
     header {
-        background-color: #B9090B;
+        background-color: #CCCC99;
         box-shadow: 0 1px 6px #000000;
     }
 
@@ -193,11 +194,11 @@ $(function() {
 <header>
     <div id="masthead" class="clearfix">
         <div class="logo">
-            <a href="https://signup.netflix.com" title="MobilePay"><img src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/common/netflix_logo_only_140w.png" alt="MobilePay" border="0"></a>
+            <a href="http://timesheet.elasticbeanstalk.com" title="MobilePay"><img width="43" src="http://timesheet.elasticbeanstalk.com/images/parksman.png" alt="MobilePay" border="0"></a>
         </div>
         <div class="hlinks">
             <ul>
-                <li class="csphone"><img src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/common/phone_white.png"><noindex><strong>Questions?</strong> Call <span class="emphasis">1-866-579-7172</span> 24 hours a day</noindex></li>
+                <li class="csphone"><img src="http://timesheet.elasticbeanstalk.com/images/phone_white.png"><noindex><strong>Questions?</strong> Call <span class="emphasis">1-888-888-8888</span> 24 hours a day</noindex></li>
 
                 <li class="anonopts">
                     <ul>
