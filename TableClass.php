@@ -273,7 +273,7 @@ function getApprovalHoursAdminForId($id, $from, $to){
 		AND DATE_FORMAT(`date`,'%m-%d-%Y')>='{$from}'
 		AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
 		AND approved='1'";
-	//echo $query;
+	//echo $query . '<br />';
 	//echo $query;
 	$result = queryDbAll($link, $query);
 
@@ -355,7 +355,7 @@ for($i=0;$i<count($punches);$i=$i+2){
 		$workingsecs = (strtotime($punches[$i+1][0])
 				- strtotime($punches[$i][0]));
 	}
-	echo $workingsecs . '----------------------------<br />';
+	//echo $workingsecs . '----------------------------<br />';
 	if($workingsecs >0){
 		$temp[] = array($workingsecs/3600, $punches[$i][1]);
 	}
@@ -599,10 +599,13 @@ if($nextday!=0){
 }
 
 function convertSecondsToTime($sec){
-	$seconds = ($sec)%60;
-	$minutes = ($sec/60)%60;
-	$hours = ($sec/60/60)%60;
-	return($hours . "H" . $minutes . "M");
+	$init = $sec;
+	$hours = floor($init / 3600);
+	$minutes = floor(($init / 60) % 60);
+	$seconds = $init % 60;
+
+	return($hours.'H'.$minutes.'M');
+	//return(gmdate("H:i:s", 685));
 }
 
 function getHours($punches){

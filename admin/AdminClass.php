@@ -172,61 +172,127 @@ function prepareEmpOutput($emp, $from, $to){
 
 	//$r for return
 	$mid = addDaysToDate(7, $from);
-	//echo $from . '-WWW'. $mid .'WWW-' . $to . '<br /><br />';
+	//echo $from . '----'. $mid .'----' . $to . '<br /><br />';
 	$r = array();
-	for($i=0; $i<count($emp); ++$i){
-	//echo '---' . $emp[$i][0];
-//echo getCurrentWeek();
-//echo "---" . $date . "<br />";
-		
+	for($i=0; $i<count($emp)-count($emp)+1; ++$i){
 		//week one and week 2 of biweek
-		$regular1=getHoursForId($emp[$i][0], $from, $mid);
+		$regular1=getHoursForId($emp[$i][0], $from, 1);
 		//print_r($regular1);
-		$regular2=getHoursForId($emp[$i][0], $mid, $to);
-		$regular = array($regular1, $regular2);
+		$regular2=getHoursForId($emp[$i][0], $mid, 1);
 
 		$approved1=getApprovalHoursAdminForId($emp[$i][0], $from, $mid);
 		$approved2=getApprovalHoursAdminForId($emp[$i][0], $mid, $to);
-		$approved = array($regular1, $regular2);
-
-		
+		//print_r($approved1);
+		//echo '<br /><br />';
+		//print_r($approved2);
 		$t_pay = 0;
 		$t_hours = 0;
-foreach($regular as $t){
-		foreach($t as $value){
-			$t_hours += $value[0];
-			if($t_hours < 40){
-				$t_pay += $value[0]*$value[1];
-			} else{
-				if($t_hours-$value[0] < 40){
-					$t_pay += ($value[0]-($t_hours%40))*$value[1];
-					$t_pay += ($t_hours%40)*$value[1]*1.5;
-				}
+
+/*
+*Calculate Hours for Week1
+*
+*
+*
+*/
+//calculate regular hours
+foreach($regular1 as $value){
+	$t_hours += $value[0];
+	if($t_hours < 40){
+		$t_pay += $value[0]*$value[1];
+	} else{
+		if($t_hours-$value[0] < 40){
+			$t_pay += ($value[0]-($t_hours%40))*$value[1];
+			$t_pay += ($t_hours%40)*$value[1]*1.5;
+		} else{
+			$t_pay += $value[0]*$value[1]*1.5;
+		}
+	}
+}
+//calculate approved non-rollover hours
+foreach($approved1 as $value){
+	//$value[2] defines the rollover
+	if($value[2] == 0){
+		$t_hours += $value[0];
+		if($t_hours < 40){
+			$t_pay += $value[0]*$value[1];
+		} else{
+			if($t_hours-$value[0] < 40){
+				$t_pay += ($value[0]-($t_hours%40))*$value[1];
+				$t_pay += ($t_hours%40)*$value[1]*1.5;
+			}else{
 				$t_pay += $value[0]*$value[1]*1.5;
 			}
 		}
-}
-		
-foreach($approved as $t){
-		foreach($t as $value){
-			$t_hours += $value[0];
-			//$value[2] defines the rollover
-			if($value[2] == 0){
-				if($t_hours < 40){
-					$t_pay += $value[0]*$value[1];
-				} else{
-					if($t_hours-$value[0] < 40){
-						$t_pay += ($value[0]-($t_hours%40))*$value[1];
-						$t_pay += ($t_hours%40)*$value[1]*1.5;
-					}
-					$t_pay += $value[0]*$value[1]*1.5;
-				}
-			} else{
-				$t_pay += $value[0]*$value[1];
-			}
-		}
+	}
 }
 
+//calculate approved rollover hours
+foreach($approved1 as $value){
+	//$value[2] defines the rollover
+	if($value[2] == 1){
+		$t_hours += $value[0];
+		$t_pay += $value[0]*$value[1];
+	}
+}
+/*
+*Calculate Hours for Week2
+*
+*
+*
+*/
+$week1pay = $t_pay;
+$week1hours = $t_hours;
+//echo '<br />'.'---' . $week1hours;
+
+$t_pay = 0;
+$t_hours = 0;
+
+//calculate regular hours
+foreach($regular2 as $value){
+	$t_hours += $value[0];
+	if($t_hours < 40){
+		$t_pay += $value[0]*$value[1];
+	} else{
+		if($t_hours-$value[0] < 40){
+			$t_pay += ($value[0]-($t_hours%40))*$value[1];
+			$t_pay += ($t_hours%40)*$value[1]*1.5;
+		}else{
+			$t_pay += $value[0]*$value[1]*1.5;
+		}
+	}
+}
+
+//calculate approved non-rollover hours
+foreach($approved2 as $value){
+	//$value[2] defines the rollover
+	if($value[2] == 0){
+		$t_hours += $value[0];
+		if($t_hours < 40){
+			$t_pay += $value[0]*$value[1];
+		} else{
+			if($t_hours-$value[0] < 40){
+				$t_pay += ($value[0]-($t_hours%40))*$value[1];
+				$t_pay += ($t_hours%40)*$value[1]*1.5;
+			} else{
+				$t_pay += $value[0]*$value[1]*1.5;
+			}
+		}
+	}
+}
+
+//calculate approved rollover hours
+foreach($approved2 as $value){
+	//$value[2] defines the rollover
+	if($value[2] == 1){
+		$t_hours += $value[0];
+		$t_pay += $value[0]*$value[1];
+	}
+}
+
+		$t_pay += $week1pay;
+		$t_hours += $week1hours;
+//echo '<br />'.'---' . $t_hours;
+		
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
 				$emp[$i][3],
