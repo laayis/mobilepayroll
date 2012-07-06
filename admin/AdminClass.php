@@ -291,7 +291,7 @@ foreach($approved2 as $value){
 
 		$t_pay += $week1pay;
 		$t_hours += $week1hours;
-//echo '<br />'.'---' . $t_hours;
+echo '<br />'.'---' . $t_hours;
 		
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
