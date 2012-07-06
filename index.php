@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en-US" >
 <head>
-    <title>MobilePay - Watch TV Shows Online, Watch Movies Online</title>
+    <title>MobilePay - Payroll, Point of Sale, Employee Clock In, and More</title>
     
 
 
@@ -11,9 +11,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
     
-    <meta name="description" content="Watch Movies & TV Shows Online or Streaming right to your TV via Xbox, Wii, PS3 & many other devices. Only $7.99/mo.  Start Your Free Trial Today.">
-    <meta name="keywords" content="watch movies, movies online, watch TV, TV online, TV shows online, watch TV shows, stream movies, stream tv, instant streaming, watch online, movies, watch movies canada, watch TV online canada, no download, full length movies">
-    <meta name="title" content="MobilePay - Watch TV Shows Online, Watch Movies Online">
+    <meta name="description" content="An online point of sale system that relies on any android device to clock users in, locate where someone is clocking in from, payroll, and many other goodies.">
+    <meta name="keywords" content="payroll, point of sale, clock in, tracking">
+    <meta name="title" content="MobilePay - Payroll, Point of Sale, Employee Clock In, and More">
     
     
     <meta name="ROBOTS" content="NOODP">
