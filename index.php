@@ -390,7 +390,7 @@ $(function() {
 
 <form method="post" name="register_form" id="regform"   >
     <section class="header">
-        <h2> Try MobilePay Free for 1 Month</h2>
+        <h2> MobilePay Free Forever</h2>
     </section>
     <fieldset>
         <dl>
@@ -410,11 +410,11 @@ $(function() {
             <dd class=""><input type="password" name="confirmPassword" id="confirmPassword" autocomplete="off" value="" /></dd>
         </dl>
 
-        <button type="submit" data-wait="Please wait ..." id="regFormButton">Start Your Free Month</button>
+        <button type="submit" data-wait="Please wait ..." id="regFormButton">Start Today</button>
     </fieldset>
 
     <div class="privacy">
-        <img src="https://netflix.hs.llnwd.net/e1/us/layout/ecweb/common/padlock_grey.png" border="0" align=bottom><span class="emphasis">Secure Server</span>. We will not sell or rent your email address. We may contact you about the MobilePay service. See our <a href="https://signup.netflix.com/PrivacyPolicy" target="_blank">Privacy Policy</a>. <span class="poplink" ltkattr="/HowItWorks"><a class="popuplayer" data-width="450" data-pop="true" href="https://signup.netflix.com/PopupDetails" target="_blank">Free trial offer details</a></span>
+        <img src="http://timesheet.elasticbeanstalk.com/images/padlock_grey.png" border="0" align=bottom><span class="emphasis">Secure Server</span>. We will not sell or rent your email address. We may contact you about the MobilePay service. See our <a href="timesheet.elasticbeanstalk.com" target="_blank">Privacy Policy</a>. <span class="poplink" ltkattr="/HowItWorks"><a class="popuplayer" data-width="450" data-pop="true" href="timesheet.elasticbeanstalk.com" target="_blank">Software is under the GPL</a></span>
     </div>
 
     <input type="hidden" name="authURL" value="1341467514590.KbIE8ScrSfmLu7fdhG27v892L6k=">
