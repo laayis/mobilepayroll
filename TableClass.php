@@ -265,24 +265,24 @@ for($j=0; $j<($max); $j=$j+2){
 	echo '</table>';
 
 }
-
-function getApprovalSecondsForId($id, $from, $to){
+function getApprovalHoursAdminForId($id, $from, $to){
 	$link = initDb();
 	selectDb($link);
-/*
-	$temp = split('-',$date);
-	$month = $temp[0];
-	$day = $temp[1];
-	$year = $temp[2];
-	$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
-	$milli_day = 60*60*24;
-	
-	$range = $milli_day*$weeks*7;
+	$query = "SELECT hours, wage, rollover FROM approvals
+		WHERE user_id='{$id}'
+		AND DATE_FORMAT(`date`,'%m-%d-%Y')>='{$from}'
+		AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
+		AND approved='1'";
+	//echo $query;
+	//echo $query;
+	$result = queryDbAll($link, $query);
 
-	$tomo = strtotime("today", $from_unix_time+$range);
-	$range = date('Y-m-d', $tomo);
-	//echo 'RANGE' . $range . 'AWWD<br />';
-*/
+	return $result;
+}
+
+function getApprovalHoursForId($id, $from, $to){
+	$link = initDb();
+	selectDb($link);
 	$query = "SELECT hours, wage, rollover FROM approvals
 		WHERE user_id='{$id}'
 		AND DATE_FORMAT(`date`,'%m-%d-%Y')>='{$from}'
@@ -303,10 +303,10 @@ function getApprovalSecondsForId($id, $from, $to){
 		//if rollover, then hours are for this billing cycle
 		if($result[$i][2] == 0){
 			$curr_pay += $result[$i][0]*$result[$i][1];
-			$curr_sec += $result[$i][0]*60*60;
+			$curr_sec += $result[$i][0];
 		} else{
 			$prev_pay += $result[$i][0]*$result[$i][1];
-			$prev_sec += $result[$i][0]*60*60;
+			$prev_sec += $result[$i][0];
 		}
 	}
 	$result = array('current'=> array($curr_sec, $curr_pay),
@@ -316,7 +316,7 @@ function getApprovalSecondsForId($id, $from, $to){
 
 }
 
-function getSecondsForId($id, $date, $weeks=1){
+function getHoursForId($id, $date, $weeks=1){
 	$temp = split('-',$date);
 	$month = $temp[0];
 	$day = $temp[1];
@@ -328,6 +328,7 @@ function getSecondsForId($id, $date, $weeks=1){
 	$formatted = date('D M d', $tomo);
 
 	$temp = array();
+	$punches = array();
 	//echo $date;
 
 	//get the amount of punches for employee
@@ -336,14 +337,35 @@ function getSecondsForId($id, $date, $weeks=1){
 		$tomo = strtotime("today", $from_unix_time);
 		$formatted = date('Y-m-d', $tomo);
 		//print_r(getPunchesForDay($formatted, $id));
-		$temp[] = getPunchesForDay($formatted, $id);
+		$t = getHoursWageForDay($formatted, $id);
+		if(count($t)){
+			$punches=$t;
+		}
 		$from_unix_time += $milli_day;
 	}
 
-	//print_r($temp);
+	//print_r($punches);
+for($i=0;$i<count($punches);$i=$i+2){
+	if(strtotime($punches[$i+1][0]) < strtotime($punches[$i][0])){
+		//how many seconds in 24 hours? 86 400
+		$aa = 86400;
+		$workingsecs = $aa-getSecondsFromHH($punches[$i][0]);
+		$workingsecs += getSecondsFromHH($punches[$i+1][0]);
+	} else{
+		$workingsecs = (strtotime($punches[$i+1][0])
+				- strtotime($punches[$i][0]));
+	}
+	echo $workingsecs . '----------------------------<br />';
+	if($workingsecs >0){
+		$temp[] = array($workingsecs/3600, $punches[$i][1]);
+	}
+	//echo '<br />' . $temp;
+
+}
 	//echo '</br></br>';
-	$seconds = getSeconds($temp);
-	$totalhours=0;
+//	$seconds = getHoursWage($temp);
+//	$totalhours=0;
+/*
 	for($i=0;$i<count($seconds); ++$i){
 		$totalhours += $seconds[$i];
 	}
@@ -351,10 +373,13 @@ function getSecondsForId($id, $date, $weeks=1){
 	
 	//return $totalhours;
 	return array($totalhours, $wage);
+*/
+
+	return $temp;
 }
 
 
-function getHoursForId($id, $date, $weeks=1){
+function getTimeForId($id, $date, $weeks=1){
 	$temp = split('-',$date);
 	$month = $temp[0];
 	$day = $temp[1];
@@ -416,6 +441,70 @@ function getID(){
 		return $_COOKIE['id'];
 	}
 
+}
+
+function getHoursWageForDay($date, $id='0'){
+	/*
+	$tt = 0;
+	if($id=='0'){
+		$tt=$_COOKIE['id'];
+	} else{
+		$tt=$id;
+	}
+	*/
+	$tt=$id;
+	//echo $tt;
+	//in current day make sure look_ahead=0.
+	//look_ahead determines if the user checked in or out.
+	//0,1 corresponds to in,out respectively
+	//$look = isLookAheadZero($date);
+	$look = getLookAhead($date, $id);
+	//echo '<br />----' . $look;
+	$query = "SELECT TIME(date) AS date, wage FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
+	. $date .
+	"' AND DATE_ADD('"
+	. $date .
+	"', INTERVAL 1 DAY) ORDER BY date ASC";
+	
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	$punches = array();
+	//get company_id to filter clock
+	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
+		$punches[] = array($row['date'], $row['wage']);
+	}
+	//echo '<br/><br/>';
+	//print_r($punches);
+	//$temp=getPunchOut($date);
+	//make punch card even
+	//4 combinations of look and max
+	
+	$nextday = getFirstPunchForNextDay($date, $id);
+	
+	//echo '<br/><br/>';
+	//echo '---' . print_r($nextday) . '---<br /> <br />';
+	if(isset($nextday['look']) == 1){
+		if($look==0 && $nextday['look']==1){
+			//add last punchout
+			$punches[] = array($nextday['date'], 0);
+		}
+	
+		if($look==1 && $nextday['look']==1){
+			$punches[] = array($nextday['date'], 0);
+			array_shift($punches);
+		}
+	}
+	if($look==1){
+		//add last punchout
+		array_shift($punches);
+	}
+	if(count($punches) %2 == 1){
+		array_pop($punches);
+	}
+	
+	return($punches);
 }
 
 function getPunchesForDay($date, $id='0'){
@@ -531,7 +620,7 @@ function getSecondsFromHH($time){
 }
 
 function getSeconds($punches){
-
+//print_r($punches);
 	$seconds=array();
 for($j=0;$j<count($punches); ++$j){
 	//echo "<br /> -------------" . count($punches[$j]);
@@ -563,6 +652,10 @@ for($j=0;$j<count($punches); ++$j){
 
 	return $seconds;
 }
+
+function getHoursWage($temp){
+}
+
 
 function countPeopleAtLocation(){
 	$query = "SELECT contact_info.company_id FROM contact_info WHERE contact_info.id='" . $user_id . "'";
@@ -621,19 +714,19 @@ if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtot
 }*/
 
 
-	echo getHoursForId($id, $from, 2);
+	echo getTimeForId($id, $from, 1);
 
 echo '</strong><br />
 <span="normal">Approved Hours:<strong>
 ';
-	$temp = getApprovalSecondsForId($id, $from, $to);
-	echo convertSecondsToTime($temp['current'][0]);
+	$temp = getApprovalHoursForId($id, $from, $to);
+	echo convertSecondsToTime($temp['current'][0]*60*60);
 
 echo '</strong>';
 
 echo '<br />Roll-over Hours (Approved Hours): <strong>
 ';
-	echo convertSecondsToTime($temp['previous'][0]);
+	echo convertSecondsToTime($temp['previous'][0]*60*60);
 
 echo '</strong></span>';
 

@@ -147,7 +147,7 @@ $monday = getFrom();
 
 //echo $monday;
 $monday = addDaysToDate(7, $monday);
-$date = $monday;
+$date = addDaysToDate(7, $monday);
 printRowIn($link, $date, 0, $id);
 
 /*

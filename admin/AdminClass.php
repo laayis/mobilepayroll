@@ -180,131 +180,58 @@ function prepareEmpOutput($emp, $from, $to){
 //echo "---" . $date . "<br />";
 		
 		//week one and week 2 of biweek
-		$regular1=getSecondsForId($emp[$i][0], $from, $mid);
-		$regular2=getSecondsForId($emp[$i][0], $mid, $to);
-		$approved1=getApprovalSecondsForId($emp[$i][0], $from, $mid);
-		$approved2=getApprovalSecondsForId($emp[$i][0], $mid, $to);
+		$regular1=getHoursForId($emp[$i][0], $from, $mid);
+		//print_r($regular1);
+		$regular2=getHoursForId($emp[$i][0], $mid, $to);
+		$regular = array($regular1, $regular2);
 
-		$regular1[0]=$regular1[0]/60/60;
-		$approved1['current'][0]=$approved1['current'][0]/60/60;
-		$approved1['previous'][0]=$approved1['previous'][0]/60/60;
-		$regular2[0]=$regular2[0]/60/60;
-		$approved2['current'][0]=$approved2['current'][0]/60/60;
-		$approved2['previous'][0]=$approved2['previous'][0]/60/60;
-		//print_r($approved1);
-		//echo '<br /><br />';
-		//print_r($approved2);
-		//echo '<br />---------';
-		//if($regular[0] >)
+		$approved1=getApprovalHoursAdminForId($emp[$i][0], $from, $mid);
+		$approved2=getApprovalHoursAdminForId($emp[$i][0], $mid, $to);
+		$approved = array($regular1, $regular2);
+
 		
-		$total_pay = 0;
-		$total_time = 0;
-		//$approved1['previous'][1];
-		//$total_pay += $approved2['previous'][1];
-
-		//$total_pay += $approved1['previous'][1]+$approved2['previous'][1];
-
-		//FIX ME approved regular hours needs to have overtime pay. add this functionality asap
-		//calculate pay for regular hours
-	$week1 = ($regular1[0]+$approved1['current'][0]);
-	//echo $week1;
+		$t_pay = 0;
+		$t_hours = 0;
+foreach($regular as $t){
+		foreach($t as $value){
+			$t_hours += $value[0];
+			if($t_hours < 40){
+				$t_pay += $value[0]*$value[1];
+			} else{
+				if($t_hours-$value[0] < 40){
+					$t_pay += ($value[0]-($t_hours%40))*$value[1];
+					$t_pay += ($t_hours%40)*$value[1]*1.5;
+				}
+				$t_pay += $value[0]*$value[1]*1.5;
+			}
+		}
+}
 		
-	if($week1 > 40){
-		if($regular1[0] > 40){
-			$total_pay += ($regular1[0]-40)*$regular1[1]*1.5;
-			$total_pay += 40*$regular1[1];
-/*
-			if($approved1['current'][0]>(40-$regular1[0])){
-				$total_pay += $approved1['current'][0]/(60/60)*40;
-				$total_pay += $approved1['current'][0]/(60/60)*40*1.5;
+foreach($approved as $t){
+		foreach($t as $value){
+			$t_hours += $value[0];
+			//$value[2] defines the rollover
+			if($value[2] == 0){
+				if($t_hours < 40){
+					$t_pay += $value[0]*$value[1];
+				} else{
+					if($t_hours-$value[0] < 40){
+						$t_pay += ($value[0]-($t_hours%40))*$value[1];
+						$t_pay += ($t_hours%40)*$value[1]*1.5;
+					}
+					$t_pay += $value[0]*$value[1]*1.5;
+				}
+			} else{
+				$t_pay += $value[0]*$value[1];
 			}
-*/
-
-		} else if($regular1[0]<=40){
-			if($approved1['current'][0]>(40-$regular1[0])){
-				//$total_pay += $regular1[0]*$regular1[1];
-				$total_pay += ((40-$regular1[0])/$approved1['current'][0])*$approved1['current'][1];
-				$total_pay += (($approved1['current'][0]-(40-$regular1[0]))/$approved1['current'][0])*$approved1['current'][1]*1.5;
-			}
-
-			$total_pay += ($regular1[0])*$regular1[1];
-				
 		}
-	} else{
-				$total_pay += ($regular1[0])*$regular1[1]+$approved1['current'][1]
-						+$approved1['previous'][1];
-	}
-	$week2 = ($regular2[0]+$approved2['current'][0]);
-	//echo ' --- ' . $week2;
-	//echo '<br/>';
-
-
-	if($week2 > 40){
-		if($regular2[0] > 40){
-			$total_pay += ($regular2[0]-40)*$regular2[1]*1.5;
-			$total_pay += 40*$regular2[1];
-/*
-			if($approved1['current'][0]>(40-$regular1[0])){
-				$total_pay += $approved1['current'][0]/(60/60)*40;
-				$total_pay += $approved1['current'][0]/(60/60)*40*1.5;
-			}
-*/
-
-		} else if($regular2[0]<=40){
-			if($approved2['current'][0]>(40-$regular2[0])){
-				//$total_pay += $regular1[0]*$regular1[1];
-				$total_pay += ((40-$regular2[0])/$approved2['current'][0])*$approved2['current'][1];
-				$total_pay += (($approved2['current'][0]-(40-$regular2[0]))/$approved2['current'][0])*$approved2['current'][1]*1.5;
-			}
-
-			$total_pay += ($regular2[0])*$regular2[1];
-				
-		}
-	} else{
-				$total_pay += ($regular2[0])*$regular2[1]+$approved2['current'][1]
-						+$approved2['previous'][1];
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//COMPLETE
-	//total time spent working in 2 week period
-	$total_time += ($regular1[0]+$approved1['current'][0]+$approved1['previous'][0])*60*60;
-	$total_time += ($regular2[0]+$approved2['current'][0]+$approved2['previous'][0])*60*60;
-
-
-
-
-
-
-
-
-
-
+}
 
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
 				$emp[$i][3],
-			convertSecondsToTime($total_time),
-//		getHoursForId($emp[$i][0], getCurrentWeek(), 2),
-			"$" . number_format(round($total_pay, 2), 2)
-//	calculatePay(getHoursForId($emp[$i][0],getCurrentWeek(), 2), $emp[$i][3])
+			convertSecondsToTime($t_hours*60*60),
+			"$" . number_format(round($t_pay, 2), 2)
 			);
 	}
 //	print_r($r);
