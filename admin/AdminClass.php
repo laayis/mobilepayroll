@@ -174,7 +174,8 @@ function prepareEmpOutput($emp, $from, $to){
 	$mid = addDaysToDate(7, $from);
 	//echo $from . '----'. $mid .'----' . $to . '<br /><br />';
 	$r = array();
-	for($i=0; $i<count($emp)-count($emp)+1; ++$i){
+	//for($i=0; $i<count($emp)-count($emp)+1; ++$i){
+	for($i=0; $i<count($emp); ++$i){
 		//week one and week 2 of biweek
 		$regular1=getHoursWage(getHoursForId($emp[$i][0], $from, 1));
 		//print_r($regular1);
