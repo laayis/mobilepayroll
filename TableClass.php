@@ -338,13 +338,18 @@ function getHoursForId($id, $date, $weeks=1){
 		$formatted = date('Y-m-d', $tomo);
 		//print_r(getPunchesForDay($formatted, $id));
 		$t = getHoursWageForDay($formatted, $id);
+	
 		if(count($t)){
 			$punches=$t;
 		}
 		$from_unix_time += $milli_day;
 	}
 
-	//print_r($punches);
+
+
+	echo '<br /><br />'.count($punches).'---<br />';
+	print_r($punches);
+	echo '<br /><br />';
 for($i=0;$i<count($punches);$i=$i+2){
 	if(strtotime($punches[$i+1][0]) < strtotime($punches[$i][0])){
 		//how many seconds in 24 hours? 86 400
@@ -355,8 +360,9 @@ for($i=0;$i<count($punches);$i=$i+2){
 		$workingsecs = (strtotime($punches[$i+1][0])
 				- strtotime($punches[$i][0]));
 	}
-	//echo $workingsecs . '----------------------------<br />';
+	echo $workingsecs . '----------------------------<br />';
 	if($workingsecs >0){
+		echo $workingsecs . '-------->0------------------<br />';
 		$temp[] = array($workingsecs/3600, $punches[$i][1]);
 	}
 	//echo '<br />' . $temp;
@@ -374,7 +380,7 @@ for($i=0;$i<count($punches);$i=$i+2){
 	//return $totalhours;
 	return array($totalhours, $wage);
 */
-
+	
 	return $temp;
 }
 
@@ -460,12 +466,12 @@ function getHoursWageForDay($date, $id='0'){
 	//$look = isLookAheadZero($date);
 	$look = getLookAhead($date, $id);
 	//echo '<br />----' . $look;
-	$query = "SELECT TIME(date) AS date, wage FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
+	$query = "SELECT date, wage FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
 	. $date .
 	"' AND DATE_ADD('"
 	. $date .
 	"', INTERVAL 1 DAY) ORDER BY date ASC";
-	
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -473,7 +479,9 @@ function getHoursWageForDay($date, $id='0'){
 	$punches = array();
 	//get company_id to filter clock
 	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
-		$punches[] = array($row['date'], $row['wage']);
+		$ll = explode(' ', $row['date']);
+		//echo '----------<br />' . $ll[1];
+		$punches[] = array($ll[1], $row['wage']);
 	}
 	//echo '<br/><br/>';
 	//print_r($punches);
@@ -484,7 +492,7 @@ function getHoursWageForDay($date, $id='0'){
 	$nextday = getFirstPunchForNextDay($date, $id);
 	
 	//echo '<br/><br/>';
-	//echo '---' . print_r($nextday) . '---<br /> <br />';
+	echo 'WWW' . print_r($nextday) . '---<br /> <br />';
 	if(isset($nextday['look']) == 1){
 		if($look==0 && $nextday['look']==1){
 			//add last punchout
@@ -493,7 +501,7 @@ function getHoursWageForDay($date, $id='0'){
 	
 		if($look==1 && $nextday['look']==1){
 			$punches[] = array($nextday['date'], 0);
-			array_shift($punches);
+			//array_shift($punches);
 		}
 	}
 	if($look==1){
@@ -503,7 +511,8 @@ function getHoursWageForDay($date, $id='0'){
 	if(count($punches) %2 == 1){
 		array_pop($punches);
 	}
-	
+	//print_r($punches);
+
 	return($punches);
 }
 
@@ -524,12 +533,12 @@ function getPunchesForDay($date, $id='0'){
 	//$look = isLookAheadZero($date);
 	$look = getLookAhead($date, $id);
 	//echo '<br />----' . $look;
-	$query = "SELECT TIME(date) AS date FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
+	$query = "SELECT date FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
 	. $date .
 	"' AND DATE_ADD('"
 	. $date .
 	"', INTERVAL 1 DAY) ORDER BY date ASC";
-	
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -537,13 +546,9 @@ function getPunchesForDay($date, $id='0'){
 	$punches = array();
 	//get company_id to filter clock
 	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
-		$punches[] = $row['date'];
+		$ll = explode(' ', $row['date']);
+		$punches[] = $ll[1];
 	}
-	//echo '<br/><br/>';
-	//print_r($punches);
-	//$temp=getPunchOut($date);
-	//make punch card even
-	//4 combinations of look and max
 	
 	$nextday = getFirstPunchForNextDay($date, $id);
 	
@@ -557,7 +562,7 @@ function getPunchesForDay($date, $id='0'){
 	
 		if($look==1 && $nextday['look']==1){
 			$punches[] = $nextday['date'];
-			array_shift($punches);
+			//array_shift($punches);
 		}
 	}
 	if($look==1){
