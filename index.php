@@ -367,7 +367,9 @@ $(function() {
 <article id="content" class="call-to-action clearfix">
     <h1 class="xx-large">
 
-        Instantly manage your business from anywhere! <br>For only <span class="price">$220</span> a year.</br>
+        Instantly manage your business from anywhere!
+
+<!--<br>For only <span class="price">$220</span> a year.</br>-->
     </h1>
     <div class=" right  clearfix">
         <section id="reg-box" class="clearfix">
@@ -390,7 +392,7 @@ $(function() {
 
 <form method="post" name="register_form" id="regform"   >
     <section class="header">
-        <h2> MobilePay Free Forever</h2>
+        <h2> MobilePay</h2>
     </section>
     <fieldset>
         <dl>
@@ -628,5 +630,3 @@ $(function(){
 
 </body>
 </html>
-
-
