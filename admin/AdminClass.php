@@ -176,10 +176,12 @@ function prepareEmpOutput($emp, $from, $to){
 	$r = array();
 	for($i=0; $i<count($emp)-count($emp)+1; ++$i){
 		//week one and week 2 of biweek
-		$regular1=getHoursForId($emp[$i][0], $from, 1);
+		$regular1=getHoursWage(getHoursForId($emp[$i][0], $from, 1));
 		//print_r($regular1);
-		$regular2=getHoursForId($emp[$i][0], $mid, 1);
-
+		$regular2=getHoursWage(getHoursForId($emp[$i][0], $mid, 1));
+		
+		//hoursHeader($emp[$i][0], $from, $mid);
+		//hoursHeader($emp[$i][0], $mid, $to);
 		$approved1=getApprovalHoursAdminForId($emp[$i][0], $from, $mid);
 		$approved2=getApprovalHoursAdminForId($emp[$i][0], $mid, $to);
 		//print_r($approved1);
@@ -289,11 +291,11 @@ foreach($approved2 as $value){
 	}
 }
 
-echo '<br />'.'---' . $week1hours;
-echo '<br />'.'---' . $t_hours;
+//echo '<br />'.'---' . $week1hours;
+//echo '<br />'.'---' . $t_hours;
 		$t_pay += $week1pay;
 		$t_hours += $week1hours;
-echo '<br />'.'---Total-' . $t_hours;
+//echo '<br />'.'---Total-' . $t_hours;
 		
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 

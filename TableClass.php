@@ -315,6 +315,57 @@ function getApprovalHoursForId($id, $from, $to){
 	return $result;
 
 }
+function getHoursWageForDay($date, $id='0'){
+	$tt=$id;
+	$look = getLookAhead($date, $id);
+	$query = "SELECT date, wage FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
+	. $date .
+	"' AND DATE_ADD('"
+	. $date .
+	"', INTERVAL 1 DAY) ORDER BY date ASC";
+	//echo $query;
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	$punches = array();
+	//get company_id to filter clock
+	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
+		$ll = explode(' ', $row['date']);
+		if(isset($row)){
+			$punches[] = array($ll[1], $row['wage']);
+		}
+	}
+	
+	$nextday = getFirstPunchForNextDay($date, $id);
+	
+	//echo '<br/><br/>';
+	if(isset($nextday['look']) == 1){
+		if($look==0 && $nextday['look']==1){
+			$punches[] = array($nextday['date'], 0);
+		}
+	
+		if($look==1 && $nextday['look']==1){
+			$punches[] = array($nextday['date'], 0);
+		}
+	}
+	if($look==1){
+		array_shift($punches);
+	}
+	if(count($punches) %2 == 1){
+		array_pop($punches);
+	}
+/*
+	echo '<br />---getFirstPunchForNextDay';
+	echo print_r($nextday);
+	echo '---<br />';
+	echo '---getLookahead' . print_r($look) . '---<br /> <br />';
+	echo '<br/>CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC';
+	print_r($punches);
+	echo '**********************************<br />';
+*/
+	return($punches);
+}
 
 function getHoursForId($id, $date, $weeks=1){
 	$temp = split('-',$date);
@@ -327,7 +378,7 @@ function getHoursForId($id, $date, $weeks=1){
 	$tomo = strtotime("today", $from_unix_time);
 	$formatted = date('D M d', $tomo);
 
-	$temp = array();
+	$temp=0;
 	$punches = array();
 	//echo $date;
 
@@ -340,86 +391,14 @@ function getHoursForId($id, $date, $weeks=1){
 		$t = getHoursWageForDay($formatted, $id);
 	
 		if(count($t)){
-			$punches=$t;
+			$punches[]=$t;
 		}
+		//echo '================================================================<br /><br />';
 		$from_unix_time += $milli_day;
 	}
 
-
-
-	echo '<br /><br />'.count($punches).'---<br />';
-	print_r($punches);
-	echo '<br /><br />';
-for($i=0;$i<count($punches);$i=$i+2){
-	if(strtotime($punches[$i+1][0]) < strtotime($punches[$i][0])){
-		//how many seconds in 24 hours? 86 400
-		$aa = 86400;
-		$workingsecs = $aa-getSecondsFromHH($punches[$i][0]);
-		$workingsecs += getSecondsFromHH($punches[$i+1][0]);
-	} else{
-		$workingsecs = (strtotime($punches[$i+1][0])
-				- strtotime($punches[$i][0]));
-	}
-	echo $workingsecs . '----------------------------<br />';
-	if($workingsecs >0){
-		echo $workingsecs . '-------->0------------------<br />';
-		$temp[] = array($workingsecs/3600, $punches[$i][1]);
-	}
-	//echo '<br />' . $temp;
-
-}
-	//echo '</br></br>';
-//	$seconds = getHoursWage($temp);
-//	$totalhours=0;
-/*
-	for($i=0;$i<count($seconds); ++$i){
-		$totalhours += $seconds[$i];
-	}
-	//echo convertSecondsToTime($totalhours);
-	
-	//return $totalhours;
-	return array($totalhours, $wage);
-*/
-	
-	return $temp;
-}
-
-
-function getTimeForId($id, $date, $weeks=1){
-	$temp = split('-',$date);
-	$month = $temp[0];
-	$day = $temp[1];
-	$year = $temp[2];
-	$from_unix_time = mktime(0, 0, 0, $month, $day, $year);
-	$milli_day = 60*60*24;
-
-	$tomo = strtotime("today", $from_unix_time);
-	$formatted = date('D M d', $tomo);
-
-	$temp = array();
-	//echo $date;
-
-	//get the amount of punches for employee
-	for($i=0;$i<7*$weeks;++$i){
-			
-		$tomo = strtotime("today", $from_unix_time);
-		$formatted = date('Y-m-d', $tomo);
-		//print_r(getPunchesForDay($formatted, $id));
-		$temp[] = getPunchesForDay($formatted, $id);
-		$from_unix_time += $milli_day;
-	}
-
-	//print_r($temp);
-	//echo '</br></br>';
-	$seconds = getSeconds($temp);
-	$totalhours=0;
-	for($i=0;$i<count($seconds); ++$i){
-		$totalhours += $seconds[$i];
-	}
-	//echo convertSecondsToTime($totalhours);
-	
-	//return $totalhours;
-	return convertSecondsToTime($totalhours);
+	//$temp = getSeconds2($punches);
+	return $punches;
 }
 
 function calculatePay($time, $wage){
@@ -449,82 +428,7 @@ function getID(){
 
 }
 
-function getHoursWageForDay($date, $id='0'){
-	/*
-	$tt = 0;
-	if($id=='0'){
-		$tt=$_COOKIE['id'];
-	} else{
-		$tt=$id;
-	}
-	*/
-	$tt=$id;
-	//echo $tt;
-	//in current day make sure look_ahead=0.
-	//look_ahead determines if the user checked in or out.
-	//0,1 corresponds to in,out respectively
-	//$look = isLookAheadZero($date);
-	$look = getLookAhead($date, $id);
-	//echo '<br />----' . $look;
-	$query = "SELECT date, wage FROM clock WHERE id='" . $tt . "' AND date BETWEEN '"
-	. $date .
-	"' AND DATE_ADD('"
-	. $date .
-	"', INTERVAL 1 DAY) ORDER BY date ASC";
-	//echo $query;
-	$result = mysql_query($query);
-	if (!$result) {
-	    die('Invalid query: ' . mysql_error());
-	}
-	$punches = array();
-	//get company_id to filter clock
-	while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
-		$ll = explode(' ', $row['date']);
-		//echo '----------<br />' . $ll[1];
-		$punches[] = array($ll[1], $row['wage']);
-	}
-	//echo '<br/><br/>';
-	//print_r($punches);
-	//$temp=getPunchOut($date);
-	//make punch card even
-	//4 combinations of look and max
-	
-	$nextday = getFirstPunchForNextDay($date, $id);
-	
-	//echo '<br/><br/>';
-	echo 'WWW' . print_r($nextday) . '---<br /> <br />';
-	if(isset($nextday['look']) == 1){
-		if($look==0 && $nextday['look']==1){
-			//add last punchout
-			$punches[] = array($nextday['date'], 0);
-		}
-	
-		if($look==1 && $nextday['look']==1){
-			$punches[] = array($nextday['date'], 0);
-			//array_shift($punches);
-		}
-	}
-	if($look==1){
-		//add last punchout
-		array_shift($punches);
-	}
-	if(count($punches) %2 == 1){
-		array_pop($punches);
-	}
-	//print_r($punches);
-
-	return($punches);
-}
-
 function getPunchesForDay($date, $id='0'){
-	/*
-	$tt = 0;
-	if($id=='0'){
-		$tt=$_COOKIE['id'];
-	} else{
-		$tt=$id;
-	}
-	*/
 	$tt=$id;
 	//echo $tt;
 	//in current day make sure look_ahead=0.
@@ -573,36 +477,9 @@ function getPunchesForDay($date, $id='0'){
 		array_pop($punches);
 	}
 	//if even do nothing, if odd then pop to make it even
-	//*
 	
-
-/*
-if($nextday!=0){	
-	if(
-	$look==1 && $nextday['look']==0
-	){
-		array_shift($punches);
-	} else if(
-	$look==1 && $nextday['look']==1
-	){
-		//$punches[] = $nextday['date'];
-		array_shift($punches);
-		$punches[] = $nextday['date'];
-	}
-}
-*/
-/*
-	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
-	. $_COOKIE['id'] .
-	"' AND date BETWEEN '"
-	. $date .
-	"' AND DATE_ADD('"
-	. $date .
-	"', INTERVAL 1 DAY) ORDER BY date ASC LIMIT 1";
-*/
 	return($punches);
 }
-
 function convertSecondsToTime($sec){
 	$init = $sec;
 	$hours = floor($init / 3600);
@@ -625,6 +502,29 @@ function getSecondsFromHH($time){
 	$secs = (substr($time, 0, 2) * 3600) + (substr($time, 3, 2) * 60);
 
 	return $secs;
+}
+
+function getSeconds2($punches){
+	$temp = array();
+	for($i=0;$i<count($punches);$i=$i+2){
+		if(strtotime($punches[$i+1][0]) < strtotime($punches[$i][0])){
+			//how many seconds in 24 hours? 86 400
+			$aa = 86400;
+			$workingsecs = $aa-getSecondsFromHH($punches[$i][0]);
+			$workingsecs += getSecondsFromHH($punches[$i+1][0]);
+		} else{
+			$workingsecs = (strtotime($punches[$i+1][0])
+					- strtotime($punches[$i][0]));
+		}
+		//echo $workingsecs . '----------------------------<br />';
+		if($workingsecs >0){
+		//	echo $workingsecs . '-------->0------------------<br />';
+			$temp[] = array($workingsecs/3600, $punches[$i][1]);
+		}
+		//echo '<br />' . $temp;
+
+	}
+
 }
 
 function getSeconds($punches){
@@ -661,9 +561,6 @@ for($j=0;$j<count($punches); ++$j){
 	return $seconds;
 }
 
-function getHoursWage($temp){
-}
-
 
 function countPeopleAtLocation(){
 	$query = "SELECT contact_info.company_id FROM contact_info WHERE contact_info.id='" . $user_id . "'";
@@ -691,6 +588,37 @@ function addDaysToDate($days, $date){
 	return $formatted;
 
 }
+function getHoursWage($temp){
+	$result = array();
+foreach($temp as $punches){
+	for($i=0; $i<count($punches); $i += 2){
+		if(strtotime($punches[$i+1][0]) < strtotime($punches[$i][0])){
+			//how many seconds in 24 hours? 86 400
+			$aa = 86400;
+			$workingsecs = $aa-getSecondsFromHH($punches[$i][0]);
+			$workingsecs += getSecondsFromHH($punches[$i+1][0]);
+		} else{
+			$workingsecs = (strtotime($punches[$i+1][0])
+					- strtotime($punches[$i][0]));
+		}
+		//echo $workingsecs . '----------------------------<br />';
+		if($workingsecs >0){
+		//	echo $workingsecs . '-------->0------------------<br />';
+			$result[] = array($workingsecs/3600, $punches[$i][1]);
+		}
+		//echo '<br />' . $temp;
+	}
+}
+	return $result;
+}
+function getTotalHours($hourswage){
+	$t_hours=0;
+	foreach($hourswage as $value){
+	        $t_hours += $value[0];
+	}
+	
+	return $t_hours;
+}
 
 function hoursHeader($id, $from, $to){
 
@@ -708,21 +636,8 @@ echo '
 echo '<span class="normal"> 
 		Regular Hours:<strong>
 ';
-	$link=initDb();
-	selectDb($link);
-
-//$monday=0;
-/*
-if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtotime("previous monday")) ){
-
-	$monday = date("m-d-Y", getCurrentWeek());
-	//$monday = date("m-d-Y", strtotime("today"));
-} else{
-	$monday = date("m-d-Y", strtotime("previous monday"));
-}*/
-
-
-	echo getTimeForId($id, $from, 1);
+	$temp = convertSecondsToTime(60*60*getTotalHours(getHoursWage(getHoursForId($id, $from, 1))));
+	echo $temp;
 
 echo '</strong><br />
 <span="normal">Approved Hours:<strong>
