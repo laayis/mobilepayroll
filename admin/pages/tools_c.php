@@ -57,7 +57,7 @@ if(empty($awdaccess)) {
 	//add 1 day to current date to display up-to-date approvals
 	$to = addDaysToDate(7*2, $from);
 
-	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Cost $xx/hour', 'Hours per Week', 'Pay'), 'Pay from ' . $from . ' to '.$to);
+	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Wage', 'Biweekly Hours', 'Pay'), 'Pay from ' . $from . ' to '.$to);
 	$emp = getEmployeesInCompany($_COOKIE['id']);
 	//print_r($emp);
 	$empf = prepareEmpOutput($emp, $from, $to);
