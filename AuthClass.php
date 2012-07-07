@@ -192,6 +192,11 @@ function showName($link, $table='contact_info'){
 	return $fullname ;
 }
 
+function showCompanyName($link, $id){
+	$query = "SELECT name AS id FROM company WHERE id='{$id}' LIMIT 1";
+	return queryDb2($link, $query);
+}
+
 function initSession(){
 	if(session_start() == TRUE){
 		
@@ -228,6 +233,7 @@ function isAlphaNumeric($str)
 
 function authenticateUser(){
 	$sid = session_id();
+	$result=0;
 	if(isUserAdmin()){
 		//query company.sessid
 		$query = "SELECT sessid AS id FROM company WHERE sessid='{$sid}'";
@@ -238,9 +244,13 @@ function authenticateUser(){
 		//echo '<br />' . strlen($result) . '--' . strlen(session_id());
 		if(strcmp($result, $sid) != 0){
 			//kick user out of the page, he is not authenticated
-			header('Location: http://timesheet.elasticbeanstalk.com/admin');
+			header('Location: http://timesheet.elasticbeanstalk.com/');
 			die();
 		}
+		//get id
+		$query = "SELECT id FROM company WHERE sessid='{$sid}'";
+		$result = queryDb2($link, $query);
+		
 
 	} else{
 		$query = "SELECT sessid AS id FROM contact_info WHERE sessid='{$sid}'";
@@ -253,8 +263,11 @@ function authenticateUser(){
 			header('Location: http://timesheet.elasticbeanstalk.com/');
 	    		die();
 		}
+		$query = "SELECT id FROM contact_info WHERE sessid='{$sid}'";
+		$result = queryDb2($link, $query);
 	}
 
+	return $result;
 }
 
 function awdaccess($access){

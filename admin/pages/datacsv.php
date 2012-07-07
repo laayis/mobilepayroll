@@ -1,16 +1,45 @@
 <?php
 
 include('../../AuthClass.php');
-authenticateUser();
+$id = authenticateUser();
 
 if(isset($_POST['request'])){
 	if($_POST['request']=='employee'){
-		echo 'Categories,Apples,Pears,Oranges,Bananas
-			John,8,4,6,5
-			Jane,3,4,2,3
-			Joe,86,76,79,77
-			Janet,3,16,13,15';
+		$link = initDb();
+		selectDb($link);
 
+		$query = "SELECT date, count FROM history_employee WHERE company_id='{$id}' ORDER BY date ASC";
+		$result = queryDbAll($link, $query);
+		
+		$date = 'Categories,';
+		$count = showCompanyName($link, $id).',';
+		foreach($result as $value){
+			$date .= $value[0] . ',';
+			$count .= $value[1] . ',';
+		}
+		$date = rtrim($date, ',');
+		$count = rtrim($count, ',');
+		echo $date . '
+';
+		echo $count;
+	} else if($_POST['request']=='pay'){
+		$link = initDb();
+		selectDb($link);
+
+		$query = "SELECT date, count FROM history_pay WHERE company_id='{$id}' ORDER BY date ASC";
+		$result = queryDbAll($link, $query);
+		
+		$date = 'Categories,';
+		$count = showCompanyName($link, $id).',';
+		foreach($result as $value){
+			$date .= $value[0] . ',';
+			$count .= $value[1] . ',';
+		}
+		$date = rtrim($date, ',');
+		$count = rtrim($count, ',');
+		echo $date . '
+';
+		echo $count;
 	}
 }
 

@@ -11,8 +11,7 @@ $(document).ready(function() {
             text: 'Employees in Company YTD'
          },
          xAxis: {
-         	categories: ['2012-07-09', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-				'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+         	categories: []
 	},
          yAxis: {
 		title: {
@@ -27,14 +26,11 @@ $(document).ready(function() {
 
          },
 
-         series: [{
-            name: 'Parksman',
-            data: []
-         }]
+         series: []
       };
 
 	$.post('datacsv.php', {request: name},function(data){
-		alert(data);
+		//alert(data);
 		var lines = data.split('\n');
 		$.each(lines, function(lineNo, line) {
 			var items = line.split(',');	
