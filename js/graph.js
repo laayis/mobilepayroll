@@ -30,7 +30,7 @@ $(document).ready(function() {
       };
 
 	$.post('datacsv.php', {request: name},function(data){
-		//alert(data);
+		alert(data);
 		var lines = data.split('\n');
 		$.each(lines, function(lineNo, line) {
 			var items = line.split(',');	
