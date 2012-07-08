@@ -79,7 +79,7 @@ echo '
 			<div align="left"><strong>' .
 		$tbname
 		. '</strong></div>
-        	<div align="center" ></div>
+        	<div align="center" >AWD</div>
         	</td>
         </tr> 
 ';
