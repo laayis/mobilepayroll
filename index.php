@@ -105,7 +105,7 @@ $(function() {
 
 
 
-<link rel="shortcut icon" href="http://timesheet.elasticbeanstalk.com/parksman.png" />
+<link rel="shortcut icon" href="http://timesheet.elasticbeanstalk.com/images/parksman.png" />
     <link rel="canonical" href="" />
 
 <link type="text/css" rel="stylesheet" href="https://signup.netflix.com/css/include?f=core;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|shared;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|header_navigation;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|setLanguagePrefMenu;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|footer;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|registration_panel;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|login_pages;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|signup_flow;WEB_CSS;8a62dfcb70b01821a6be3b596c4eb1c9|" />

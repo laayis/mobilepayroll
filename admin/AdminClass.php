@@ -76,10 +76,12 @@ echo '
 	$w
 	. '" border="2" cellpadding="0" cellspacing="0" bordercolor="#EFEFE4" >
 		<tr><td colspan="'.count($columns).'" bgcolor="EFEFE4" class="normal"> 
-			<div align="left"><strong>' .
+			<span class="left"><strong>' .
 		$tbname
-		. '</strong></div>
-        	<div align="center" >AWD</div>
+		. '</strong></span>
+        	<span class="right" >' .
+		'Export to Excel'
+		.'</span>
         	</td>
         </tr> 
 ';

@@ -18,7 +18,7 @@
 </td>
 </tr><tr>
 <td colspan="2">
-<a class="right" href="forgot.php">Forgot your password?</a>
+<a class="right" href="forgotpassword.php">Forgot your password?</a>
 </td>
 </tr>
 </table>
