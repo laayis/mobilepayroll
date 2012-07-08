@@ -182,10 +182,13 @@ AND subscribed_devices.license = '" . $form['license'] .
 // 	date 	id  	location 	company_id 	look_ahead 	license 
 
 	$inout = isClockInOrOut($form['id'], $form['license']);
+	$query = "SELECT wage FROM contact_info WHERE id='{$id}' ";
+	$wage = queryDb2($link, $query);
 	$query = "INSERT INTO clock (" . 
-	"`date`, `id`, `look_ahead`, `company_id`, `license`) VALUES( " . 
+	"`date`, `id`, `wage`, `look_ahead`, `company_id`, `license`) VALUES( " . 
         "'" . $form['date'] . "', " .
         "'" . $form['id'] . "', " .
+        "'" . $wage . "', " .
         "'" . $inout . "', " .
         "'" . getCompanyId($form['id']) . "', " .
         "'" . $form['license'] . "')";
