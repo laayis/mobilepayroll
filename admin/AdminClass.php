@@ -69,7 +69,7 @@ function getActiveKeysInCompany($company_id){
 	
 }
 
-function printTableTop($columns, $tbname, $w='700px'){
+function printTableTop($columns, $tbname, $w='700px', $topright=''){
 echo '
 	<table width='
 	.
@@ -78,10 +78,10 @@ echo '
 		<tr><td colspan="'.count($columns).'" bgcolor="EFEFE4" class="normal"> 
 			<span class="left"><strong>' .
 		$tbname
-		. '</strong></span>
-        	<span class="right" >' .
-		'Export to Excel'
-		.'</span>
+		. '</strong></span>';
+
+		echo $topright;
+echo '
         	</td>
         </tr> 
 ';
