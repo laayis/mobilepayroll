@@ -80,7 +80,7 @@ echo '
 		$tbname
 		. '</strong></span>
         	<span class="right" >' .
-		'Export to Excel'
+		'<a href="exportcsv.php">Export to Excel</a>'
 		.'</span>
         	</td>
         </tr> 
@@ -168,6 +168,11 @@ function getCurrentWeek(){
 	//return '06-18-2012';
 	return $result;
 }
+
+function payEmpIdFromTo($id, $from, $to){
+
+}
+
 /*
 Regular hours are hours calculated from the clock table.
 */
@@ -220,11 +225,10 @@ foreach($approved as $value){
 		$t_pay += $value[0]*$value[1];
 	}
 }
-$r = array('hours'=>$t_hours, 'pay'=>$t_pay);
-return($r);
+
+return(array('hours'=>$t_hours, 'pay'=>$t_pay));
 
 }
-
 
 function prepareEmpOutput($emp, $from, $to){
 //	print_r($emp);
@@ -234,37 +238,79 @@ function prepareEmpOutput($emp, $from, $to){
 	//echo $from . '----'. $mid .'----' . $to . '<br /><br />';
 	$r = array();
 	//for($i=0; $i<count($emp)-count($emp)+1; ++$i){
-	for($i=0; $i<count($emp); ++$i){
-		//week one and week 2 of biweek
-		$regular1=getHoursWage(getHoursForId($emp[$i][0], $from, 1));
-		//print_r($regular1);
-		$regular2=getHoursWage(getHoursForId($emp[$i][0], $mid, 1));
+for($i=0; $i<count($emp); ++$i){
+	//week one and week 2 of biweek
+	$regular1=getHoursWage(getHoursForId($emp[$i][0], $from, 1));
+	//print_r($regular1);
+	$regular2=getHoursWage(getHoursForId($emp[$i][0], $mid, 1));
+	
+	//hoursHeader($emp[$i][0], $from, $mid);
+	//hoursHeader($emp[$i][0], $mid, $to);
+	$approved1=getApprovalHoursAdminForId($emp[$i][0], $from, $mid);
+	$approved2=getApprovalHoursAdminForId($emp[$i][0], $mid, $to);
+	//print_r($approved1);
+	//echo '<br /><br />';
+	//print_r($approved2);
 		
-		//hoursHeader($emp[$i][0], $from, $mid);
-		//hoursHeader($emp[$i][0], $mid, $to);
-		$approved1=getApprovalHoursAdminForId($emp[$i][0], $from, $mid);
-		$approved2=getApprovalHoursAdminForId($emp[$i][0], $mid, $to);
-		//print_r($approved1);
-		//echo '<br /><br />';
-		//print_r($approved2);
-		$t_pay = 0;
-		$t_hours = 0;
+	/*
+	*Calculate Hours for Week1
+	*/
+	$r=payWeek($regular1, $approved1);
+	//print_r($r);
+	$week1hours = $r['hours'];
+	$week1pay = $r['pay'];
+	echo '---' . $week1hours . '<br />';
 
-		/*
-		*Calculate Hours for Week1
-		*/
-		$p=payWeek($regular1, $approved1);
-		$t_pay += $p['pay'];
-		$t_hours += $p['hours'];
+	$t_pay = 0;
+	$t_hours = 0;
 
-		/*
-		*Calculate Hours for Week2
-		*/
-		$p=payWeek($regular2, $approved2);
-		$t_pay += $p['pay'];
-		$t_hours += $p['hours'];
+//calculate regular hours
+foreach($regular2 as $value){
+	$t_hours += $value[0];
+	if($t_hours < 40){
+		$t_pay += $value[0]*$value[1];
+	} else{
+		if($t_hours-$value[0] < 40){
+			$t_pay += ($value[0]-($t_hours%40))*$value[1];
+			$t_pay += ($t_hours%40)*$value[1]*1.5;
+		}else{
+			$t_pay += $value[0]*$value[1]*1.5;
+		}
+	}
+}
 
-		//echo '<br />'.'---Total--- ' . $t_hours . '<br />';
+//calculate approved non-rollover hours
+foreach($approved2 as $value){
+	//$value[2] defines the rollover
+	if($value[2] == 0){
+		$t_hours += $value[0];
+		if($t_hours < 40){
+			$t_pay += $value[0]*$value[1];
+		} else{
+			if($t_hours-$value[0] < 40){
+				$t_pay += ($value[0]-($t_hours%40))*$value[1];
+				$t_pay += ($t_hours%40)*$value[1]*1.5;
+			} else{
+				$t_pay += $value[0]*$value[1]*1.5;
+			}
+		}
+	}
+}
+
+//calculate approved rollover hours
+foreach($approved2 as $value){
+	//$value[2] defines the rollover
+	if($value[2] == 1){
+		$t_hours += $value[0];
+		$t_pay += $value[0]*$value[1];
+	}
+}
+
+//echo '<br />'.'---' . $week1hours;
+//echo '<br />'.'---' . $t_hours;
+		$t_pay += $week1pay;
+		$t_hours += $week1hours;
+//echo '<br />'.'---Total-' . $t_hours;
 		
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 

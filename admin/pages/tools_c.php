@@ -48,16 +48,17 @@ if(empty($awdaccess)) {
 	$temp_from = $from;
 	for($i=0; $i<1; ++$i){
 		$temp_from = addDaysToDate(-7*2, $temp_from);
-		$to = addDaysToDate(7*2, $temp_from);
 		$redirect = $_SERVER['SCRIPT_NAME'] . '?from=' . $temp_from;
+		$to = addDaysToDate(7*2, $temp_from);
+		$tt = addDaysToDate(-1, $to);
 		echo "
-			<a href='{$redirect}'>{$temp_from} to {$to}</a> | 
+			<a href='{$redirect}'>{$tt}</a> | 
 		";
 	}
 	//add 1 day to current date to display up-to-date approvals
 	$to = addDaysToDate(7*2, $from);
-
-	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Wage in $/hr', 'Biweekly Hours', 'Pay'), 'Pay from ' . $from . ' to '.$to);
+	$tt = addDaysToDate(-1, $to);
+	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Wage in $/hr', 'Biweekly Hours', 'Pay'), 'Pay ending on '.$tt);
 	$emp = getEmployeesInCompany($_COOKIE['id']);
 	//print_r($emp);
 	$empf = prepareEmpOutput($emp, $from, $to);

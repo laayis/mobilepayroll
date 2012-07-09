@@ -42,13 +42,13 @@ $to = addDaysToDate(7, $from);
 
 echo '<br /><br /><table width="100%" border="0" cellpadding="0" cellspacing="0">'; 
 echo '<tr><td>';
-hoursHeader($id, $from, $to, 'First');
+hoursHeader($id, $from, $to);
 echo '</td>';
 
 $from = $to;
 $to = addDaysToDate(7, $from);
 echo '<td>';
-hoursHeader($id, $from, $to, 'Second');
+hoursHeader($id, $from, $to);
 echo '</td></tr>';
 
 echo '</table>';
@@ -67,6 +67,35 @@ echo '</table>';
 				<br />
 			</div>
 			<br />
+<!--
+			<fieldset><legend> <strong><font color="#000000" class="normal">ALLOTTED TIME OFF</font></strong>
+			</legend>
+			<table width="100%" border="2" cellpadding=5 cellspacing=0>
+					<tr>
+						<td width="70%" align="center" bgcolor="EFEFE4" class="normal"><strong>Description</strong>
+						</td>
+						<td width="15%" align="center" bgcolor="EFEFE4" class="normal"><strong>Taken</strong>
+						</td>
+						<td width="15%" align="center" bgcolor="EFEFE4" class="normal"><strong>Available</strong>
+						</td>
+					</tr>
+					<tr>
+						<td align="left" class="normal"><strong>SICK-US</strong></td>
+						<td align="center">0:0</td>
+						<td align="center">0:00</td>	
+					</tr>
+					<tr>
+						<td align="left" class="normal"><strong>VACATION-US</strong></td>
+						<td align="center">0:0</td>
+						<td align="center">0:00</td>	
+					</tr>
+				</table>
+				<div align="center" class="normal">
+					'Taken' time is shown only for displayed pay periods.
+   				</div>
+			</fieldset>
+			<br />
+-->
 			<div class="timeDetailData">
 			<fieldset><legend> <strong>
 			<font color="#000000" class="normal">
@@ -81,13 +110,15 @@ selectDb($link);
 	$from = getFrom();
 	//add 1 day to current date to display up-to-date approvals
 	$to = addDaysToDate(7, $from);
-	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from First Week', '100%');
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to
+			, '100%');
 	printApprovalTableBottom($from, $to);
 	userAddTimeForm($id, $from);
 	echo '<br />';
 	$from = $to;
 	$to = addDaysToDate(7, $from);
-	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from Second Week' , '100%');
+	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to
+			, '100%');
 	printApprovalTableBottom($from, $to);
 	userAddTimeForm($id, $from);
 

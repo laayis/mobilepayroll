@@ -620,18 +620,47 @@ function getTotalHours($hourswage){
 	return $t_hours;
 }
 
-function hoursHeader($id, $from, $to){
+function hoursHeader($id, $from, $to, $week='First'){
 
 echo '
 	<div class="timeDetailData">
         <fieldset><legend> <strong>
         <font color="#000000" class="normal">
         Approvals from ' .
-	$from . ' to ' . $to
+	$week . ' Week '
         . '</font>
         </strong>
         </legend>
 ';
+		include_once("admin/AdminClass.php");
+		$regular=getHoursWage(getHoursForId($id, $from, 1));
+		$approved=getApprovalHoursAdminForId($id, $from, $to);
+		//print_r($approved2);
+		$t_pay = 0;
+		$t_hours = 0;
+
+		/*
+		*Calculate Hours for Week
+		*/
+		$p=payWeek($regular, $approved);
+		$t_pay += $p['pay'];
+		$t_hours += $p['hours'];
+		echo '<span class="normal"> 
+			Total Hours:<strong>
+			';
+		$temp = convertSecondsToTime(60*60*$t_hours);
+		echo $temp;
+		echo '</strong><br /></span>';
+
+		echo '<span class="normal"> 
+			Total Pay:<strong>
+			';
+		$temp = number_format(round($t_pay,2),2);
+		echo '$'.$temp;
+		echo '</strong></span><br/><br/>';
+
+
+
 
 echo '<span class="normal"> 
 		Regular Hours:<strong>
@@ -639,8 +668,9 @@ echo '<span class="normal">
 	$temp = convertSecondsToTime(60*60*getTotalHours(getHoursWage(getHoursForId($id, $from, 1))));
 	echo $temp;
 
-echo '</strong><br />
-<span="normal">Approved Hours:<strong>
+echo '</strong><br />';
+
+echo '<span="normal">Approved Hours:<strong>
 ';
 	$temp = getApprovalHoursForId($id, $from, $to);
 	echo convertSecondsToTime($temp['current'][0]*60*60);
