@@ -157,16 +157,36 @@ function printCurrTableBottom(){
 
 //this function is based on the company's billing schedule. Select
 //dates that are on a monday.
-function getCurrentWeek(){
+function getCurrentWeek($id=0){
+	if($id==0){
+		$id = $_COOKIE['id'];
+	}
 	$link = initDb();
 	selectDb($link);
-
+	
 	$query = "SELECT DATE_FORMAT(biweekly, '%m-%d-%Y') as id FROM company
-		WHERE `company`.`id`='{$_COOKIE['id']}'";
+		WHERE `company`.`id`='{$id}'";
 	$result = queryDb2($link, $query);
-	//echo $result;
-	//return '06-18-2012';
+	
 	return $result;
+}
+
+function changeCurrentWeek($id){
+	$current = getCurrentWeek($id);
+	$today = date("m-d-Y", strtotime("today"));
+	$n=0;
+	if(strtotime($current) < strtotime($today)){
+		//include_once('../AuthClass.php');
+		$n = addDaysToDate(14, getCurrentWeek($id));
+		$link = initDb();
+		selectDb($link);
+		$query = "UPDATE company SET `biweekly`=DATE(STR_TO_DATE('{$n}', '%m-%d-%Y')) WHERE id='{$id}'";
+		queryDb($link, $query);
+	} else{
+		$n='false';
+	}
+
+	return $n;
 }
 /*
 Regular hours are hours calculated from the clock table.

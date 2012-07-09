@@ -26,10 +26,10 @@ if(isset($_POST['request'])){
 
 } else if(isset($_GET['export'])){
 		include_once('../AdminClass.php');
-// We'll be outputting a PDF
-header('Content-type: text/csv');
-// It will be called downloaded.pdf
-header('Content-Disposition: attachment; filename="downloaded.csv"');
+		// We'll be outputting a csv
+		header('Content-type: text/csv');
+		// It will be called downloaded.pdf
+		header('Content-Disposition: attachment; filename="downloaded.csv"');
 
 		$emp = getEmployeesInCompany($id);
 		//print_r($emp);

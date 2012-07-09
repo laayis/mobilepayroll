@@ -1,4 +1,4 @@
-<form enctype="application/x-www-form-urlencoded" action="login.php" method="post">
+<form enctype="application/x-www-form-urlencoded" action="pages/login.php" method="post">
 <table width="250px" class="login">
 <tr>
 <td>
