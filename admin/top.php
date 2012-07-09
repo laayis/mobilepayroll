@@ -30,7 +30,7 @@
 			
 			<?php 
 				//if(isLoggedIn()){
-					include('left.php');
+				include('left.php');
 				//} 
 			?>
 			</div>

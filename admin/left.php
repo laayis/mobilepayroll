@@ -2,8 +2,10 @@
 
 <?php
 
-if(isset($_COOKIE['SESSID'])){
-       if($_COOKIE['SESSID'] == session_id()){
+$tt = explode('/', $_SERVER['SCRIPT_NAME']);
+if($tt[2]!='index.php' &&
+$tt[2]!='forgotpassword.php'
+){
 ?>
 	
 	<li>Employee Self-Service</li>
@@ -20,7 +22,6 @@ if(isset($_COOKIE['SESSID'])){
 	<li><a href="stats.php">Statistical Tools</a></li>
 	<li><a href="changepassword.php">Change Password</a></li>
 <?php
-	}
 }
 ?>
 </ul>
