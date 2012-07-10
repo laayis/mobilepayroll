@@ -26,6 +26,8 @@ $id = authenticateUser();
 		
 		//get next clock out
 		$query = "SELECT date AS id FROM `clock` WHERE `date`>='{$date}' AND id='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
+		$link = initDb();
+		selectDb($link);
 		
 		$nextclock = queryDb2($link, $query);
 		echo $query . "-------" . $nextclock;	
