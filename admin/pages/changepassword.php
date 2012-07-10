@@ -1,6 +1,6 @@
 <?php
 include('../../AuthClass.php');
-authenticateUser();
+$user = authenticateUser();
 include('../top.php')?>
 <html>
  <head>
@@ -32,7 +32,12 @@ if(isAlphaNumeric($_POST['current']) && isAlphaNumeric($_POST['new']) && isAlpha
 	}
 	$link = initDb();
 	selectDb($link);
-	$query = "SELECT password AS id FROM company WHERE id={$_COOKIE['id']}";
+
+	if($user['type']=='admin'){
+		$query = "SELECT password AS id FROM company WHERE id={$user['id']}";
+	} else{
+		$query = "SELECT password AS id FROM contact_info WHERE id={$user['id']}";
+	}
 	$pw = queryDb2($link, $query);
 	if($_POST['current'] == $pw){
 		echo 'Password Successfully Changed.';

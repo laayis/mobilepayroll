@@ -1,13 +1,18 @@
 <?php
 session_start();
 
-function isUserAdmin(){
+function isUserAdmin($sid){
 	//$temp = explode('/', $_SERVER['SCRIPT_NAME']);
+	$link = initDb();
+	selectDb($link);
 
-	if(isset($_COOKIE['admin']) && $_COOKIE['admin'] == 1){
+	$query = "SELECT id FROM company WHERE sessid='{$sid}'";
+	$result = queryDb2($link, $query);
+
+	if($result>0){
 		return 1;
 	}
-	
+
 	return 0;
 }
 
@@ -232,11 +237,24 @@ function isAlphaNumeric($str)
 {
     return preg_match('/^[A-Za-z0-9_]+$/',$str);
 }
+function getCompanyId($user_id, $link=0){
+	$query = "SELECT contact_info.company_id FROM contact_info WHERE contact_info.id='" . $user_id . "'";
+	$result = mysql_query($query);
+	if (!$result) {
+	    die('Invalid query: ' . mysql_error());
+	}
+	//get company_id to filter clock
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	$company_id = $row['company_id'];
+	return($company_id);
+}
 
 function authenticateUser(){
 	$sid = session_id();
 	$result=0;
-	if(isUserAdmin()){
+	$type='employee';
+	$company_id=0;
+	if(isUserAdmin($sid)){
 		//query company.sessid
 		$query = "SELECT sessid AS id FROM company WHERE sessid='{$sid}'";
 		$link = initDb();
@@ -252,7 +270,8 @@ function authenticateUser(){
 		//get id
 		$query = "SELECT id FROM company WHERE sessid='{$sid}'";
 		$result = queryDb2($link, $query);
-		
+		$type = 'admin';
+		$company_id = $result;
 
 	} else{
 		$query = "SELECT sessid AS id FROM contact_info WHERE sessid='{$sid}'";
@@ -267,9 +286,11 @@ function authenticateUser(){
 		}
 		$query = "SELECT id FROM contact_info WHERE sessid='{$sid}'";
 		$result = queryDb2($link, $query);
+		$type = 'employee';
+		$company_id = getCompanyId($result, $link);
 	}
 
-	return $result;
+	return array('id'=>$result, 'type'=>$type, 'company_id'=>$company_id);
 }
 
 function awdaccess($access){

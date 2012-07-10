@@ -1,4 +1,5 @@
 <?php
+/*
 function getCompanyId($user_id, $link=0){
 	$query = "SELECT contact_info.company_id FROM contact_info WHERE contact_info.id='" . $user_id . "'";
 	$result = mysql_query($query);
@@ -10,7 +11,7 @@ function getCompanyId($user_id, $link=0){
 	$company_id = $row['company_id'];
 	return($company_id);
 }
-
+*/
 function isClockInOrOut($id, $license){
 	$query = "SELECT look_ahead AS look FROM clock WHERE id='"
 	. $id .

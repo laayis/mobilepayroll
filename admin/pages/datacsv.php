@@ -1,18 +1,18 @@
 <?php
 
 include('../../AuthClass.php');
-$id = authenticateUser();
+$user = authenticateUser();
 
 if(isset($_POST['request'])){
 	if($_POST['request']=='employee'){
 		$link = initDb();
 		selectDb($link);
 
-		$query = "SELECT date, count FROM history_employee WHERE company_id='{$id}' ORDER BY date ASC";
+		$query = "SELECT date, count FROM history_employee WHERE company_id='{$user['id']}' ORDER BY date ASC";
 		$result = queryDbAll($link, $query);
 		
 		$date = 'Categories,';
-		$count = showCompanyName($link, $id).',';
+		$count = showCompanyName($link, $user['id']).',';
 		foreach($result as $value){
 			$date .= $value[0] . ',';
 			$count .= $value[1] . ',';
@@ -31,7 +31,7 @@ if(isset($_POST['request'])){
 		// It will be called downloaded.pdf
 		header('Content-Disposition: attachment; filename="downloaded.csv"');
 
-		$emp = getEmployeesInCompany($id);
+		$emp = getEmployeesInCompany($user['id']);
 		//print_r($emp);
 		$from = $_GET['export'];
 		$to = addDaysToDate(7*2, $from);
