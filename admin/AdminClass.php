@@ -175,7 +175,7 @@ function changeCurrentWeek($id){
 	$current = getCurrentWeek($id);
 	$today = date("m-d-Y", strtotime("today"));
 	$n=0;
-	if(strtotime($current) < strtotime($today)){
+	if(strtotime($current) < strtotime(addDaysToDate(-14, $today))){
 		//include_once('../AuthClass.php');
 		$n = addDaysToDate(14, getCurrentWeek($id));
 		$link = initDb();
