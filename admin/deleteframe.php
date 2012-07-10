@@ -26,15 +26,15 @@ $id = authenticateUser();
 		queryDb($link, $query);
 		
 		//get next clock out
-		$query = "SELECT date FROM `clock` WHERE `date` > '"
+		$query = "SELECT date AS id FROM `clock` WHERE `date` > '"
 			. $_POST['date'] . " "
-			. $_POST['timei'] . "' AND `id`='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
+			. $_POST['timei'] . "' AND id='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
 		
-		$nextclock = queryDbAll($link, $query);
+		$nextclock = queryDb2($link, $query);
 		echo $query . "-------<br /><br />";	
-		echo $nextclock[0] . "-------<br /><br />";	
+		echo $nextclock . "-------<br /><br />";	
 		$query = "DELETE FROM `clock` WHERE `date` = '"
-			. $nextclock[0] . "' AND id='"
+			. $nextclock . "' AND id='"
 			. getID() . "'";
 		queryDb($link, $query);
 		echo $query . "-------<br /><br />";	
