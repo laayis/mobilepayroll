@@ -25,8 +25,8 @@ $id = authenticateUser();
 		queryDb($link, $query);
 		
 		//get next clock out
-		$date = $_POST['date'] . ' ' . $_POST['timef'];
-		$query = "SELECT date AS id FROM `clock` WHERE `date`='{$date}' AND id='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
+		//$date = $_POST['date'] . ' ' . $_POST['timef'];
+		$query = "SELECT date AS id FROM `clock` WHERE `date`>STR_TO_DATE('{$date}', '%Y-%m-%d %H:%i:%s') AND id='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
 		
 		$nextclock = queryDb2($link, $query);
 		echo $query . "-------" . $nextclock;	
