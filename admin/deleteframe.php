@@ -31,10 +31,11 @@ $id = authenticateUser();
 			. $_POST['timei'] . "' AND id='"
 			. getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
 		$nextclock = queryDb2($link, $query);
-		echo $query . "-------<br /><br />";	
+		echo $nextclock . "-------<br /><br />";	
 		$query = "DELETE FROM `clock` WHERE `date` = '"
 			. $nextclock . "' AND id='"
 			. getID() . "'";
 		queryDb($link, $query);
+		echo $query . "-------<br /><br />";	
 ?>
 
