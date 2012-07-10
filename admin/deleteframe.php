@@ -8,10 +8,10 @@ $id = authenticateUser();
 		//echo $_POST['timef'];
 		
 		//before deleting entry, get license key
+		$date = $_POST['date'] . ' ' . $_POST['timei'];
 		$query = "SELECT license AS id FROM `clock` WHERE `date` = '"
-			. $_POST['date'] . " "
-			. $_POST['timei'] . "' AND id='"
-			. getID() . "'";
+			. $date . "' "
+			. "AND id='". getID() . "'";
 		$link = initDb();
 		selectDb($link);
 		//echo $query;
@@ -19,14 +19,13 @@ $id = authenticateUser();
 
 		//delete clock entry
 		$query = "DELETE FROM `clock` WHERE `date` = '"
-			. $_POST['date'] . " "
-			. $_POST['timei'] . "' AND id='"
-			. getID() . "' AND license='{$license}'";
+			. $date . "' "
+			. "AND id='". getID() . "' AND license='{$license}'";
 		//echo $query;
 		queryDb($link, $query);
 		
 		//get next clock out
-		$query = "SELECT date AS id FROM `clock` WHERE `date` >= '". $_POST['date'] . " ". $_POST['timei'] . "' AND id='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
+		$query = "SELECT date AS id FROM `clock` WHERE `date` >= '". $date . "' AND id='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
 		
 		$nextclock = queryDb2($link, $query);
 		echo $query . "-------<br /><br />";	
