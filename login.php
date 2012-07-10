@@ -14,6 +14,9 @@ if( isset($_POST['username']) && isset($_POST['password']) ){
 	if(isAlphaNumeric($_POST['password']) && isAlphaNumeric($_POST['password'])){
 		$result = isValidLogin($link);
 	}
+} else{
+	//header('Location: http://timesheet.elasticbeanstalk.com/admin/');
+	//die();
 }
 /*
 echo $_COOKIE['SESSID'];
@@ -25,13 +28,25 @@ echo "Result: " . $result;
 if($result){
 	selectDb($link);
 	$sid=session_id();
-	$tid=getEmployeeId($link, 'company');	
-	$query = "UPDATE company SET sessid='{$sid}' WHERE id='{$tid}'";
+	$tid=0;
+	//alphanumeric usernames are in the contact_info table
+	//email usernames are in the company table
+	if(isAlphaNumeric($_POST['username']) == 1){
+		$tid=getEmployeeId($link, 'contact_info');
+		$query = "UPDATE contact_info SET sessid='{$sid}' WHERE id='{$tid}'";
+		setcookie('admin', 0, time()+3600);	
+	} else{
+		$tid=getEmployeeId($link, 'company');
+		$query = "UPDATE company SET sessid='{$sid}' WHERE id='{$tid}'";
+		setcookie('admin', '1', time()+3600);	
+	}
 	queryDb($link, $query);
-setcookie('id', getEmployeeId($link), time()+3600);	
-	header('Location: pages/overview.php');
+	setcookie('SESSID', $sid, time()+3600);	
+	setcookie('id', $tid, time()+3600);	
+	//header('Location: pages/overview.php');
 } else{
-	header('Location: http://timesheet.elasticbeanstalk.com');
+	echo 'ABD';
+	//header('Location: http://timesheet.elasticbeanstalk.com');
 }
 
 ?>

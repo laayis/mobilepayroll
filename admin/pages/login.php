@@ -11,9 +11,16 @@ $result = 0;
 
 //prevents injection
 if( isset($_POST['username']) && isset($_POST['password']) ){
-	if(isAlphaNumeric($_POST['password']) && isAlphaNumeric($_POST['password'])){
+	if(isAlphaNumeric($_POST['username']) == 1){
+	//if(isAlphaNumeric($_POST['password'])){
+		$result = isValidLogin($link, 'contact_info');
+	} else{
 		$result = isValidLogin($link, 'company');
+		echo 'ADMIN'. $result . '<br />';
 	}
+} else{
+	header('Location: http://timesheet.elasticbeanstalk.com/admin/');
+	die();
 }
 /*
 echo $_COOKIE['SESSID'];
@@ -21,27 +28,29 @@ echo "<br>" ;
 echo $_COOKIE['id'];
 echo "Result: " . $result;
 */
-//echo $result;
+//echo '=='.$result;
 if($result){
-	//change billing week if 2 weeks have passed.
 	selectDb($link);
-	
 	$sid=session_id();
-	$table='company';
-	$tid=getEmployeeId($link, $table);
-	if($table=='company'){
-		include_once('../AdminClass.php');
-		changeCurrentWeek($tid);
-		//$r = getCurrentWeek($tid);
+	$tid=0;
+	//alphanumeric usernames are in the contact_info table
+	//email usernames are in the company table
+	if(isAlphaNumeric($_POST['username']) == 1){
+		$tid=getEmployeeId($link, 'contact_info');
+		$query = "UPDATE contact_info SET sessid='{$sid}' WHERE id='{$tid}'";
+		setcookie('admin', 0, time()+3600);	
+	} else{
+		$tid=getEmployeeId($link, 'company');
 		$query = "UPDATE company SET sessid='{$sid}' WHERE id='{$tid}'";
-		queryDb($link, $query);
-		setcookie('SESSID', session_id(), time()+3600);	
-		setcookie('id', getEmployeeId($link, 'company'), time()+3600);	
-		$l = 'Location: http://timesheet.elasticbeanstalk.com/admin/pages/overview.php';
-		header($l);
+		setcookie('admin', '1', time()+3600);	
 	}
+	queryDb($link, $query);
+	setcookie('SESSID', $sid, time()+3600);	
+	setcookie('id', $tid, time()+3600);	
+	header('Location: overview.php');
 } else{
-	header('Location: http://timesheet.elasticbeanstalk.com/admin');
+	//echo 'ABD';
+	header('Location: http://timesheet.elasticbeanstalk.com');
 }
 
 ?>

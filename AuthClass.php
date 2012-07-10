@@ -2,9 +2,9 @@
 session_start();
 
 function isUserAdmin(){
-	$temp = explode('/', $_SERVER['SCRIPT_NAME']);
+	//$temp = explode('/', $_SERVER['SCRIPT_NAME']);
 
-	if($temp[1]=='admin'){
+	if(isset($_COOKIE['admin']) && $_COOKIE['admin'] == 1){
 		return 1;
 	}
 	
@@ -120,11 +120,13 @@ function isValidLogin($link, $table='contact_info'){
 	    die ('Can\'t use live : ' . mysql_error());
 	}
 
+	//if(isAlphaNumeric($_POST['username']) == 1){
 	if($table=='contact_info'){
 	$query = "SELECT contact_info.username, contact_info.password FROM contact_info WHERE contact_info.username='" . $_POST['username'] . "'";
 	} else{
 	$query = "SELECT company.username, company.password FROM company WHERE company.username='" . $_POST['username'] . "'";
 	}
+	//echo $query;
 	$result = mysql_query($query);
 	if (!$result) {
 	    die('Invalid query: ' . mysql_error());
@@ -132,8 +134,8 @@ function isValidLogin($link, $table='contact_info'){
 	$row = mysql_fetch_array($result, MYSQL_ASSOC);
 	if($row['username'] == $_POST['username'] &&
 	$row['password'] == $_POST['password']){
-		return TRUE;
-	}else{return FALSE;}
+		return 1;
+	}else{return 0;}
 }
 
 //only works at login because of $_POST
