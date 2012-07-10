@@ -419,11 +419,11 @@ function getID(){
 	$uri = $_SERVER['REQUEST_URI'];
 	$pieces = explode("/", $uri);
 	if(isset($_GET['id']) && $pieces[1]=='admin'){
-		return $_GET['id'];
+		return trim($_GET['id']);
 	} else if(isset($_POST['id']) && $pieces[1]=='admin'){
-		return $_POST['id'];
+		return trim($_POST['id']);
 	} else{
-		return $_COOKIE['id'];
+		return trim($_COOKIE['id']);
 	}
 
 }
