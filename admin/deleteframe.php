@@ -29,7 +29,7 @@ $id = authenticateUser();
 		
 		$nextclock = queryDb2($link, $query);
 		echo $query . "-------<br /><br />";	
-		echo $nextclock . "-------<br /><br />";	
+		echo $date . "-------<br /><br />";	
 		$query = "DELETE FROM `clock` WHERE `date` = '"
 			. $nextclock . "' AND id='"
 			. getID() . "'";
