@@ -16,7 +16,6 @@ $id = authenticateUser();
 		selectDb($link);
 		//echo $query;
 		$license = queryDb2($link, $query);
-		echo $query . "-------<br /><br />";	
 
 		//delete clock entry
 		$query = "DELETE FROM `clock` WHERE `date` = '"
@@ -25,7 +24,6 @@ $id = authenticateUser();
 			. getID() . "' AND license='{$license}'";
 		//echo $query;
 		queryDb($link, $query);
-		echo $query . "-------<br /><br />";	
 		
 		//get next clock out
 		$query = "SELECT date AS id FROM `clock` WHERE `date` > '"
@@ -38,6 +36,5 @@ $id = authenticateUser();
 			. $nextclock . "' AND id='"
 			. getID() . "'";
 		queryDb($link, $query);
-		echo $query . "-------<br /><br />";	
 ?>
 
