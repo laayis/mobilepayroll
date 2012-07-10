@@ -29,17 +29,16 @@ if($result){
 	$sid=session_id();
 	$table='company';
 	$tid=getEmployeeId($link, $table);
-	$r='0';
 	if($table=='company'){
 		include_once('../AdminClass.php');
-		$r = changeCurrentWeek($tid);
+		changeCurrentWeek($tid);
 		//$r = getCurrentWeek($tid);
-	$query = "UPDATE company SET sessid='{$sid}' WHERE id='{$tid}'";
-	queryDb($link, $query);
-	setcookie('SESSID', session_id(), time()+3600);	
-	setcookie('id', getEmployeeId($link, 'company'), time()+3600);	
-	$l = 'Location: http://timesheet.elasticbeanstalk.com/admin/pages/overview.php?'.$r.'=awd';
-	header($l);
+		$query = "UPDATE company SET sessid='{$sid}' WHERE id='{$tid}'";
+		queryDb($link, $query);
+		setcookie('SESSID', session_id(), time()+3600);	
+		setcookie('id', getEmployeeId($link, 'company'), time()+3600);	
+		$l = 'Location: http://timesheet.elasticbeanstalk.com/admin/pages/overview.php';
+		header($l);
 	}
 } else{
 	header('Location: http://timesheet.elasticbeanstalk.com/admin');

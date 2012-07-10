@@ -4,7 +4,7 @@ if(empty($awdaccess)) {
 	die();
 }
 include('../TableClass.php');
-$id = getID();
+$user_id = getID();
 ?>
 
 <!--
@@ -30,7 +30,7 @@ $id = getID();
 			</strong>&nbsp;
 			Associate ID:&nbsp<strong>
 			<?php
-				echo $id;
+				echo $user_id;
 				//echo $_COOKIE['id'];
 			 ?>
 			</strong>
@@ -62,7 +62,8 @@ $id = getID();
 						<div align="right"><strong>First:
 						</strong></div></td>
 						<td class="normal"><div align="left">&nbsp; 
-						<input type="text" name="totable_first" maxlength="30" size="15" value="<?php selectContact($link, 'first'); ?>" onfocus="displayNameNote()" class="entertext" id="first" />
+						<input style="display:none" type="text" name="id" value="<?php echo $user_id; ?>" onfocus="displayNameNote()" class="entertext" />
+	<input type="text" name="totable_first" maxlength="30" size="15" value="<?php selectContact($link, 'first'); ?>" onfocus="displayNameNote()" class="entertext" id="first" />
 						<span ><strong>M.I.:
 						</strong></span> 
                         <input type="text" name="totable_mi" maxlength="1" size="1" value="<?php selectContact($link, 'mi'); ?>" onfocus="displayNameNote()" class="entertext" id="mi">

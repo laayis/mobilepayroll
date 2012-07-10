@@ -284,8 +284,6 @@ function prepareEmpOutput($emp, $from, $to){
 		$t_pay += $p['pay'];
 		$t_hours += $p['hours'];
 
-		//echo '<br />'.'---Total--- ' . $t_hours . '<br />';
-		
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
 				$emp[$i][3],
