@@ -29,7 +29,8 @@ $id = authenticateUser();
 		$query = "SELECT date FROM `clock` WHERE `date` > '"
 			. $_POST['date'] . " "
 			. $_POST['timei'] . "' AND `id`='". getID() . "' AND license='{$license}' ORDER BY date ASC LIMIT 1";
-		$nextclock = queryDb2($link, $query);
+		
+		$nextclock = queryDbAll($link, $query);
 		echo $query . "-------<br /><br />";	
 		echo $nextclock[0] . "-------<br /><br />";	
 		$query = "DELETE FROM `clock` WHERE `date` = '"
