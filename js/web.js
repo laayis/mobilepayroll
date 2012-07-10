@@ -27,8 +27,9 @@ function deleteframe(temp){
 	if(check==true){
 		$.post("../deleteframe.php", { id: id, date: date, timei: n[1], timef: nn[1]},
 		function(data){
+			alert(data);
 			if(1){
-	//		alert('---');
+			alert('---');
 			var temp = rem;
 	//		alert(temp);
 				//remove
