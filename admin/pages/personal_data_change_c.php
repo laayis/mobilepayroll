@@ -30,7 +30,7 @@ $user_id = getID();
 			</strong>&nbsp;
 			Associate ID:&nbsp<strong>
 			<?php
-				echo $user['id'];
+				echo $_GET['id'];
 				//echo $_COOKIE['id'];
 			 ?>
 			</strong>
