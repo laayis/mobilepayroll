@@ -2,6 +2,10 @@
 
 include('../../AuthClass.php');
 $user = authenticateUser();
+if($user['type'] != 'admin'){
+	header('Location: http://timesheet.elasticbeanstalk.com/admin/pages/overview.php');
+	die();
+}
 
 include('../top.php');
 $uri = $_SERVER['REQUEST_URI'];

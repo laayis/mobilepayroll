@@ -6,15 +6,14 @@ include('../../TableClass.php');
 
 
 
+$link = initDb();
+selectDb($link);
+//print_r($user);
+//echo '<br/>'. getCompanyId($_POST['user_id'], $link) ;
+if(isset($_POST['user_id']) &&
+$user['company_id'] == getCompanyId($_POST['user_id'], $link)){
 
-
-
-if(isset($_POST['user_id']) && isset($_POST['request']) &&
-$user['company_id'] == getCompanyId($_POST['user_id'])){
-	$link = initDb();
-	selectDb($link);
-
-	if(isset($_POST['request']) && isset($_POST['action'])){
+	if(isset($_POST['request']) && isset($_POST['action']) && isset($_POST['request']) ){
 		$act = $_POST['action'];
 		
 		if($act=='d'){
@@ -39,10 +38,17 @@ $user['company_id'] == getCompanyId($_POST['user_id'])){
 		$temp = $_POST['date'];
 		$formatted = dateForSQL($temp);
 		
+		$query='';
+		if($user['type'] == 'admin'){
 		$query = "INSERT INTO `approvals` (`company_id`, `wage`, `user_id`, `hours`, `rollover`, `reason`, `approved`, `date`)
 					VALUES ('{$user['company_id']}','{$_POST['wage']}', '{$_POST['user_id']}', '{$_POST['hours']}',
 					'{$_POST['rollover']}', '{$_POST['reason']}', '1', '{$formatted}')";
-
+		} else{
+		$query = "INSERT INTO `approvals` (`company_id`, `wage`, `user_id`, `hours`, `rollover`, `reason`, `approved`, `date`)
+					VALUES ('{$user['company_id']}','{$_POST['wage']}', '{$_POST['user_id']}', '{$_POST['hours']}',
+					'{$_POST['rollover']}', '{$_POST['reason']}', '0', '{$formatted}')";
+		
+		}
 		queryDb($link, $query);
 
 		header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -50,4 +56,3 @@ $user['company_id'] == getCompanyId($_POST['user_id'])){
 }
 		
 ?>
-

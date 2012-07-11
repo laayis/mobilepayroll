@@ -1,6 +1,6 @@
 <?php
 include('../../AuthClass.php');
-authenticateUser();
+$user = authenticateUser();
 
 $t = array_keys($_POST);
 //print_r($t);
@@ -33,7 +33,7 @@ if(isset($_POST['id'])){
 	$query= "UPDATE contact_info SET " . $t . " WHERE id='" . $_POST['id'] ."'";
 	//echo "<br />" . $query;
 	queryDb($link, $query);
-	$l = "Location: http://timesheet.elasticbeanstalk.com/admin/pages/personal_data_change.php?id={$_POST['id']}";
+	$l = "Location: http://timesheet.elasticbeanstalk.com/admin/pages/personal_data_change.php";
 	header($l);
 }
 //echo "<br />------hello";

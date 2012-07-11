@@ -181,6 +181,23 @@ function selectContact($link, $selected){
 	echo $tossed_salad;
 	return $tossed_salad;
 }
+function cmpUserAndId($user){
+$link=initDb();
+if($user['type']=='admin'){
+	if(isset($_GET['id'])){
+		if($user['company_id']!=getCompanyId($_GET['id'], $link)){
+			header('Location: http://timesheet.elasticbeanstalk.com/admin/pages/overview.php');
+			die();
+		}
+	}
+} else{
+	if(isset($_GET['id'])){
+		header('Location: http://timesheet.elasticbeanstalk.com/admin/pages/overview.php');
+		die();
+	}
+}
+}
+
 
 function showName($link, $table='contact_info'){
 	$db_selected = mysql_select_db('live', $link);

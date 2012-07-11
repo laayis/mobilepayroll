@@ -3,7 +3,7 @@ if(empty($awdaccess)) {
 	header('Location: http://timesheet.elasticbeanstalk.com/');
 	die();
 }
-include('../TableClass.php');
+//include('../../TableClass.php');
 $user_id = getID();
 ?>
 
@@ -30,7 +30,7 @@ $user_id = getID();
 			</strong>&nbsp;
 			Associate ID:&nbsp<strong>
 			<?php
-				echo $user_id;
+				echo $user['id'];
 				//echo $_COOKIE['id'];
 			 ?>
 			</strong>
@@ -82,8 +82,17 @@ $user_id = getID();
 
 					<tr><td class="normal"> 
 						<div align="right"><strong>Wage:</strong></div></td>
-						<td ><div align="left"><strong>&nbsp; 
-						<input type="text" name="totable_wage" maxlength="2" size="4" value="<?php selectContact($link, 'wage'); ?>" onfocus="displayAdrNote()" class="entertext" id="addr1">
+						<td ><div align="left"><strong>&nbsp;
+			<?php 
+			if($user['type'] == 'admin'){
+				echo '<input type="text" name="totable_wage" maxlength="2" size="4" value="';
+				selectContact($link, 'wage');
+				echo '" onfocus="displayAdrNote()" class="entertext" id="addr1">';
+			}else if($user['type']=='employee'){
+					//print_r($user);
+					selectContact($link, 'wage');
+			}
+			?>
 						</strong></div></td>
 					</tr>
 

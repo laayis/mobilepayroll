@@ -2,6 +2,7 @@
 
 include('../../AuthClass.php');
 $user = authenticateUser();
+cmpUserAndId($user);
 include('../AdminClass.php');
 include('../top.php');
 
