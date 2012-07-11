@@ -1,0 +1,76 @@
+* { padding:0; margin:0; font-family:Arial, Helvetica, sans-serif;}
+
+body { color: #606060; font-size: 12px;
+	background-image:url('../images/scroll.png');
+	background-position:center; 
+	background-repeat:no-repeat;
+
+
+}
+.tiny { color: #606060; font-size: 10px;}
+
+a { color: #606060; text-decoration: none;}
+a:hover { text-decoration: underline;}
+
+/* Header */
+h1 { margin-bottom: 20px;}
+hr { margin-bottom: 15px;}
+.refresh{ height: 30px; width: 30px;
+	background-position:center;
+	float: right;
+}
+.bold { font-weight: bold; }
+
+/*
+table:first-child { font-weight: bold; }
+*/
+table a {text-decoration: underline; color:#0000FF;}
+td {padding: 3px 2px 3px 2px;}
+input { padding: 2px}
+select { padding: 2px}
+#sub {text-transform: capitalize;}
+fieldset { padding: 10px;}
+.login input {padding: 0px 0px 0px 0px;}
+
+.main_wrapper { }
+.main { width: 1000px; border: 0px solid #000000; text-align: left;}
+
+.red {background-color: #FF0F0F;}
+.green {background-color: #00FF00;
+	background-image:url('../images/green-check.png');
+	background-position:center; 
+	background-size:40px 40px;
+	background-repeat:no-repeat;
+}
+
+.header_top {}
+.header_logo { float: left;}
+.header_login { float: right; margin: 10px 10px 0px 0px;}
+.header_menu { height: 25px; background-color: #CCCC99;}
+
+.content_main {}
+.content_left { float: left; width: 190px;}
+.content_right { float: left; width: 810px;}
+.content_right_inner { padding: 30px 0px 15px 15px;}
+.content {}
+
+.menu_left { background-color: #9999CC; list-style-type: none; padding: 50px 0px 90px 5px; color: #FFFFFF;}
+.menu_left a { color: #FFFFFF;}
+
+.bottom {}
+.bottom_content { padding: 15px; background-color: #CCCC99;}
+.bottom_content, .bottom_content a { color: #000000;}
+.bottom_links { list-style-type: none;}
+.bottom_links li { float: left; margin-right: 40px;}
+.bottom_menu { list-style-type: none;}
+.bottom_menu li { float: none;}
+.bottom_copyright { font-size: 10px; text-align: center;}
+.bottom_copyright a { color: #DF761C;}
+
+/* Aux. Classes */
+.clear { clear: both;}
+.right { float: right;}
+.left { float: left;}
+.dotted { border-right: 1px dotted #000000;}
+.uppercase { text-transform: uppercase;}
+.capitalize { text-transform: capitalize;}
