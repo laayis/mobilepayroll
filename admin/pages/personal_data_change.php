@@ -3,11 +3,6 @@
 include('../../AuthClass.php');
 $user = authenticateUser();
 cmpUserAndId($user);
-if($user['type']=='admin'){
-	header('Location: http://timesheet.elasticbeanstalk.com/admin/pages/tools.php');
-	die();
-}
-
 
 include('../AdminClass.php');
 include('../top.php');
