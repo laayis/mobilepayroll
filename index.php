@@ -391,7 +391,7 @@ $(function() {
 
 <form method="post" name="register_form" id="regform"   >
     <section class="header">
-        <h2> MobileRAWR</h2>
+        <h2> MobilePay</h2>
     </section>
     <fieldset>
         <dl>
