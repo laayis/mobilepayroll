@@ -15,7 +15,7 @@
 #top10{
 	width: 600px;
 	height: 400px;
-	position: absolute;
+	position: relative;
 	top: 300px;
 	left: 30px;
 }
