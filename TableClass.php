@@ -168,7 +168,7 @@ function getMax($temp){
 
 function printRowIn($link, $date, $section, $id){
 $weeks=1;
-echo '<table width="100%" border="2" cellpadding="0" cellspacing="0">';
+echo '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
 printRowWeek($date, $weeks, $section);
 echo $date;
 $temp = split('-',$date);
