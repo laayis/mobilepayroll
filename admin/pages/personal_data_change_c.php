@@ -4,7 +4,7 @@ if(empty($awdaccess)) {
 	die();
 }
 //include('../../TableClass.php');
-$user_id = getID($user);
+$user_id = getID();
 ?>
 
 <!--

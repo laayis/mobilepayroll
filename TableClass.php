@@ -415,9 +415,10 @@ function calculatePay($time, $wage){
 	return($pay);
 }
 
-function getID($user){
+function getID(){
+	$user=authenticateUser();
 	$uri = $_SERVER['REQUEST_URI'];
-	$pieces = explode("/", $uri);
+	
 	if(isset($_GET['id']) && $user['id']==$user['company_id']){
 		return trim($_GET['id']);
 	} else if(isset($_POST['id']) && $user['id']==$user['company_id']){
@@ -427,6 +428,23 @@ function getID($user){
 		//return trim($_COOKIE['id']);
 	}
 
+}
+
+function selectContact($link, $selected){
+	$db_selected = mysql_select_db('live', $link);
+	if (!$db_selected) {
+	    die ('Can\'t use live : ' . mysql_error());
+	}
+
+	$query = "SELECT " . $selected . " FROM contact_info WHERE contact_info.id=" . getID();
+	$result=mysql_query($query);
+        if(!$result) {
+            die('Invalid query: ' . mysql_error());
+        }
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	$tossed_salad=$row[$selected];
+	echo $tossed_salad;
+	return $tossed_salad;
 }
 
 function getPunchesForDay($date, $id='0'){

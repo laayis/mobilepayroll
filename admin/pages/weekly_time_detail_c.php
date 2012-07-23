@@ -7,11 +7,11 @@ if(empty($awdaccess)) {
 
 $id = getID();
 
-function getFrom(){
+function getFrom($user){
 	if(isset($_GET['from'])){
 		return $_GET['from'];
 	}else{
-		return getCurrentWeek();
+		return getCurrentWeek($user['company_id']);
 	}
 }
 ?>
@@ -28,16 +28,12 @@ function getFrom(){
  		</strong>&nbsp;
 	             Associate ID: <strong>
 			<span id="getid">
-			<?php
-			//$gook = getID();
-			echo $id;
-			?>
+			<?php echo $id; ?>
 				</strong>
 </span>
 
 <?php
-
-$from = getFrom();
+$from = getFrom($user);
 $to = addDaysToDate(7, $from);
 
 echo '<br /><br /><table width="100%" border="0" cellpadding="0" cellspacing="0">'; 
@@ -78,7 +74,7 @@ echo '</table>';
 $link = initDb();
 selectDb($link);
 
-	$from = getFrom();
+	$from = getFrom($user);
 	//add 1 day to current date to display up-to-date approvals
 	$to = addDaysToDate(7, $from);
 	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from First Week', '100%');
@@ -112,7 +108,7 @@ if(addDaysToDate(-7, date("m-d-Y", strtotime("today")) ) == date("m-d-Y", strtot
 	$monday = date("m-d-Y", strtotime("previous monday"));
 }
 
-$monday = getFrom();
+$monday = getFrom($user);
 
 //echo $monday;
 $monday = addDaysToDate(7, $monday);

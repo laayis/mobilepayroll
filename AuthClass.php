@@ -165,22 +165,6 @@ function getEmployeeId($link, $table='contact_info'){
 
 }
 
-function selectContact($link, $selected){
-	$db_selected = mysql_select_db('live', $link);
-	if (!$db_selected) {
-	    die ('Can\'t use live : ' . mysql_error());
-	}
-	
-	$query = "SELECT " . $selected . " FROM contact_info WHERE contact_info.id=" . getID();
-	$result=mysql_query($query);
-        if(!$result) {
-            die('Invalid query: ' . mysql_error());
-        }
-	$row = mysql_fetch_array($result, MYSQL_ASSOC);
-	$tossed_salad=$row[$selected];
-	echo $tossed_salad;
-	return $tossed_salad;
-}
 function cmpUserAndId($user){
 $link=initDb();
 if($user['type']=='admin'){
