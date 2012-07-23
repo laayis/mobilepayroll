@@ -82,13 +82,13 @@ selectDb($link);
 	//add 1 day to current date to display up-to-date approvals
 	$to = addDaysToDate(7, $from);
 	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from First Week', '100%');
-	printApprovalTableBottom($from, $to);
+	printApprovalTableBottom($from, $to, $user);
 	userAddTimeForm($id, $from);
 	echo '<br />';
 	$from = $to;
 	$to = addDaysToDate(7, $from);
 	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from Second Week' , '100%');
-	printApprovalTableBottom($from, $to);
+	printApprovalTableBottom($from, $to, $user);
 	userAddTimeForm($id, $from);
 
  ?>

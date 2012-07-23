@@ -168,7 +168,7 @@ function printCurrTableBottom(){
 //dates that are on a monday.
 function getCurrentWeek($id=0){
 	if($id==0){
-		$id = $_COOKIE['id'];
+		die();
 	}
 	$link = initDb();
 	selectDb($link);
@@ -177,15 +177,21 @@ function getCurrentWeek($id=0){
 		WHERE `company`.`id`='{$id}'";
 	$result = queryDb2($link, $query);
 	
-	return $result;
+	return trim($result);
 }
 
 function changeCurrentWeek($id){
 	$current = getCurrentWeek($id);
-	$today = date("m-d-Y", strtotime("today"));
+	echo $current . 'FUCK YEAA<br/>';
+	$today = date("m-d-Y", strtotime("now"));
+	echo $today . 'FUCK YEAA<br/>';
+	$current = strtotime(getCurrentWeek($id));
+	$today=strtotime(addDaysToDate(-14, $today));
+	echo $current . '-14CURRRRdaysFUCK YEAA<br/>';
+	echo $today . '-14daysFUCK YEAA<br/>';
 	$n=0;
-	if(strtotime($current) < strtotime(addDaysToDate(-14, $today))){
-		//include_once('../AuthClass.php');
+/*
+	if($current <= $today && ){
 		$n = addDaysToDate(14, getCurrentWeek($id));
 		$link = initDb();
 		selectDb($link);
@@ -194,7 +200,10 @@ function changeCurrentWeek($id){
 	} else{
 		$n='false';
 	}
-
+*/
+	echo $current;
+	echo '---<br/>';
+	echo $today;
 	return $n;
 }
 /*
@@ -363,7 +372,7 @@ function printEmpTableBottom($emp, $from=0){
 
 }
 
-function printApprovalTableBottom($from, $to){
+function printApprovalTableBottom($from, $to, $user=0){
 	$link = initDb();
 	selectDb($link);
 	
@@ -375,7 +384,7 @@ function printApprovalTableBottom($from, $to){
 			approved, reason FROM approvals
 			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
 			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
-			AND company_id='{$_COOKIE['id']}'
+			AND company_id='{$user['company_id']}'
 			ORDER BY user_id ASC";
 	//echo $query;
 	} else{
@@ -383,7 +392,7 @@ function printApprovalTableBottom($from, $to){
 			approved, reason FROM approvals
 			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
 			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
-			AND company_id='{$_COOKIE['id']}'
+			AND company_id='{$user['company_id']}'
 			AND user_id='{$_GET['id']}'
 			ORDER BY user_id ASC";
 	
