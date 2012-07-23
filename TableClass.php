@@ -717,7 +717,7 @@ function userAddTimeForm($id, $from){
 //echo 'FUCK  YOU';
 echo '<br />';
 echo '<form method="POST" action="approval.php">';
-echo '<table width="50%" border="0" cellpadding="0" cellspacing="0">';
+echo '<table width="55%" border="1" cellpadding="0" cellspacing="0">';
 
 $i=0;
 echo '
@@ -734,16 +734,13 @@ echo '
 ';
 
 echo '
-	<td colspan="1" width="15%" align="left">
+	<td colspan="2" width="15%" align="left">
 	<div>
 	Wages
 	<input style="display:none;" type="text" name="user_id" value="'. $id .'" onclick="">&nbsp;
 	</div>
 	</td>
-	<td>
-	&nbsp;
-	</td>
-	<td align="left">
+	<td width="25%" align="left">
 	<div>
 	<input type="checkbox" name="rollover" value="1" onclick="">&nbsp; <span class="normal"><strong>Roll-over Hours</strong></span>
 	</div>
@@ -753,12 +750,10 @@ echo '
 	<td>
 		<input type="text" name="hours" value="4.5" onclick="">&nbsp;
 	</td>
-	<td>
+	<td colspan="2">
 		<input type="text" name="wage" value="7" onclick="">&nbsp;
 	</td>
-	<td>
-		&nbsp;
-	</td>
+
 	<td>
 		&nbsp;
 	</td>
