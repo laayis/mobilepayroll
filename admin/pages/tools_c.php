@@ -42,7 +42,7 @@ if(empty($awdaccess)) {
 	if(isset($_GET['from'])){
 		$from = $_GET['from'];
 	} else{
-		$from = getCurrentWeek();
+		$from = getCurrentWeek($user['id']);
 	}
 
 	$temp_from = $from;

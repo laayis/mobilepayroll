@@ -2,7 +2,7 @@
 
 include('../../AuthClass.php');
 $user=authenticateUser();
-print_r($user);
+//print_r($user);
 if($user['type'] != 'admin'){
 	header('Location: http://timesheet.elasticbeanstalk.com/admin/pages/overview.php');
 	die();
