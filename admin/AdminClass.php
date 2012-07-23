@@ -296,14 +296,14 @@ function prepareEmpOutput($emp, $from, $to){
 		$p=payWeek($regular2, $approved2);
 		$t_pay += $p['pay'];
 		$t_hours += $p['hours'];
-		if($t_pay != 0.00){
+		//if($t_pay != 0.00){
 		$r[] = array($emp[$i][0], 
 				$emp[$i][1] . ' ' . $emp[$i][2], 
 				$emp[$i][3],
 			convertSecondsToTime($t_hours*60*60),
 			"$" . number_format(round($t_pay, 2), 2)
 			);
-		}
+		//}
 	}
 //	print_r($r);
 	return $r;
