@@ -177,21 +177,16 @@ function getCurrentWeek($id=0){
 		WHERE `company`.`id`='{$id}'";
 	$result = queryDb2($link, $query);
 	
-	return trim($result);
+	return $result;
 }
 
 function changeCurrentWeek($id){
-	$current = getCurrentWeek($id);
-	echo $current . 'FUCK YEAA<br/>';
 	$today = date("m-d-Y", strtotime("now"));
-	echo $today . 'FUCK YEAA<br/>';
 	$current = strtotime(getCurrentWeek($id));
 	$today=strtotime(addDaysToDate(-14, $today));
-	echo $current . '-14CURRRRdaysFUCK YEAA<br/>';
-	echo $today . '-14daysFUCK YEAA<br/>';
 	$n=0;
 /*
-	if($current <= $today && ){
+	if($current <= $today){
 		$n = addDaysToDate(14, getCurrentWeek($id));
 		$link = initDb();
 		selectDb($link);
@@ -200,10 +195,10 @@ function changeCurrentWeek($id){
 	} else{
 		$n='false';
 	}
-*/
 	echo $current;
 	echo '---<br/>';
 	echo $today;
+*/
 	return $n;
 }
 /*

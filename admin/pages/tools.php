@@ -10,7 +10,7 @@ if($user['type'] != 'admin'){
 
 include('../AdminClass.php');
 include('../top.php');
-changeCurrentWeek($user['id']);
+changeCurrentWeek($user['company_id']);
 
 $uri = $_SERVER['REQUEST_URI'];
 $pieces = explode("/", $uri);
