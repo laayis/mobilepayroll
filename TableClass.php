@@ -416,7 +416,7 @@ function calculatePay($time, $wage){
 }
 
 function getID(){
-	
+	$user = authenticateUser();
 	$uri = $_SERVER['REQUEST_URI'];
 	$pieces = explode("/", $uri);
 	if(isset($_GET['id']) && $pieces[1]=='admin'){
@@ -424,7 +424,8 @@ function getID(){
 	} else if(isset($_POST['id']) && $pieces[1]=='admin'){
 		return trim($_POST['id']);
 	} else{
-		return trim($_COOKIE['id']);
+		return 1;
+		//return trim($_COOKIE['id']);
 	}
 
 }

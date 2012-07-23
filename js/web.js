@@ -80,6 +80,16 @@ function update(request, user_id, action){
 
 	}
 }
+function renewname(temp){
+	//alert(temp+'1');
+	var name = document.getElementById("location-name-"+temp).value;
+	$.post("../renew.php", { totable_license: temp, totable_name: name },
+	function(data){
+		//alert('Name Successfully Changed.');
+	}
+	);
+}
+
 function renew(temp){
 	//alert(temp+'1');
 	$.post("../renew.php", { totable_license: temp },

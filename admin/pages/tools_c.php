@@ -24,7 +24,7 @@ if(empty($awdaccess)) {
 			</strong>&nbsp;
 			Administrator ID:&nbsp<strong>
 			<?php
-				echo $_COOKIE['id'];
+				echo $user['id'];
 			 ?>
 			</strong>
 			</span><br />
@@ -65,7 +65,7 @@ if(empty($awdaccess)) {
 		. '</a>'
 		.'</span>';
 	printTableTop(array('Actions', 'Associate ID', 'Contact Info', 'Wage in $/hr', 'Biweekly Hours', 'Pay'), 'Pay ending on '.$tt, '700px', $export);
-	$emp = getEmployeesInCompany($_COOKIE['id']);
+	$emp = getEmployeesInCompany($user['id']);
 	//print_r($emp);
 	$empf = prepareEmpOutput($emp, $from, $to);
 	printEmpTableBottom($empf, $from)
@@ -78,8 +78,8 @@ if(empty($awdaccess)) {
 <td colspan="2">
 	<br />
 	<?php
-	printTableTop(array('License','Activated', 'Generate'), 'Subscribed Devices', '300px');
-	$emp = getActiveKeysInCompany($_COOKIE['id']);
+	printTableTop(array('Count', 'Name', 'License','Activated', 'Generate'), 'Subscribed Devices', '600px');
+	$emp = getActiveKeysInCompany($user['id']);
 	printTableBottom($emp);
 ?>
 </td>

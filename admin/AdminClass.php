@@ -46,7 +46,7 @@ function getActiveKeysInCompany($company_id){
 
 
 	$query = "
-	SELECT subscribed_devices.license, subscribed_devices.active
+	SELECT subscribed_devices.name, subscribed_devices.license, subscribed_devices.active
 	FROM subscribed_devices
 	WHERE subscribed_devices.company_id=$company_id
 	ORDER BY active ASC
@@ -61,7 +61,16 @@ function getActiveKeysInCompany($company_id){
 	while($row=mysql_fetch_array($result, MYSQL_ASSOC)){
 		$l= '<a href="javascript:void(null);renew(\''.
 		$row['license'] . '\');">Renew</a>';
-		$temp[] = array($row['license'],$row['active'], $l);
+
+		//create javascript action	
+		$h = '<input onblur="renewname(\''.
+		$row['license']
+		.'\')" type="text" id="location-name-'.
+		$row['license']
+		.'" value="'.
+		$row['name']
+		.'"/>';
+		$temp[] = array($h,$row['license'],$row['active'], $l);
 	}
 
 	//print_r($temp);
@@ -443,6 +452,10 @@ function printApprovalTableBottom($from, $to){
 function printTableBottom($emp){
 	for($i=0; $i<count($emp); ++$i){
 		echo '<tr>';
+		//Count
+		echo '<td>';
+		echo $i+1;
+		echo '</td>';
 		for($j=0; $j<count($emp[$i]);++$j){
 			echo '<td>';
 			echo $emp[$i][$j];
