@@ -415,16 +415,15 @@ function calculatePay($time, $wage){
 	return($pay);
 }
 
-function getID(){
-	$user = authenticateUser();
+function getID($user){
 	$uri = $_SERVER['REQUEST_URI'];
 	$pieces = explode("/", $uri);
-	if(isset($_GET['id']) && $pieces[1]=='admin'){
+	if(isset($_GET['id']) && $user['id']==$user['company_id']){
 		return trim($_GET['id']);
-	} else if(isset($_POST['id']) && $pieces[1]=='admin'){
+	} else if(isset($_POST['id']) && $user['id']==$user['company_id']){
 		return trim($_POST['id']);
 	} else{
-		return 1;
+		return $user['id'];
 		//return trim($_COOKIE['id']);
 	}
 

@@ -4,7 +4,7 @@ if(empty($awdaccess)) {
 	die();
 }
 //include('../../TableClass.php');
-$user_id = getID();
+$user_id = getID($user);
 ?>
 
 <!--
@@ -30,7 +30,7 @@ $user_id = getID();
 			</strong>&nbsp;
 			Associate ID:&nbsp<strong>
 			<?php
-				echo $_GET['id'];
+				echo $user_id;
 				//echo $_COOKIE['id'];
 			 ?>
 			</strong>
