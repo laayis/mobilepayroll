@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+        
+    <EditText
+        android:id="@+id/employee_first"
+	    android:layout_width="250dp"
+		android:layout_height="wrap_content"
+		android:hint="@string/first_name"
+		android:text="" />
+    
+    <EditText
+        android:id="@+id/employee_last"
+	    android:layout_width="250dp"
+		android:layout_height="wrap_content"
+		android:hint="@string/last_name"
+		android:text="" />
+    
+    <Button
+        android:id="@+id/button_getinfo"
+		android:layout_width="250dp"
+		android:layout_height="wrap_content"
+		android:text="@string/employee_button" />
+    
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ParkActivity!</string>
+    <string name="app_name">Time Sheet</string>
+    <string name="punch_time">Punch Time</string>
+    <string name="forma">Form A</string>
+    <string name="punch">Punch</string>
+    <string name="punch_in_out">Punch In/Out</string>
+	<string name="checkin">Check-In</string>
+	<string name="checkout">Check-Out</string>
+	<string name="latest_checkin">Latest Check-In</string>
+	<string name="latest_checkout">Latest Check-Out</string>
+	
+	<!-- Add Employee Dialog -->
+	<string name="create_user_title">Crease User:</string>
+	<string name="first_name">First Name</string>
+	<string name="last_name">Last Name</string>
+	<string name="employee_button">Get Info</string>
+</resources>
