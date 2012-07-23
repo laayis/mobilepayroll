@@ -374,21 +374,29 @@ function printApprovalTableBottom($from, $to, $user=0){
 	//echo $from . '<br />' . $to;
 	$query = 0;
 	//echo $user_id;
-	if(!isset($_GET['id'])){
+	if(isset($_GET['id']) && $user['type'] == 'admin'){
+	$query = "SELECT request, user_id, hours, wage, rollover,
+			approved, reason FROM approvals
+			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
+			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
+			AND company_id='{$user['company_id']}'
+			AND user_id='{$_GET['id']}'
+			ORDER BY user_id ASC";
+	//echo $query;
+	} else if($user['type']=='admin'){
 	$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
 			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
 			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
 			AND company_id='{$user['company_id']}'
 			ORDER BY user_id ASC";
-	//echo $query;
-	} else{
+	} else if(!isset($_GET['id'])){
 		$query = "SELECT request, user_id, hours, wage, rollover,
 			approved, reason FROM approvals
 			WHERE DATE_FORMAT(`date`, '%m-%d-%Y')>='{$from}'
 			AND DATE_FORMAT(`date`,'%m-%d-%Y')<'{$to}'
 			AND company_id='{$user['company_id']}'
-			AND user_id='{$_GET['id']}'
+			AND user_id='{$user['id']}'
 			ORDER BY user_id ASC";
 	
 	//echo $query;

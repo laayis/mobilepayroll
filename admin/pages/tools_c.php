@@ -104,7 +104,7 @@ $from = addDaysToDate(0, getCurrentWeek());
 	printTableTop(array('Actions', 'ID', 'Hours', 'Wage', 'Roll-over', 'Approved?', 'Reason'), 'Approvals from ' . $from . ' to ' . $to , '100%');
 	//$emp = getEmployeesInCompany($_COOKIE['id']);
 
-printApprovalTableBottom($from, $to);
+printApprovalTableBottom($from, $to, $user);
 ?>
 
 </td></tr>

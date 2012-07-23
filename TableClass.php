@@ -419,9 +419,9 @@ function getID(){
 	$user=authenticateUser();
 	$uri = $_SERVER['REQUEST_URI'];
 	
-	if(isset($_GET['id']) && $user['id']==$user['company_id']){
+	if(isset($_GET['id']) && $user['type']=='admin'){
 		return trim($_GET['id']);
-	} else if(isset($_POST['id']) && $user['id']==$user['company_id']){
+	} else if(isset($_POST['id']) && $user['type']=='admin'){
 		return trim($_POST['id']);
 	} else{
 		return $user['id'];
