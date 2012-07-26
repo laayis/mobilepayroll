@@ -13,6 +13,6 @@ $pieces = explode("/", $uri);
 //awdwad.php
 $temp = explode(".", $pieces[3]);
 include($temp[0] . "_c.php");
-include('../../bottom.php');
+include('../bottom.php');
 
 ?>

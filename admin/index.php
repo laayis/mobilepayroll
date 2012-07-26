@@ -14,7 +14,7 @@ include('top.php')?>
 -->
 
 <?php
-include('../inner_login.php');
+include('index_inner.php');
 ?>
 
 
@@ -23,4 +23,4 @@ include('../inner_login.php');
 ?> 
  </body>
 </html>	
-<?php include('../bottom.php')?>
+<?php include('bottom.php')?>

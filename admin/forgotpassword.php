@@ -18,9 +18,9 @@ Enter the e-mail address associated with your account, then click Continue. We'l
 <p>Please login to proceed</p>
 -->
 
-<form enctype="application/x-www-form-urlencoded" action="../validatecaptcha.php" method="post">
+<form enctype="application/x-www-form-urlencoded" action="../securimage/validatecaptcha.php" method="post">
 <?php
-include('../inner_forgot.php');
+include('forgotpassword_inner.php');
 ?>
 
 </form>
@@ -30,4 +30,4 @@ include('../inner_forgot.php');
 ?> 
  </body>
 </html>	
-<?php include('../bottom.php')?>
+<?php include('bottom.php')?>

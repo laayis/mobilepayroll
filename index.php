@@ -20,8 +20,7 @@
    
 
 
-<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
 
 /*** 
@@ -198,7 +197,7 @@ $(function() {
         </div>
         <div class="hlinks">
             <ul>
-                <li class="csphone"><img src="http://timesheet.elasticbeanstalk.com/images/phone_white.png"><noindex><strong>Questions?</strong> Call <span class="emphasis">1-888-888-8888</span> 24 hours a day</noindex></li>
+                <li class="csphone"><img src="http://timesheet.elasticbeanstalk.com/images/phone_white.png"><noindex><strong>Questions?</strong> Contact <strong>winicius@gmail.com</strong> 24 hours a day</noindex></li>
 
                 <li class="anonopts">
                     <ul>
@@ -487,10 +486,10 @@ $(function() {
 
 
 <div id="slideshow">
-    <img src="image1.png" alt="Slideshow Image 1" class="active" />
-    <img src="image2.png" alt="Slideshow Image 2" />
-    <img src="image1.png" alt="Slideshow Image 3" />
-    <img src="image2.png" alt="Slideshow Image 4" />
+    <img src="images/slides/image1.png" alt="Slideshow Image 1" class="active" />
+    <img src="images/slides/image2.png" alt="Slideshow Image 2" />
+    <img src="images/slides/image1.png" alt="Slideshow Image 3" />
+    <img src="images/slides/image2.png" alt="Slideshow Image 4" />
 </div>
 
 

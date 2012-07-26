@@ -55,7 +55,7 @@ if(isAlphaNumeric($_POST['current']) && isAlphaNumeric($_POST['new']) && isAlpha
 
 
 
-include('../../inner_change.php');
+include('changepassword_inner.php');
 ?>
 
 </form>
@@ -65,4 +65,4 @@ include('../../inner_change.php');
 ?> 
  </body>
 </html>	
-<?php include('../../bottom.php')?>
+<?php include('../bottom.php')?>
