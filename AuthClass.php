@@ -18,7 +18,7 @@ function isUserAdmin($sid){
 
 
 function initDb(){
-	$link = mysql_connect('mobilepay.c0sp63vzrvuy.us-east-1.rds.amazonaws.com', 'pussyeater', 'win2210760');
+	$link = mysql_connect('timesheet.elasticbeanstalk.com', 'pussyeater', 'win2210760');
 	if (!$link) { die('Could not connect: ' . mysql_error());}
 	return $link;
 }
