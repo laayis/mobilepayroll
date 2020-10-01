@@ -1,7 +1,7 @@
 // disable back button
 window.history.forward(1);
 // timeout functionality
-setTimeout("checkTimeout()", 840000); // 14 Minutes
+setTimeout("checkTimeout()", 840000) ; //Count Time 14 Min
 var a = 0;
 var greaterthanflag = null;
 var greaterthantotflag = null;
@@ -90,7 +90,7 @@ function massageStateForm() {
         dep2.value = fmtAsNumeric(dep2.value);
     }
     if (addlTax1) {
-        addlTax1.value = fmtAsCurrency(addlTax1.value);
+        addlTax1.value = fmtAsCurrency(addlTax1.value) ;
     }
     if (addlTax2) {
         addlTax2.value = fmtAsCurrency(addlTax2.value);
@@ -205,6 +205,7 @@ function validateFormGeneric(frm) {
             }
         }
     }
+    //error getting
     if (alertErrors == '') {
         if (frm.name == 'federalTaxInfoBean') {
             massageFederalForm();
